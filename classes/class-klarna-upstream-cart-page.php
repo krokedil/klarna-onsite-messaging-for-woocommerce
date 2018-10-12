@@ -37,7 +37,7 @@ class Klarna_Upstream_Cart_Page {
 	public function add_iframe() {
 		$total = WC()->cart->get_total( 'klarna_upstream' );
 		?>
-		<klarna-placement data-id="<?php echo $this->placement_id; ?>" data-total_amount="<?php echo $total; ?>"></klarna-placement>
+		<klarna-placement class="klarna-upstream-cart" data-id="<?php echo $this->placement_id; ?>" data-total_amount="<?php echo $total; ?>"></klarna-placement>
 		<?php
 	}
 } new Klarna_Upstream_Cart_Page();

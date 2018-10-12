@@ -42,7 +42,7 @@ class Klarna_Upstream_Product_Page {
 			$price = $product->get_price( 'klarna_upstream' );
 		}
 		?>
-		<klarna-placement data-id="<?php echo $this->placement_id; ?>" data-total_amount="<?php echo $price; ?>"></klarna-placement>
+		<klarna-placement class="klarna-upstream-product" data-id="<?php echo $this->placement_id; ?>" data-total_amount="<?php echo $price; ?>"></klarna-placement>
 		<?php
 	}
 } new Klarna_Upstream_Product_Page();
