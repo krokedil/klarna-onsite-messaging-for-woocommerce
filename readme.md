@@ -25,15 +25,16 @@ You can change the location of the individual widget by using the following filt
 * *klarna_onsite_messaging_cart_target* for the Cart page.
 
 ##### Code example
-	<?php>
-	add_filter( 'klarna_onsite_messaging_cart_target', 'change_klarna_onsite_messaging_cart_location' );
-	function change_klarna_onsite_messaging_cart_location( $location ) {
-		// Here you need to replace the $location variable with the action that you want to use instead of the default.
-		// You can also add custom checks to apply different locations depending on your needs.
-		$location = 'woocommerce_after_cart';
-		return $location;
-	}
-
+```
+<?php
+add_filter( 'klarna_onsite_messaging_cart_target', 'change_klarna_onsite_messaging_cart_location' );
+function change_klarna_onsite_messaging_cart_location( $location ) {
+    // Here you need to replace the $location variable with the action that you want to use instead of the default.
+    // You can also add custom checks to apply different locations depending on your needs.
+    $location = 'woocommerce_after_cart';
+    return $location;
+}
+```
 These can be used with any action that you want. You can find a list of all WooCommerce actions and where they operate [here](https://docs.woocommerce.com/wc-apidocs/hook-docs.html)
 
 **We do not support individual themes. If you want to change the appearance of the widget outside of what we can do with the filter then this requires custom CSS code. Use the classes *klarna-onsite-messaging-product* and *klarna-onsite-messaging-cart* respectively.**
