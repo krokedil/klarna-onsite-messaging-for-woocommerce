@@ -64,12 +64,47 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 			'title' => 'Klarna On-Site Messaging',
 			'type'  => 'title',
 		);
+		$settings['onsite_messaging_uci']                  = array(
+			'title'       => __( 'UCI', 'klarna-onsite-messaging-for-woocommerce' ),
+			'type'        => 'text',
+			'description' => __( 'Enter the UCI givern by klarna for Klarna On-Site Messaging', 'klarna-onsite-messaging-for-woocommerce' ),
+			'default'     => '',
+			'desc_tip'    => true,
+		);
+		$settings['onsite_messaging_enabled_product']      = array(
+			'title'   => __( 'Enable/Disable the Product placement', 'klarna-onsite-messaging-for-woocommerce' ),
+			'type'    => 'checkbox',
+			'label'   => __( 'Enable/Disable the Product placement', 'klarna-onsite-messaging-for-woocommerce' ),
+			'default' => 'yes',
+		);
 		$settings['onsite_messaging_placement_id_product'] = array(
 			'title'       => __( 'Product page placement id', 'klarna-onsite-messaging-for-woocommerce' ),
 			'type'        => 'text',
 			'description' => __( 'Enter the placement id of the On-Site Messaging placement for the product page.', 'klarna-onsite-messaging-for-woocommerce' ),
 			'default'     => '',
 			'desc_tip'    => true,
+		);
+		$settings['onsite_messaging_product_location']     = array(
+			'title'   => __( 'Product On-Site Messaging placement', 'klarna-onsite-messaging-for-woocommerce' ),
+			'desc'    => __( 'Select where to display the widget in your product pages', 'klarna-onsite-messaging-for-woocommerce' ),
+			'id'      => '',
+			'default' => '45',
+			'type'    => 'select',
+			'options' => array(
+				'4'  => __( 'Above Title', 'klarna-onsite-messaging-for-woocommerce' ),
+				'7'  => __( 'Between Title and Price', 'klarna-onsite-messaging-for-woocommerce' ),
+				'15' => __( 'Between Price and Excerpt', 'klarna-onsite-messaging-for-woocommerce' ),
+				'25' => __( 'Between Excerpt and Add to cart button', 'klarna-onsite-messaging-for-woocommerce' ),
+				'35' => __( 'Between Add to cart button and Product meta', 'klarna-onsite-messaging-for-woocommerce' ),
+				'45' => __( 'Between Product meta and Product sharing buttons', 'klarna-onsite-messaging-for-woocommerce' ),
+				'55' => __( 'After Product sharing-buttons', 'klarna-onsite-messaging-for-woocommerce' ),
+			),
+		);
+		$settings['onsite_messaging_enabled_cart']         = array(
+			'title'   => __( 'Enable/Disable the Cart placement', 'klarna-onsite-messaging-for-woocommerce' ),
+			'type'    => 'checkbox',
+			'label'   => __( 'Enable/Disable the Cart placement', 'klarna-onsite-messaging-for-woocommerce' ),
+			'default' => 'yes',
 		);
 		$settings['onsite_messaging_placement_id_cart']    = array(
 			'title'       => __( 'Cart page placement id', 'klarna-onsite-messaging-for-woocommerce' ),
@@ -78,12 +113,19 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 			'default'     => '',
 			'desc_tip'    => true,
 		);
-		$settings['onsite_messaging_uci']                  = array(
-			'title'       => __( 'UCI', 'klarna-onsite-messaging-for-woocommerce' ),
-			'type'        => 'text',
-			'description' => __( 'Enter the UCI givern by klarna for Klarna On-Site Messaging', 'klarna-onsite-messaging-for-woocommerce' ),
-			'default'     => '',
-			'desc_tip'    => true,
+		$settings['onsite_messaging_cart_location']        = array(
+			'title'   => __( 'Cart On-Site Messaging placement', 'klarna-onsite-messaging-for-woocommerce' ),
+			'desc'    => __( 'Select where to display the widget on your cart page', 'klarna-onsite-messaging-for-woocommerce' ),
+			'id'      => '',
+			'default' => 'woocommerce_cart_collaterals',
+			'type'    => 'select',
+			'options' => array(
+				'woocommerce_cart_collaterals'    => __( 'Above Cross sell', 'klarna-onsite-messaging-for-woocommerce' ),
+				'woocommerce_before_cart_totals'  => __( 'Above cart totals', 'klarna-onsite-messaging-for-woocommerce' ),
+				'woocommerce_proceed_to_checkout' => __( 'Between cart totals and proceed to checkout button', 'klarna-onsite-messaging-for-woocommerce' ),
+				'woocommerce_after_cart_totals'   => __( 'After proceed to checkout button', 'klarna-onsite-messaging-for-woocommerce' ),
+				'woocommerce_after_cart'          => __( 'Bottom of the page', 'klarna-onsite-messaging-for-woocommerce' ),
+			),
 		);
 
 		return $settings;
