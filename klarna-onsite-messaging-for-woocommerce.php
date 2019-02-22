@@ -3,14 +3,14 @@
  * Plugin Name: Klarna On-Site Messaging for WooCommerce
  * Plugin URI:
  * Description: Provides Klarna On-Site Messaging for WooCommerce
- * Author: krokedil, klarna, automattic
+ * Author: krokedil, klarna
  * Author URI: https://krokedil.se/
  * Version: 1.0.0
  * Text Domain: klarna-onsite-messaging-for-woocommerce
  * Domain Path: /languages
  *
  * WC requires at least: 3.0
- * WC tested up to: 3.4.2
+ * WC tested up to: 3.5.5
  *
  * @package Klarna_OnSite_Messaging
  *
