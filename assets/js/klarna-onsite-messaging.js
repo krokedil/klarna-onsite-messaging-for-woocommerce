@@ -14,21 +14,9 @@ jQuery( function($) {
 			return true;
 		},
 
-		update_total: function( variable_id ) {
-			if( $('.variation_id').val() !== '' ) {
-				var variables        = $('form.variations_form').data('product_variations');
-				var price;
-				var i;
-				for (i = 0; i < variables.length; i++) {
-					if( variables[i].variation_id == variable_id ) {
-						price = variables[i].display_price;
-					}
-				}
-				document.getElementsByTagName("klarna-placement")[0].setAttribute("data-total_amount", price);
+		update_total: function( variation ) {
+				document.getElementsByTagName("klarna-placement")[0].setAttribute("data-total_amount", variation.display_price );
 				klarna_onsite_messaging.update_iframe();
-			} else {
-				$('klarna-placement').hide();			
-			}
 		}
 	}
 
@@ -42,7 +30,8 @@ jQuery( function($) {
 			$('klarna-placement').show();
 		}
 	});
-	$(document).on('change', "input[name='variation_id']", function(){
-		klarna_onsite_messaging.update_total( $('input[name="variation_id"]').val() );
+
+	$(document).on( 'found_variation', function( e, variation ) {
+		klarna_onsite_messaging.update_total( variation );
 	});
 });
