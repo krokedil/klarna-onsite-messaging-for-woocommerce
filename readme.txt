@@ -25,5 +25,8 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 == Changelog ==
 
+= 2019.02.27 	- version 1.0.1 =
+* Enhancement	- Added Kernl Versioning.
+
 = 2019.02.27 	- version 1.0.0 =
 * Initial release
