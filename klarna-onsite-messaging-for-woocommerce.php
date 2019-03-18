@@ -5,7 +5,7 @@
  * Description: Provides Klarna On-Site Messaging for WooCommerce
  * Author: krokedil, klarna
  * Author URI: https://krokedil.se/
- * Version: 1.0.1
+ * Version: 1.0.2
  * Text Domain: klarna-onsite-messaging-for-woocommerce
  * Domain Path: /languages
  *

@@ -15,7 +15,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 == Installation ==
 1. Upload plugin folder to to the "/wp-content/plugins/" directory.
 2. Activate the plugin through the "Plugins" menu in WordPress.
-3. Go WooCommerce Settings –> Payments -> Klarna Checkout/Klarna Payments and configure your On-Site messaging settings.
+3. Go WooCommerce Settings ï¿½> Payments -> Klarna Checkout/Klarna Payments and configure your On-Site messaging settings.
 
 = Are there any specific requirements? =
 * WooCommerce 3.0 or newer is required.
@@ -24,6 +24,9 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 	
 
 == Changelog ==
+
+= 2019.02.27 	- version 1.0.2 =
+* Fix	        - Fixed bug where Placement ID was not set correctly.
 
 = 2019.02.27 	- version 1.0.1 =
 * Enhancement	- Added Kernl Versioning.
