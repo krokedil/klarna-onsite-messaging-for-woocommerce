@@ -17,14 +17,21 @@ class Klarna_OnSite_Messaging_Product_Page {
 	public $placement_id;
 
 	/**
+	 * Settings
+	 *
+	 * @var array
+	 */
+	public $settings;
+
+	/**
 	 * Class constructor
 	 */
 	public function __construct() {
+		$this->settings = Klarna_OnSite_Messaging_For_WooCommerce::get_settings();
 		if ( $this->is_enabled() ) {
 			$this->set_placement_id();
-			$settings = Klarna_OnSite_Messaging_For_WooCommerce::get_settings();
 			$target   = apply_filters( 'klarna_onsite_messaging_product_target', 'woocommerce_single_product_summary' );
-			$priority = apply_filters( 'klarna_onsite_messaging_product_priority', ( isset( $settings['onsite_messaging_product_location'] ) ? $settings['onsite_messaging_product_location'] : '45' ) );
+			$priority = apply_filters( 'klarna_onsite_messaging_product_priority', ( isset( $this->settings['onsite_messaging_product_location'] ) ? $this->settings['onsite_messaging_product_location'] : '45' ) );
 			add_action( $target, array( $this, 'add_iframe' ), $priority );
 		}
 	}
@@ -35,8 +42,7 @@ class Klarna_OnSite_Messaging_Product_Page {
 	 * @return self
 	 */
 	private function set_placement_id() {
-		$settings           = Klarna_OnSite_Messaging_For_WooCommerce::get_settings();
-		$this->placement_id = $settings['onsite_messaging_placement_id_product'];
+		$this->placement_id = $this->settings['onsite_messaging_placement_id_product'];
 		return $this->placement_id;
 	}
 
@@ -46,8 +52,7 @@ class Klarna_OnSite_Messaging_Product_Page {
 	 * @return boolean
 	 */
 	public function is_enabled() {
-		$settings = Klarna_OnSite_Messaging_For_WooCommerce::get_settings();
-		if ( ! isset( $settings['onsite_messaging_enabled_product'] ) || 'yes' === $settings['onsite_messaging_enabled_product'] ) {
+		if ( ! isset( $this->settings['onsite_messaging_enabled_product'] ) || 'yes' === $this->settings['onsite_messaging_enabled_product'] ) {
 			return true;
 		}
 		return false;

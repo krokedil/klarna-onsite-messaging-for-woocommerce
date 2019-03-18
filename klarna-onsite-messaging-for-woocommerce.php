@@ -48,10 +48,7 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 		add_filter( 'kco_wc_gateway_settings', array( $this, 'extend_settings' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'plugins_loaded', array( $this, 'check_version' ) );
-
-		// Includes.
-		include_once WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH . '/classes/class-klarna-onsite-messaging-product-page.php';
-		include_once WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH . '/classes/class-klarna-onsite-messaging-cart-page.php';
+		add_action( 'plugins_loaded', array( $this, 'include_files' ) );
 	}
 
 	/**
@@ -187,5 +184,16 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 			'klarna-onsite-messaging-for-woocommerce',
 			1
 		);
+	}
+
+	/**
+	 * Includes the plugin files.
+	 *
+	 * @return void
+	 */
+	public function include_files() {
+		// Includes.
+		include_once WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH . '/classes/class-klarna-onsite-messaging-product-page.php';
+		include_once WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH . '/classes/class-klarna-onsite-messaging-cart-page.php';
 	}
 } new Klarna_OnSite_Messaging_For_WooCommerce();
