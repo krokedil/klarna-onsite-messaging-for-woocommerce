@@ -39,6 +39,7 @@ class Klarna_OnSite_Messaging_Product_Page {
 	public function init_class() {
 		if ( $this->is_enabled() ) {
 			$this->set_placement_id();
+			$this->set_theme();
 			$target   = apply_filters( 'klarna_onsite_messaging_product_target', 'woocommerce_single_product_summary' );
 			$priority = apply_filters( 'klarna_onsite_messaging_product_priority', ( isset( $this->settings['onsite_messaging_product_location'] ) ? $this->settings['onsite_messaging_product_location'] : '45' ) );
 			add_action( $target, array( $this, 'add_iframe' ), $priority );
@@ -53,6 +54,19 @@ class Klarna_OnSite_Messaging_Product_Page {
 	private function set_placement_id() {
 		$this->placement_id = $this->settings['onsite_messaging_placement_id_product'];
 		return $this->placement_id;
+	}
+
+	/**
+	 * Sets the iFrame theme from settings.
+	 *
+	 * @return void
+	 */
+	private function set_theme() {
+		if ( isset( $this->settings['onsite_messaging_theme_product'] ) ) {
+			$this->theme = $this->settings['onsite_messaging_theme_product'];
+		} else {
+			$this->theme = '';
+		}
 	}
 
 	/**
@@ -81,7 +95,7 @@ class Klarna_OnSite_Messaging_Product_Page {
 			$price = wc_get_price_to_display( $product );
 		}
 		?>
-		<klarna-placement class="klarna-onsite-messaging-product" data-id="<?php echo $this->placement_id; // phpcs: ignore. ?>" data-total_amount="<?php echo $price; // phpcs: ignore. ?>"></klarna-placement>
+		<klarna-placement class="klarna-onsite-messaging-product" data-theme="<?php echo $this->theme; ?>" data-id="<?php echo $this->placement_id; // phpcs: ignore. ?>" data-total_amount="<?php echo $price; // phpcs: ignore. ?>"></klarna-placement>
 		<?php
 	}
 } new Klarna_OnSite_Messaging_Product_Page();
