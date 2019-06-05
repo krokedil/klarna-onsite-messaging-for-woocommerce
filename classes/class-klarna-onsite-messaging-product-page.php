@@ -76,7 +76,7 @@ class Klarna_OnSite_Messaging_Product_Page {
 	public function add_iframe() {
 		global $product;
 		if ( $product->is_type( 'variable' ) ) {
-			$price = 0;
+			$price = $product->get_variation_price( 'min' );
 		} else {
 			$price = $product->get_price( 'klarna_onsite_messaging' );
 		}
