@@ -78,7 +78,7 @@ class Klarna_OnSite_Messaging_Product_Page {
 		if ( $product->is_type( 'variable' ) ) {
 			$price = $product->get_variation_price( 'min' );
 		} else {
-			$price = $product->get_price( 'klarna_onsite_messaging' );
+			$price = wc_get_price_to_display( $product );
 		}
 		?>
 		<klarna-placement class="klarna-onsite-messaging-product" data-id="<?php echo $this->placement_id; // phpcs: ignore. ?>" data-total_amount="<?php echo $price; // phpcs: ignore. ?>"></klarna-placement>
