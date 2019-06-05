@@ -2,10 +2,10 @@
 Contributors: krokedil
 Tags: woocommerce, klarna, ecommerce, e-commerce, on-site messaging
 Requires at least: 4.0
-Tested up to: 5.0.0
+Tested up to: 5.2.1
 Requires PHP: 5.6
 WC requires at least: 3.0.0
-WC tested up to: 3.5.5
+WC tested up to: 3.6.4
 Stable tag: trunk
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -24,6 +24,12 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 	
 
 == Changelog ==
+
+= 2019.06.05 	- version 1.0.3 =
+* Feature	    - Added support for themes.
+* Enhancement	- Use the cheapest variation instead of 0 for the placement on a variable product.
+* Fix			- Fixed an issue where placement filters did not run correctly.
+* Fix			- Fixed not using the price shown for the placement in some cases depending on tax settings.
 
 = 2019.02.27 	- version 1.0.2 =
 * Fix	        - Fixed bug where Placement ID was not set correctly.
