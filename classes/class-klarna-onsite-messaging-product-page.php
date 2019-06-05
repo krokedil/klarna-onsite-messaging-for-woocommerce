@@ -28,6 +28,15 @@ class Klarna_OnSite_Messaging_Product_Page {
 	 */
 	public function __construct() {
 		$this->settings = Klarna_OnSite_Messaging_For_WooCommerce::get_settings();
+		add_action( 'wp_head', array( $this, 'init_class' ) );
+	}
+
+	/**
+	 * Initiates the class
+	 *
+	 * @return void
+	 */
+	public function init_class() {
 		if ( $this->is_enabled() ) {
 			$this->set_placement_id();
 			$target   = apply_filters( 'klarna_onsite_messaging_product_target', 'woocommerce_single_product_summary' );
