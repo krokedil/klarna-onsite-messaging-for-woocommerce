@@ -62,10 +62,12 @@ class Klarna_OnSite_Messaging_Product_Page {
 	 * @return void
 	 */
 	private function set_theme() {
-		if ( isset( $this->settings['onsite_messaging_theme_product'] ) ) {
-			$this->theme = $this->settings['onsite_messaging_theme_product'];
-		} else {
+		if ( isset( $this->settings['onsite_messaging_theme_product'] ) && 'none' !== $this->settings['onsite_messaging_theme_product'] ) {
+			$this->theme = 'data-theme="' . $this->settings['onsite_messaging_theme_product'] . '"';
+		} elseif ( isset( $this->settings['onsite_messaging_theme_product'] ) && 'none' === $this->settings['onsite_messaging_theme_product'] ) {
 			$this->theme = '';
+		} else {
+			$this->theme = 'data-theme="default"';
 		}
 	}
 
@@ -94,8 +96,9 @@ class Klarna_OnSite_Messaging_Product_Page {
 		} else {
 			$price = wc_get_price_to_display( $product );
 		}
+
 		?>
-		<klarna-placement class="klarna-onsite-messaging-product" data-theme="<?php echo $this->theme; ?>" data-id="<?php echo $this->placement_id; // phpcs: ignore. ?>" data-total_amount="<?php echo $price; // phpcs: ignore. ?>"></klarna-placement>
+		<klarna-placement class="klarna-onsite-messaging-product" <?php echo $this->theme; ?> data-id="<?php echo $this->placement_id; // phpcs: ignore. ?>" data-total_amount="<?php echo $price; // phpcs: ignore. ?>"></klarna-placement>
 		<?php
 	}
 } new Klarna_OnSite_Messaging_Product_Page();

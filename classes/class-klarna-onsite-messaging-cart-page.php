@@ -76,10 +76,12 @@ class Klarna_OnSite_Messaging_Cart_Page {
 	 * @return void
 	 */
 	private function set_theme() {
-		if ( isset( $this->settings['onsite_messaging_theme_cart'] ) ) {
-			$this->theme = $this->settings['onsite_messaging_theme_cart'];
-		} else {
+		if ( isset( $this->settings['onsite_messaging_theme_cart'] ) && 'none' !== $this->settings['onsite_messaging_theme_cart'] ) {
+			$this->theme = 'data-theme="' . $this->settings['onsite_messaging_theme_cart'] . '"';
+		} elseif ( isset( $this->settings['onsite_messaging_theme_cart'] ) && 'none' === $this->settings['onsite_messaging_theme_cart'] ) {
 			$this->theme = '';
+		} else {
+			$this->theme = 'data-theme="default"';
 		}
 	}
 
@@ -91,7 +93,7 @@ class Klarna_OnSite_Messaging_Cart_Page {
 	public function add_iframe() {
 		$total = WC()->cart->get_total( 'klarna_onsite_messaging' );
 		?>
-		<klarna-placement class="klarna-onsite-messaging-cart" data-theme="<?php echo $this->theme; ?>" data-id="<?php echo $this->placement_id; // phpcs: ignore. ?>" data-total_amount="<?php echo $total; // phpcs: ignore. ?>"></klarna-placement>
+		<klarna-placement class="klarna-onsite-messaging-cart" <?php echo $this->theme; ?> data-id="<?php echo $this->placement_id; // phpcs: ignore. ?>" data-total_amount="<?php echo $total; // phpcs: ignore. ?>"></klarna-placement>
 		<?php
 	}
 } new Klarna_OnSite_Messaging_Cart_Page();

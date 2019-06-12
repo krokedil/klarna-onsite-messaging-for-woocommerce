@@ -104,8 +104,9 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 				'default' => '',
 				'type'    => 'select',
 				'options' => array(
-					''     => __( 'Light', 'klarna-onsite-messaging-for-woocommerce' ),
-					'dark' => __( 'Dark', 'klarna-onsite-messaging-for-woocommerce' ),
+					'default' => __( 'Light', 'klarna-onsite-messaging-for-woocommerce' ),
+					'dark'    => __( 'Dark', 'klarna-onsite-messaging-for-woocommerce' ),
+					'none'    => __( 'None', 'klarna-onsite-messaging-for-woocommerce' ),
 				),
 			),
 		);
@@ -142,8 +143,9 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 				'default' => '',
 				'type'    => 'select',
 				'options' => array(
-					''     => __( 'Light', 'klarna-onsite-messaging-for-woocommerce' ),
-					'dark' => __( 'Dark', 'klarna-onsite-messaging-for-woocommerce' ),
+					'default' => __( 'Light', 'klarna-onsite-messaging-for-woocommerce' ),
+					'dark'    => __( 'Dark', 'klarna-onsite-messaging-for-woocommerce' ),
+					'none'    => __( 'None', 'klarna-onsite-messaging-for-woocommerce' ),
 				),
 			),
 		);
