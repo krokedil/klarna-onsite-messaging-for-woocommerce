@@ -24,6 +24,8 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 	
 
 == Changelog ==
+= 2019.06.12    - version 1.0.4 =
+* Enhancement   - Added support for custom themes.
 
 = 2019.06.05 	- version 1.0.3 =
 * Feature	    - Added support for themes.
