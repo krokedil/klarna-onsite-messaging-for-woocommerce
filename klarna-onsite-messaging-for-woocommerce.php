@@ -39,7 +39,6 @@ define( 'WC_KLARNA_ONSITE_MESSAGING_PLUGIN_URL', untrailingslashit( plugin_dir_u
  * Main plugin class.
  */
 class Klarna_OnSite_Messaging_For_WooCommerce {
-
 	/**
 	 * Class cunstructor.
 	 */
