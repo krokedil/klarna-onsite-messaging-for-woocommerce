@@ -24,6 +24,9 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 	
 
 == Changelog ==
+= 2019.10.22    - version 1.0.5 =
+* Enhancement   - Only show iframe is customer matches the store base country.
+
 = 2019.06.12    - version 1.0.4 =
 * Enhancement   - Added support for custom themes.
 
