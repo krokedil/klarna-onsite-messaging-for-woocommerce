@@ -14,7 +14,7 @@
  *
  * @package Klarna_OnSite_Messaging
  *
- * Copyright (c) 2017-2018 Krokedil
+ * Copyright (c) 2017-2020 Krokedil
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
