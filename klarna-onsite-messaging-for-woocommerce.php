@@ -48,6 +48,11 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'plugins_loaded', array( $this, 'check_version' ) );
 		add_action( 'plugins_loaded', array( $this, 'include_files' ) );
+		
+
+		add_filter( 'script_loader_tag', array( $this, 'load_klarna_async' ), 10, 3 );
+
+		$this->set_data_client_id();
 	}
 
 	/**
@@ -64,7 +69,14 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 		$settings['onsite_messaging_uci']                  = array(
 			'title'       => __( 'UCI', 'klarna-onsite-messaging-for-woocommerce' ),
 			'type'        => 'text',
-			'description' => __( 'Enter the UCI givern by klarna for Klarna On-Site Messaging', 'klarna-onsite-messaging-for-woocommerce' ),
+			'description' => __( 'Enter the UCI given by Klarna for Klarna On-Site Messaging', 'klarna-onsite-messaging-for-woocommerce' ),
+			'default'     => '',
+			'desc_tip'    => true,
+		);
+		$settings['data_client_id']                  = array(
+			'title'       => __( 'Data client ID', 'klarna-onsite-messaging-for-woocommerce' ),
+			'type'        => 'text',
+			'description' => __( 'Enter the data-client-id given by Klarna for Klarna On-Site Messaging', 'klarna-onsite-messaging-for-woocommerce' ),
 			'default'     => '',
 			'desc_tip'    => true,
 		);
@@ -74,10 +86,19 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 			'label'   => __( 'Enable/Disable the Product placement', 'klarna-onsite-messaging-for-woocommerce' ),
 			'default' => 'yes',
 		);
+		/*
 		$settings['onsite_messaging_placement_id_product'] = array(
 			'title'       => __( 'Product page placement id', 'klarna-onsite-messaging-for-woocommerce' ),
 			'type'        => 'text',
 			'description' => __( 'Enter the placement id of the On-Site Messaging placement for the product page.', 'klarna-onsite-messaging-for-woocommerce' ),
+			'default'     => '',
+			'desc_tip'    => true,
+		);
+		*/
+		$settings['placement_data_key_product'] = array(
+			'title'       => __( 'Product page placement data key', 'klarna-onsite-messaging-for-woocommerce' ),
+			'type'        => 'text',
+			'description' => __( 'Enter the placement data key for the product page.', 'klarna-onsite-messaging-for-woocommerce' ),
 			'default'     => '',
 			'desc_tip'    => true,
 		);
@@ -115,10 +136,19 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 			'label'   => __( 'Enable/Disable the Cart placement', 'klarna-onsite-messaging-for-woocommerce' ),
 			'default' => 'yes',
 		);
+		/*
 		$settings['onsite_messaging_placement_id_cart']    = array(
 			'title'       => __( 'Cart page placement id', 'klarna-onsite-messaging-for-woocommerce' ),
 			'type'        => 'text',
 			'description' => __( 'Enter the placement id of the On-Site Messaging placement for the cart page.', 'klarna-onsite-messaging-for-woocommerce' ),
+			'default'     => '',
+			'desc_tip'    => true,
+		);
+		*/
+		$settings['placement_data_key_cart'] = array(
+			'title'       => __( 'Cart page placement data key', 'klarna-onsite-messaging-for-woocommerce' ),
+			'type'        => 'text',
+			'description' => __( 'Enter the placement data key for the cart page.', 'klarna-onsite-messaging-for-woocommerce' ),
 			'default'     => '',
 			'desc_tip'    => true,
 		);
@@ -153,6 +183,24 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	}
 
 	/**
+	 * Load Klarna JS file asynchronously.
+	 *
+	 * @param string $tag The <script> tag for the enqueued script.
+	 * @param string $handle The script's registered handle.
+	 *
+	 * @return string
+	 */
+	public function load_klarna_async( $tag, $handle ) {
+		if ( 'klarna-onsite-messaging' !== $handle ) {
+			return $tag;
+		}
+		$tag = str_replace( ' src', ' async src', $tag );
+		$tag = str_replace( '></script>', ' data-client-id="' . $this->data_client_id . '"></script>', $tag );
+
+		return $tag;
+	}
+
+	/**
 	 * Gets the settings for the different klarna plugins.
 	 *
 	 * @return array
@@ -162,7 +210,23 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 			return get_option( 'woocommerce_klarna_payments_settings' );
 		} elseif ( class_exists( 'Klarna_Checkout_For_WooCommerce' ) ) {
 			return get_option( 'woocommerce_kco_settings' );
+		} elseif ( class_exists( 'KCO' ) ) {
+			return get_option( 'woocommerce_kco_settings' );
 		}
+	}
+
+	/**
+	 * Sets the placement id
+	 *
+	 * @return self
+	 */
+	private function set_data_client_id() {
+		$settings = self::get_settings();
+		$this->data_client_id      = '';
+		if ( isset( $settings['data_client_id'] ) ) {
+			$this->data_client_id = $settings['data_client_id'];
+		}
+		return $this->data_client_id;
 	}
 
 	/**
@@ -171,26 +235,40 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	 * @return void
 	 */
 	public function enqueue_scripts() {
+	
 		$settings = self::get_settings();
 		$uci      = '';
 		if ( isset( $settings['onsite_messaging_uci'] ) ) {
 			$uci = $settings['onsite_messaging_uci'];
 		}
+
+		
 		if ( 'US' === wc_get_base_location()['country'] ) {
-			$env_string = 'us-library';
+			$region = 'us-library';
 		} else {
-			$env_string = 'eu-library';
+			$region = 'eu-library';
+		}
+
+		if ( 'yes' === $settings['testmode'] ) {
+			$environment = 'playground';
+		} else {
+			$environment = 'production';
 		}
 		if ( is_product() || is_cart() ) {
-			wp_enqueue_script( 'onsite_messaging_script', 'https://' . $env_string . '.klarnaservices.com/merchant.js?uci=' . $uci . '&country=' . wc_get_base_location()['country'], array( 'jquery' ) );
+			if( ! empty( $this->data_client_id ) ) {
+				wp_enqueue_script( 'klarna-onsite-messaging', 'https://' . $region . '.' . $environment . '.klarnaservices.com/lib.js', array( 'jquery' ), '1.0.0', true );
+			} elseif( ! empty( $uci ) ) {
+				wp_enqueue_script( 'onsite_messaging_script', 'https://' . $region . '.' . $environment . '.klarnaservices.com/merchant.js?uci=' . $uci . '&country=' . wc_get_base_location()['country'], array( 'jquery' ) );
 
-			wp_register_script( 'klarna_onsite_messaging', plugins_url( '/assets/js/klarna-onsite-messaging.js', __FILE__ ), array( 'jquery' ), '1.0.0' );
-			wp_localize_script(
-				'klarna_onsite_messaging', 'klarna_onsite_messaging_params', array(
-					'ajaxurl' => admin_url( 'admin-ajax.php' ),
-				)
-			);
-			wp_enqueue_script( 'klarna_onsite_messaging' );
+				wp_register_script( 'klarna_onsite_messaging', plugins_url( '/assets/js/klarna-onsite-messaging.js', __FILE__ ), array( 'jquery' ), '1.0.0' );
+				wp_localize_script(
+					'klarna_onsite_messaging', 'klarna_onsite_messaging_params', array(
+						'ajaxurl' => admin_url( 'admin-ajax.php' ),
+					)
+				);
+				wp_enqueue_script( 'klarna_onsite_messaging' );
+			}
+			
 		}
 	}
 
@@ -218,5 +296,6 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 		// Includes.
 		include_once WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH . '/classes/class-klarna-onsite-messaging-product-page.php';
 		include_once WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH . '/classes/class-klarna-onsite-messaging-cart-page.php';
+		include_once WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH . '/classes/admin/class-klarna-onsite-messaging-admin-notices.php';
 	}
 } new Klarna_OnSite_Messaging_For_WooCommerce();
