@@ -256,11 +256,11 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 		}
 		if ( is_product() || is_cart() ) {
 			if( ! empty( $this->data_client_id ) ) {
-				wp_enqueue_script( 'klarna-onsite-messaging', 'https://' . $region . '.' . $environment . '.klarnaservices.com/lib.js', array( 'jquery' ), '1.0.0', true );
+				wp_enqueue_script( 'klarna-onsite-messaging', 'https://' . $region . '.' . $environment . '.klarnaservices.com/lib.js', array( 'jquery' ), WC_KLARNA_ONSITE_MESSAGING_VERSION, true );
 			} elseif( ! empty( $uci ) ) {
 				wp_enqueue_script( 'onsite_messaging_script', 'https://' . $region . '.' . $environment . '.klarnaservices.com/merchant.js?uci=' . $uci . '&country=' . wc_get_base_location()['country'], array( 'jquery' ) );
 
-				wp_register_script( 'klarna_onsite_messaging', plugins_url( '/assets/js/klarna-onsite-messaging.js', __FILE__ ), array( 'jquery' ), '1.0.0' );
+				wp_register_script( 'klarna_onsite_messaging', plugins_url( '/assets/js/klarna-onsite-messaging.js', __FILE__ ), array( 'jquery' ), WC_KLARNA_ONSITE_MESSAGING_VERSION );
 				wp_localize_script(
 					'klarna_onsite_messaging', 'klarna_onsite_messaging_params', array(
 						'ajaxurl' => admin_url( 'admin-ajax.php' ),
