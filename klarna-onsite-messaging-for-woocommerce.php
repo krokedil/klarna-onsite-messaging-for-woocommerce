@@ -67,6 +67,7 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 			'type'        => 'title',
 			'description' => __( 'Klarna is now using Data Client ID (data-client-id) as credentials to configure On-Site Messaging. Please log in to your Klarna Merchant Portal to retrieve your credentials.', 'klarna-onsite-messaging-for-woocommerce' ),
 		);
+		/*
 		$settings['onsite_messaging_uci']                  = array(
 			'title'       => __( 'UCI', 'klarna-onsite-messaging-for-woocommerce' ),
 			'type'        => 'text',
@@ -74,6 +75,7 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 			'default'     => '',
 			'desc_tip'    => true,
 		);
+		*/
 		$settings['data_client_id']                  = array(
 			'title'       => __( 'Data client ID', 'klarna-onsite-messaging-for-woocommerce' ),
 			'type'        => 'text',

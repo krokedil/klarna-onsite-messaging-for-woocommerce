@@ -72,7 +72,7 @@ class Klarna_OnSite_Messaging_Admin_Notices {
 	 * Check if UCI field exist.
 	 */
 	public function check_uci() {
-		if ( isset( $this->settings['onsite_messaging_uci'] ) && ! empty( $this->settings['onsite_messaging_uci'] ) ) {
+		if ( isset( $this->settings['onsite_messaging_uci'] ) && empty( $this->settings['data_client_id'] ) ) {
 			$gateway_id = '';
 			if ( class_exists( 'WC_Klarna_Payments' ) ) {
 				$gateway_id = 'klarna_payments';
