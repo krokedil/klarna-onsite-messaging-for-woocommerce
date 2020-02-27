@@ -260,13 +260,6 @@ class Klarna_OnSite_Messaging_Cart_Page {
 					data-preloaded="true"
 				></klarna-placement>
 
-				<script>
-					window.kudt = window.kudt || [];
-					window.kudt.push({
-					eventName: 'refresh-placements'
-					});
-				</script>
-
 				<script id="rendered-js">
 					function uuidv4() {
 					return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {

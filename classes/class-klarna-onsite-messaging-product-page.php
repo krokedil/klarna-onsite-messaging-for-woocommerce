@@ -267,12 +267,7 @@ class Klarna_OnSite_Messaging_Product_Page {
 				></klarna-placement>
 				
 				
-				<script>
-					window.kudt = window.kudt || [];
-					window.kudt.push({
-					eventName: 'refresh-placements'
-					});
-				</script>
+		
 
 				<script id="rendered-js">
 					function uuidv4() {
