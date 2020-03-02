@@ -39,6 +39,8 @@ class Klarna_OnSite_Messaging_Product_Page {
 	public function init_class() {
 		if ( $this->is_enabled() ) {
 			$this->set_placement_id();
+			$this->set_data_key();
+			$this->set_data_client_id();
 			$this->set_theme();
 			$target   = apply_filters( 'klarna_onsite_messaging_product_target', 'woocommerce_single_product_summary' );
 			$priority = apply_filters( 'klarna_onsite_messaging_product_priority', ( isset( $this->settings['onsite_messaging_product_location'] ) ? $this->settings['onsite_messaging_product_location'] : '45' ) );
@@ -51,9 +53,32 @@ class Klarna_OnSite_Messaging_Product_Page {
 	 *
 	 * @return self
 	 */
+	private function set_data_key() {
+		$this->data_key = $this->settings['placement_data_key_product'];
+		return $this->data_key;
+	}
+
+	/**
+	 * Sets the data key
+	 *
+	 * @return self
+	 */
 	private function set_placement_id() {
 		$this->placement_id = $this->settings['onsite_messaging_placement_id_product'];
 		return $this->placement_id;
+	}
+
+	/**
+	 * Sets the data client id
+	 *
+	 * @return self
+	 */
+	private function set_data_client_id() {
+		$this->data_client_id      = '';
+		if ( isset( $this->settings['data_client_id'] ) ) {
+			$this->data_client_id = $this->settings['data_client_id'];
+		}
+		return $this->data_client_id;
 	}
 
 	/**
@@ -78,7 +103,7 @@ class Klarna_OnSite_Messaging_Product_Page {
 	 */
 	public function is_enabled() {
 		$store_base_location = apply_filters( 'klarna_onsite_messaging_store_location', wc_get_base_location()['country'] );
-		$customer_location   = apply_filters( 'klarna_onsite_messaging_customer_location', WC()->customer->get_country() );
+		$customer_location   = apply_filters( 'klarna_onsite_messaging_customer_location', WC()->customer->get_billing_country() );
 		if ( $store_base_location == $customer_location ) {
 			if ( ! isset( $this->settings['onsite_messaging_enabled_product'] ) || 'yes' === $this->settings['onsite_messaging_enabled_product'] ) {
 				return true;
@@ -86,7 +111,6 @@ class Klarna_OnSite_Messaging_Product_Page {
 		}
 		return false;
 	}
-
 
 	/**
 	 * Adds the iframe to the page.
@@ -96,13 +120,37 @@ class Klarna_OnSite_Messaging_Product_Page {
 	public function add_iframe() {
 		global $product;
 		if ( $product->is_type( 'variable' ) ) {
-			$price = $product->get_variation_price( 'min' );
+			$price = $product->get_variation_price( 'min' ) * 100;
 		} else {
-			$price = wc_get_price_to_display( $product );
+			$price = wc_get_price_to_display( $product ) * 100;
 		}
 
-		?>
-		<klarna-placement class="klarna-onsite-messaging-product" <?php echo $this->theme; ?> data-id="<?php echo $this->placement_id; // phpcs: ignore. ?>" data-total_amount="<?php echo $price; // phpcs: ignore. ?>"></klarna-placement>
-		<?php
+		$locale = kosm_get_locale_for_klarna_country( kosm_get_purchase_country() );
+		if( ! empty( $this->data_client_id ) ) {
+			?>
+				<klarna-placement class="klarna-onsite-messaging-product" 
+					<?php echo $this->theme; ?> 
+					data-key="<?php echo $this->data_key; // phpcs: ignore. ?>" 
+					data-purchase-amount="<?php echo $price; // phpcs: ignore. ?>"
+					data-locale="<?php echo $locale; ?>"
+					data-preloaded="true"
+				></klarna-placement>
+
+				<script id="rendered-js">
+					function uuidv4() {
+					return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+						var r = Math.random() * 16 | 0,v = c == 'x' ? r : r & 0x3 | 0x8;
+						return v.toString(16);
+					});
+					}
+					document.cookie = `ku1-sid=test-session; ku1-vid=${uuidv4()}`;
+					//# sourceURL=pen.js
+				</script>
+			<?php
+		} else {
+			?>
+			<klarna-placement class="klarna-onsite-messaging-product" <?php echo $this->theme; ?> data-id="<?php echo $this->placement_id; // phpcs: ignore. ?>" data-total_amount="<?php echo $price; // phpcs: ignore. ?>"></klarna-placement>
+			<?php
+		}
 	}
 } new Klarna_OnSite_Messaging_Product_Page();
