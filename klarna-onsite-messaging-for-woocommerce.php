@@ -300,6 +300,9 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	 */
 	public function include_files() {
 		// Includes.
+		include_once WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH . '/includes/klarna-onsite-messaging-functions.php';
+
+		// Classes.
 		include_once WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH . '/classes/class-klarna-onsite-messaging-product-page.php';
 		include_once WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH . '/classes/class-klarna-onsite-messaging-cart-page.php';
 		include_once WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH . '/classes/admin/class-klarna-onsite-messaging-admin-notices.php';
