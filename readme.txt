@@ -2,10 +2,10 @@
 Contributors: krokedil
 Tags: woocommerce, klarna, ecommerce, e-commerce, on-site messaging
 Requires at least: 4.0
-Tested up to: 5.2.1
+Tested up to: 5.3.2
 Requires PHP: 5.6
 WC requires at least: 3.0.0
-WC tested up to: 3.6.4
+WC tested up to: 3.9.2
 Stable tag: trunk
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -24,6 +24,11 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 	
 
 == Changelog ==
+= 2020.03.02    - version 1.1.0 =
+* Feature       - Added support for new way to integrate On-Site Messaging.
+* Tweak         - Use constant to enqueue correct script versions.
+* Tweak         - Added admin notice to inform current users that they need to update the way OSM is integrated.
+
 = 2019.10.22    - version 1.0.5 =
 * Enhancement   - Only show iframe is customer matches the store base country.
 
