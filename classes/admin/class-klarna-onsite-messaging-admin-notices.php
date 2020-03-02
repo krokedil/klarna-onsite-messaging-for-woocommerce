@@ -28,13 +28,6 @@ class Klarna_OnSite_Messaging_Admin_Notices {
 	protected static $instance;
 
 	/**
-	 * Checks if KCO gateway is enabled.
-	 *
-	 * @var $enabled
-	 */
-	protected $enabled;
-
-	/**
 	 * Returns the *Singleton* instance of this class.
 	 *
 	 * @return self::$instance The *Singleton* instance.
@@ -54,7 +47,7 @@ class Klarna_OnSite_Messaging_Admin_Notices {
 		$this->settings = Klarna_OnSite_Messaging_For_WooCommerce::get_settings();
 
 		add_action( 'admin_init', array( $this, 'check_settings' ) );
-    }
+	}
 
 	/**
 	 * Checks the settings.
