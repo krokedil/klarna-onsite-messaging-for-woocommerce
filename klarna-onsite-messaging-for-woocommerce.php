@@ -46,12 +46,17 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 		add_filter( 'wc_gateway_klarna_payments_settings', array( $this, 'extend_settings' ) );
 		add_filter( 'kco_wc_gateway_settings', array( $this, 'extend_settings' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-		add_action( 'plugins_loaded', array( $this, 'check_version' ) );
-		add_action( 'plugins_loaded', array( $this, 'include_files' ) );
-		
-
 		add_filter( 'script_loader_tag', array( $this, 'load_klarna_async' ), 10, 3 );
 
+		add_action( 'plugins_loaded', array( $this, 'check_version' ) );
+		add_action( 'plugins_loaded', array( $this, 'include_files' ) );
+		add_action( 'plugins_loaded', array( $this, 'init' ) );
+	}
+
+	/**
+	 * Init the plugin after plugins_loaded so environment variables are set.
+	 */
+	public function init() {
 		$this->set_data_client_id();
 	}
 
@@ -238,14 +243,12 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	 * @return void
 	 */
 	public function enqueue_scripts() {
-	
 		$settings = self::get_settings();
 		$uci      = '';
 		if ( isset( $settings['onsite_messaging_uci'] ) ) {
 			$uci = $settings['onsite_messaging_uci'];
 		}
 
-		
 		if ( 'US' === wc_get_base_location()['country'] ) {
 			$region = 'us-library';
 		} else {
@@ -262,16 +265,16 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 				wp_enqueue_script( 'klarna-onsite-messaging', 'https://' . $region . '.' . $environment . '.klarnaservices.com/lib.js', array( 'jquery' ), WC_KLARNA_ONSITE_MESSAGING_VERSION, true );
 			} elseif( ! empty( $uci ) ) {
 				wp_enqueue_script( 'onsite_messaging_script', 'https://' . $region . '.' . $environment . '.klarnaservices.com/merchant.js?uci=' . $uci . '&country=' . wc_get_base_location()['country'], array( 'jquery' ) );
+			}
 
-				wp_register_script( 'klarna_onsite_messaging', plugins_url( '/assets/js/klarna-onsite-messaging.js', __FILE__ ), array( 'jquery' ), WC_KLARNA_ONSITE_MESSAGING_VERSION );
+			wp_register_script( 'klarna_onsite_messaging', plugins_url( '/assets/js/klarna-onsite-messaging.js', __FILE__ ), array( 'jquery' ), WC_KLARNA_ONSITE_MESSAGING_VERSION );
 				wp_localize_script(
 					'klarna_onsite_messaging', 'klarna_onsite_messaging_params', array(
 						'ajaxurl' => admin_url( 'admin-ajax.php' ),
 					)
 				);
 				wp_enqueue_script( 'klarna_onsite_messaging' );
-			}
-			
+
 		}
 	}
 
