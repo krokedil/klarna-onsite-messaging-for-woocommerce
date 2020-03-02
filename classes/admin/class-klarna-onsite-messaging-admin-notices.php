@@ -52,7 +52,6 @@ class Klarna_OnSite_Messaging_Admin_Notices {
 	 */
 	public function __construct() {
 		$this->settings = Klarna_OnSite_Messaging_For_WooCommerce::get_settings();
-		$this->enabled = $this->settings['enabled'];
 
 		add_action( 'admin_init', array( $this, 'check_settings' ) );
     }
