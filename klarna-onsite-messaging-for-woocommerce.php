@@ -5,7 +5,7 @@
  * Description: Provides Klarna On-Site Messaging for WooCommerce
  * Author: krokedil, klarna
  * Author URI: https://krokedil.se/
- * Version: 1.1.0
+ * Version: 1.2.0
  * Text Domain: klarna-onsite-messaging-for-woocommerce
  * Domain Path: /languages
  *
@@ -31,7 +31,7 @@
  */
 
 // Definitions.
-define( 'WC_KLARNA_ONSITE_MESSAGING_VERSION', '1.1.0' );
+define( 'WC_KLARNA_ONSITE_MESSAGING_VERSION', '1.2.0' );
 define( 'WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'WC_KLARNA_ONSITE_MESSAGING_PLUGIN_URL', untrailingslashit( plugin_dir_url( __FILE__ ) ) );
 
@@ -251,20 +251,22 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 
 		if ( 'US' === wc_get_base_location()['country'] ) {
 			$region = 'us-library';
+		} elseif ( 'AU' === wc_get_base_location()['country'] ) {
+			$region = 'oc-library';
 		} else {
 			$region = 'eu-library';
 		}
 
 		if ( 'yes' === $settings['testmode'] ) {
-			$environment = 'playground';
+			$environment = 'playground.';
 		} else {
-			$environment = 'production';
+			$environment = '';
 		}
 		if ( is_product() || is_cart() ) {
 			if( ! empty( $this->data_client_id ) ) {
-				wp_enqueue_script( 'klarna-onsite-messaging', 'https://' . $region . '.' . $environment . '.klarnaservices.com/lib.js', array( 'jquery' ), WC_KLARNA_ONSITE_MESSAGING_VERSION, true );
+				wp_enqueue_script( 'klarna-onsite-messaging', 'https://' . $region . '.' . $environment . 'klarnaservices.com/lib.js', array( 'jquery' ), WC_KLARNA_ONSITE_MESSAGING_VERSION, true );
 			} elseif( ! empty( $uci ) ) {
-				wp_enqueue_script( 'onsite_messaging_script', 'https://' . $region . '.' . $environment . '.klarnaservices.com/merchant.js?uci=' . $uci . '&country=' . wc_get_base_location()['country'], array( 'jquery' ) );
+				wp_enqueue_script( 'onsite_messaging_script', 'https://' . $region . '.' . $environment . 'klarnaservices.com/merchant.js?uci=' . $uci . '&country=' . wc_get_base_location()['country'], array( 'jquery' ) );
 			}
 
 			wp_register_script( 'klarna_onsite_messaging', plugins_url( '/assets/js/klarna-onsite-messaging.js', __FILE__ ), array( 'jquery' ), WC_KLARNA_ONSITE_MESSAGING_VERSION );

@@ -21,6 +21,9 @@ function kosm_get_locale_for_klarna_country( $klarna_country ) {
                 $klarna_locale = 'de-AT';
             }
             break;
+        case 'AU':
+            $klarna_locale = 'en-AU';
+            break;
         case 'BE':
             if ( $has_english_locale ) {
                 $klarna_locale = 'en-BE';
