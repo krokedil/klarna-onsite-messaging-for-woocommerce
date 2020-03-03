@@ -251,6 +251,8 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 
 		if ( 'US' === wc_get_base_location()['country'] ) {
 			$region = 'us-library';
+		} elseif ( 'AU' === wc_get_base_location()['country'] ) {
+			$region = 'oc-library';
 		} else {
 			$region = 'eu-library';
 		}
