@@ -24,6 +24,10 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 	
 
 == Changelog ==
+= 2020.03.03    - version 1.2.0 =
+* Feature       - Added support for Australia.
+* Fix           - Changed url to enqueue Klarna JS file for production.
+
 = 2020.03.02    - version 1.1.0 =
 * Feature       - Added support for new way to integrate On-Site Messaging.
 * Tweak         - Use constant to enqueue correct script versions.
