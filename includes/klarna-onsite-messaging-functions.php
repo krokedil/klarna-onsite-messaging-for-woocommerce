@@ -91,7 +91,7 @@ function kosm_get_locale_for_klarna_country( $klarna_country ) {
             if ( $has_english_locale ) {
                 $klarna_locale = 'en-NO';
             } else {
-                $klarna_locale = 'nb-NO';
+                $klarna_locale = 'no-NO';
             }
             break;
         case 'PL':
