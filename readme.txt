@@ -24,6 +24,9 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 	
 
 == Changelog ==
+= 2020.03.04    - version 1.2.1 =
+* Fix           - Changed locale name for Norwegian.
+
 = 2020.03.03    - version 1.2.0 =
 * Feature       - Added support for Australia.
 * Fix           - Changed url to enqueue Klarna JS file for production.

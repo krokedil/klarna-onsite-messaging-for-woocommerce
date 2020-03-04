@@ -1,13 +1,18 @@
 {
-     "1.1.0" : {
+    "1.1.0" : {
           "description" : "<ul><li>Feature - Added support for new way to integrate On-Site Messaging.</li><li>Tweak - Use constant to enqueue correct script versions.</li><li>Tweak - Added admin notice to inform current users that they need to update the way OSM is integrated.</li></ul>",
           "requires" : "4.7.0",
           "tested" : "5.3.0",
           "upgrade_notice" : "Klarna On-site Messaging has a new way to be implemented on your site. Please visit the settings age after updating the plugin."
-     },
-     "1.2.0" : {
+    },
+    "1.2.0" : {
         "description" : "<ul><li>Feature - Added support for Australia.</li><li>Fix - Changed url to enqueue Klarna JS file for production.</li></ul>",
         "requires" : "4.7.0",
         "tested" : "5.3.0"
-   }
+   },
+   "1.2.1" : {
+    "description" : "<ul><li>* Fix - Changed locale name for Norwegian.</li></ul>",
+    "requires" : "4.7.0",
+    "tested" : "5.3.0"
+    }
 }
