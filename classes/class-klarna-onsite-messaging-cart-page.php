@@ -81,7 +81,7 @@ class Klarna_OnSite_Messaging_Cart_Page {
 	 * @return self
 	 */
 	private function set_placement_id() {
-		$this->placement_id = $this->settings['onsite_messaging_placement_id_cart'];
+		$this->placement_id = isset( $this->settings['onsite_messaging_placement_id_cart'] ) ? $this->settings['onsite_messaging_placement_id_cart'] : '';
 		return $this->placement_id;
 	}
 
