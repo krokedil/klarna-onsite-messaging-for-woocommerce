@@ -37,7 +37,7 @@ class Klarna_OnSite_Messaging_Cart_Page {
 	 * @return void
 	 */
 	public function init_class() {
-		if ( $this->is_enabled() ) {
+		if ( $this->is_enabled() && is_cart() ) {
 			$this->set_placement_id();
 			$this->set_data_key();
 			$this->set_data_client_id();
@@ -91,7 +91,7 @@ class Klarna_OnSite_Messaging_Cart_Page {
 	 * @return self
 	 */
 	private function set_data_client_id() {
-		$this->data_client_id      = '';
+		$this->data_client_id = '';
 		if ( isset( $this->settings['data_client_id'] ) ) {
 			$this->data_client_id = $this->settings['data_client_id'];
 		}
@@ -105,11 +105,11 @@ class Klarna_OnSite_Messaging_Cart_Page {
 	 */
 	private function set_theme() {
 		if ( isset( $this->settings['onsite_messaging_theme_cart'] ) && 'none' !== $this->settings['onsite_messaging_theme_cart'] ) {
-			$this->theme = 'data-theme="' . $this->settings['onsite_messaging_theme_cart'] . '"';
+			$this->theme = $this->settings['onsite_messaging_theme_cart'];
 		} elseif ( isset( $this->settings['onsite_messaging_theme_cart'] ) && 'none' === $this->settings['onsite_messaging_theme_cart'] ) {
 			$this->theme = '';
 		} else {
-			$this->theme = 'data-theme="default"';
+			$this->theme = 'default';
 		}
 	}
 
@@ -120,31 +120,16 @@ class Klarna_OnSite_Messaging_Cart_Page {
 	 */
 	public function add_iframe() {
 		$total = WC()->cart->get_total( 'klarna_onsite_messaging' ) * 100;
-		$locale = kosm_get_locale_for_klarna_country( kosm_get_purchase_country() );
 		if ( ! empty( $this->data_client_id ) ) {
-			?>
-				<klarna-placement class="klarna-onsite-messaging-cart" 
-					<?php echo $this->theme; ?> 
-					data-key="<?php echo $this->data_key; // phpcs: ignore. ?>" 
-					data-purchase-amount="<?php echo $total; // phpcs: ignore. ?>"
-					data-locale="<?php echo $locale; ?>"
-					data-preloaded="true"
-				></klarna-placement>
-
-				<script id="rendered-js">
-					function uuidv4() {
-					return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-						var r = Math.random() * 16 | 0,v = c == 'x' ? r : r & 0x3 | 0x8;
-						return v.toString(16);
-					});
-					}
-					document.cookie = `ku1-sid=test-session; ku1-vid=${uuidv4()}`;
-					//# sourceURL=pen.js
-				</script>
-			<?php
+			$args = array(
+				'data-key'             => $this->data_key,
+				'data-purchase-amount' => $total,
+				'data-theme'           => $this->theme,
+			);
+			kosm_klarna_placement( $args );
 		} else {
 			?>
-			<klarna-placement class="klarna-onsite-messaging-cart" <?php echo $this->theme; ?> data-id="<?php echo $this->placement_id; // phpcs: ignore. ?>" data-total_amount="<?php echo $total; // phpcs: ignore. ?>"></klarna-placement>
+			<klarna-placement class="klarna-onsite-messaging-cart" <?php echo ( ! empty( $this->theme ) ) ? esc_html( "data-theme=$this->theme" ) : ''; ?> data-id="<?php echo $this->placement_id; // phpcs: ignore. ?>" data-total_amount="<?php echo $total; // phpcs: ignore. ?>"></klarna-placement>
 			<?php
 		}
 	}
