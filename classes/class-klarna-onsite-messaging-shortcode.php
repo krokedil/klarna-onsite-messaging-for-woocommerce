@@ -1,6 +1,8 @@
 <?php
 /**
  * File for the class for the shortcode class.
+ *
+ * @package Klarna_OnSite_Messaging/Classes
  */
 
 /**
@@ -18,7 +20,7 @@ class Klarna_OnSite_Messaging_Shortcode {
 	 * Prints the klarna placement tag.
 	 *
 	 * @param array $atts The attributes for the shortcode.
-	 * @return void
+	 * @return string
 	 */
 	public function osm_shortcode( $atts ) {
 		if ( ! is_admin() ) {
