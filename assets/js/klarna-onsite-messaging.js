@@ -28,7 +28,7 @@ jQuery( function($) {
 			});
 		},
 
-		init: function {
+		init: function() {
 			document.cookie = `ku1-sid=test-session; ku1-vid=${klarna_onsite_messaging.uuidv4()}`;
 
 			$(document.body).on("updated_cart_totals", function () {
