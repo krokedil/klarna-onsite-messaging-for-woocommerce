@@ -11,8 +11,13 @@
         "tested" : "5.3.0"
    },
    "1.2.1" : {
-    "description" : "<ul><li>* Fix - Changed locale name for Norwegian.</li></ul>",
-    "requires" : "4.7.0",
-    "tested" : "5.3.0"
+		"description" : "<ul><li>* Fix - Changed locale name for Norwegian.</li></ul>",
+		"requires" : "4.7.0",
+		"tested" : "5.3.0"
+	},
+	"1.2.2" : {
+		"description" : "<ul><li>* Fix - Updated JavaScript library URL to not include the plugin version number.</li><li>Fix - Updated the US library endpoint to NA.</li></ul>",
+		"requires" : "4.7.0",
+		"tested" : "5.4.1"
     }
 }
