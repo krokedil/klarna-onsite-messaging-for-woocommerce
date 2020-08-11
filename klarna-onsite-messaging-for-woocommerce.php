@@ -5,12 +5,12 @@
  * Description: Provides Klarna On-Site Messaging for WooCommerce
  * Author: krokedil, klarna
  * Author URI: https://krokedil.se/
- * Version: 1.2.1
+ * Version: 1.2.2
  * Text Domain: klarna-onsite-messaging-for-woocommerce
  * Domain Path: /languages
  *
  * WC requires at least: 3.0
- * WC tested up to: 3.9.2
+ * WC tested up to: 4.2.0
  *
  * @package Klarna_OnSite_Messaging
  *
@@ -31,7 +31,7 @@
  */
 
 // Definitions.
-define( 'WC_KLARNA_ONSITE_MESSAGING_VERSION', '1.2.1' );
+define( 'WC_KLARNA_ONSITE_MESSAGING_VERSION', '1.2.2' );
 define( 'WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'WC_KLARNA_ONSITE_MESSAGING_PLUGIN_URL', untrailingslashit( plugin_dir_url( __FILE__ ) ) );
 
@@ -251,7 +251,7 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 		}
 
 		if ( 'US' === wc_get_base_location()['country'] ) {
-			$region = 'us-library';
+			$region = 'na-library';
 		} elseif ( 'AU' === wc_get_base_location()['country'] ) {
 			$region = 'oc-library';
 		} else {
@@ -273,7 +273,9 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 
 			wp_register_script( 'klarna_onsite_messaging', plugins_url( '/assets/js/klarna-onsite-messaging.js', __FILE__ ), array( 'jquery' ), WC_KLARNA_ONSITE_MESSAGING_VERSION );
 				wp_localize_script(
-					'klarna_onsite_messaging', 'klarna_onsite_messaging_params', array(
+					'klarna_onsite_messaging',
+					'klarna_onsite_messaging_params',
+					array(
 						'ajaxurl' => admin_url( 'admin-ajax.php' ),
 					)
 				);
