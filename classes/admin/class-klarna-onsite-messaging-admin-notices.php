@@ -53,7 +53,7 @@ class Klarna_OnSite_Messaging_Admin_Notices {
 	 * Checks the settings.
 	 */
 	public function check_settings() {
-		if ( ! empty( $_POST ) ) {
+		if ( ! empty( $_POST ) ) { // phpcs:ignore
 			add_action( 'woocommerce_settings_saved', array( $this, 'check_uci' ) );
 		} else {
 			add_action( 'admin_notices', array( $this, 'check_uci' ) );
@@ -75,7 +75,21 @@ class Klarna_OnSite_Messaging_Admin_Notices {
 			}
 			?>
 			<div class="kco-message notice woocommerce-message notice-error">
-			<?php echo wp_kses_post( wpautop( '<p>' . sprintf( __( 'Klarna On-site Messaging has a new way to be implemented on your site. Please visit the <a href="%s">plugin settings page</a> for more information.', 'klarna-checkout-for-woocommerce' ), admin_url( 'admin.php?page=wc-settings&tab=checkout&section=' . $gateway_id ) ) . '</p>' ) ); ?>
+			<?php
+			echo wp_kses_post(
+				wpautop(
+					'<p>' .
+					sprintf(
+						// translators: Link to Klarna settings.
+						__(
+							'Klarna On-site Messaging has a new way to be implemented on your site. Please visit the <a href="%s">plugin settings page</a> for more information.',
+							'klarna-checkout-for-woocommerce'
+						),
+						admin_url( 'admin.php?page=wc-settings&tab=checkout&section=' . $gateway_id )
+					) . '</p>'
+				)
+			);
+			?>
 			</div>
 			<?php
 		}

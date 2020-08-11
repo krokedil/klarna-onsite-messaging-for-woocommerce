@@ -1,11 +1,11 @@
 === Klarna On-Site Messaging for WooCommerce ===
 Contributors: krokedil
 Tags: woocommerce, klarna, ecommerce, e-commerce, on-site messaging
-Requires at least: 4.0
-Tested up to: 5.3.2
+Requires at least: 4.7
+Tested up to: 5.4.2
 Requires PHP: 5.6
-WC requires at least: 3.0.0
-WC tested up to: 3.9.2
+WC requires at least: 3.8.0
+WC tested up to: 4.3.2
 Stable tag: trunk
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -15,7 +15,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 == Installation ==
 1. Upload plugin folder to to the "/wp-content/plugins/" directory.
 2. Activate the plugin through the "Plugins" menu in WordPress.
-3. Go WooCommerce Settings �> Payments -> Klarna Checkout/Klarna Payments and configure your On-Site messaging settings.
+3. Go WooCommerce Settings -> Payments -> Klarna Checkout/Klarna Payments and configure your On-Site messaging settings.
 
 = Are there any specific requirements? =
 * WooCommerce 3.0 or newer is required.
@@ -24,6 +24,16 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 	
 
 == Changelog ==
+= 2020.08.11    - version 1.3.0 =
+* Feature       - Added [onsite_messaging] shortcode to be able to display OSM placements on other places than plugin default.
+* Tweak         - Removed inline javascript.
+* Tweak         - Coding standards fix.
+* Fix           - Error notice fix.
+
+= 2020.06.02    - version 1.2.2 =
+* Fix           - Updated JavaScript library URL to not include the plugin version number.
+* Fix           - Updated the US library endpoint to NA.
+
 = 2020.03.04    - version 1.2.1 =
 * Fix           - Changed locale name for Norwegian.
 
