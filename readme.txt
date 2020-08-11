@@ -24,6 +24,9 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 	
 
 == Changelog ==
+= 2020.08.11    - version 1.3.1 =
+* Fix           - Small JS fix that could cause issues with single product page display and variable products.
+
 = 2020.08.11    - version 1.3.0 =
 * Feature       - Added [onsite_messaging] shortcode to be able to display OSM placements on other places than plugin default.
 * Tweak         - Removed inline javascript.

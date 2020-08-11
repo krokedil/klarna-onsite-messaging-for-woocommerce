@@ -47,5 +47,5 @@ jQuery( function($) {
 			});
 		}
 	}
+	klarna_onsite_messaging.init();
 });
-klarna_onsite_messaging.init();
