@@ -125,7 +125,7 @@ class Klarna_OnSite_Messaging_Product_Page {
 			$price = wc_get_price_to_display( $product ) * 100;
 		}
 
-		$locale = kosm_get_locale_for_klarna_country( kosm_get_purchase_country() );
+		$locale = kosm_get_locale_for_currency();
 		if ( ! empty( $this->data_client_id ) ) {
 			$args = array(
 				'data-key'             => $this->data_key,
