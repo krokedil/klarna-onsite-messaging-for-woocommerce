@@ -29,5 +29,10 @@
         "description" : "<ul><li>Fix - Small JS fix that could cause issues with single product page display and variable products.</li></ul>",
 		"requires" : "4.7.0",
 		"tested" : "5.4.2"
+	},
+	"1.4.0" : {
+        "description" : "<ul><li>Feature - Added a widget to add Klarna on-site messaging to a widget field.</li><li>Enhancement - Added support for changing the total value data tag on a page with multiple placements.</li></ul>",
+		"requires" : "4.7.0",
+		"tested" : "5.5.1"
     }
 }

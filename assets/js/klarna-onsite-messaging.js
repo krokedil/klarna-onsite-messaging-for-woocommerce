@@ -16,8 +16,10 @@ jQuery( function($) {
 
 		update_total: function( variation ) {
 			let price = Math.round( variation.display_price * 100 );
-			document.getElementsByTagName("klarna-placement")[0].setAttribute("data-total_amount", price );
-			document.getElementsByTagName("klarna-placement")[0].setAttribute("data-purchase-amount", price );
+			$("klarna-placement").each( function() {
+				$( this ).attr("data-total_amount", price );
+				$( this ).attr("data-purchase-amount", price );
+			});
 			klarna_onsite_messaging.update_iframe();
 		},
 
