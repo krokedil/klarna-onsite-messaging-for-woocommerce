@@ -281,7 +281,16 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 				)
 			);
 
-		if ( is_product() || is_cart() || has_shortcode( $post->post_content, 'onsite_messaging' ) ) {
+		// Check if our block is active.
+		$block = false;
+		foreach ( parse_blocks( $post->post_content ) as $block ) {
+			if ( 'onsite-messaging' === $block['blockName'] ) {
+				$block = true;
+				break;
+			}
+		}
+
+		if ( is_product() || is_cart() || has_shortcode( $post->post_content, 'onsite_messaging' ) || $block || is_admin() ) {
 			if ( ! empty( $this->data_client_id ) ) {
 				wp_enqueue_script( 'klarna-onsite-messaging' );
 			} elseif ( ! empty( $uci ) ) {
@@ -321,6 +330,8 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 		include_once WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH . '/classes/class-klarna-onsite-messaging-shortcode.php';
 		include_once WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH . '/classes/class-klarna-onsite-messaging-widget.php';
 		include_once WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH . '/classes/admin/class-klarna-onsite-messaging-admin-notices.php';
+		require_once WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH . '/blocks/onsite-messaging.php';
+
 	}
 
 	/**

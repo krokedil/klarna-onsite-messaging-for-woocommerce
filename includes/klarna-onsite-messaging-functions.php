@@ -127,9 +127,10 @@ function kosm_get_locale_for_klarna_country( $klarna_country ) {
  */
 function kosm_get_purchase_country() {
 	// Try to use customer country if available.
-	if ( ! empty( WC()->customer->get_billing_country() ) && strlen( WC()->customer->get_billing_country() ) === 2 ) {
+	/*
+	if ( class_exists( 'WC_Customer' ) && ! empty( WC()->customer->get_billing_country() ) && strlen( WC()->customer->get_billing_country() ) === 2 ) {
 		return WC()->customer->get_billing_country( 'edit' );
-	}
+	}*/
 
 	$base_location = wc_get_base_location();
 	$country       = $base_location['country'];
