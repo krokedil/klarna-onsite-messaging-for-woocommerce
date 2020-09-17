@@ -1,11 +1,13 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText } from '@wordpress/block-editor';
+import { TextControl } from '@wordpress/components';
+import icons from './icons/icons.js'
  
 registerBlockType( 'klarna/onsite-messaging', {
-    title: 'Example: last post',
-    icon: 'megaphone',
+    title: 'Klarna On-Site Messaging',
+    icon: icons.kosm,
     category: 'widgets',
     name: 'klarna/onsite-messaging',
+    description: 'Add Klarnas On-Site messaging to the page',
     attributes: {
         dataKey: {
             type:'text'
@@ -18,39 +20,34 @@ registerBlockType( 'klarna/onsite-messaging', {
         }
     },
     edit: function( props ) {
-        const { attributes: { dataKey, dataTheme, dataAmount }, setAttributes, className } = props;
+        const { attributes: { dataKey, dataTheme, dataAmount, editing }, setAttributes, className } = props;
         const changeKey = ( newKey ) => {
             setAttributes( { dataKey: newKey } );
         };
         const changeTheme = ( newTheme ) => {
-            setAttributes( { dataKey: newTheme } );
+            setAttributes( { dataTheme: newTheme } );
         };
         const changeAmount = ( newAmount ) => {
             setAttributes( { dataAmount: newAmount } );
         };
-        return (
+
+        return ( 
             <div class={ className + " kosm-block-settings" }>
                 <h4>Klarna On-site Messaging</h4>
-                <label class={ className + " components-placeholder__label" }>Placement key</label>
-                <RichText
-                    tagName="p"
-                    className= { className + " block-editor-plain-text input-control" }
-                    onChange={ changeKey }
+                <TextControl
                     value={ dataKey }
+                    label="Placement Key"
+                    onChange={ ( nextValue ) => changeKey( nextValue ) }
                 />
-                <label class={ className + " components-placeholder__label" }>Theme</label>
-                <RichText
-                    tagName="p"
-                    className= { className + " block-editor-plain-text input-control" }
-                    onChange={ changeTheme }
+                 <TextControl
                     value={ dataTheme }
+                    label="Theme"
+                    onChange={ ( nextValue ) => changeTheme( nextValue ) }
                 />
-                <label class={ className + " components-placeholder__label" }>Amount</label>
-                <RichText
-                    tagName="p"
-                    className= { className + " block-editor-plain-text input-control" }
-                    onChange={ changeAmount }
+                 <TextControl
                     value={ dataAmount }
+                    label="Amount"
+                    onChange={ ( nextValue ) => changeAmount( nextValue ) }
                 />
             </div>
         );

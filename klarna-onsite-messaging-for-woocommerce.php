@@ -264,7 +264,6 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 		} else {
 			$environment = '';
 		}
-		global $post;
 
 		if ( ! empty( $this->data_client_id ) ) {
 			wp_register_script( 'klarna-onsite-messaging', 'https://' . $region . '.' . $environment . 'klarnaservices.com/lib.js', array( 'jquery' ), null, true );
@@ -273,24 +272,33 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 		}
 
 		wp_register_script( 'klarna_onsite_messaging', plugins_url( '/assets/js/klarna-onsite-messaging.js', __FILE__ ), array( 'jquery' ), WC_KLARNA_ONSITE_MESSAGING_VERSION );
-			wp_localize_script(
-				'klarna_onsite_messaging',
-				'klarna_onsite_messaging_params',
-				array(
-					'ajaxurl' => admin_url( 'admin-ajax.php' ),
-				)
-			);
+		wp_localize_script(
+			'klarna_onsite_messaging',
+			'klarna_onsite_messaging_params',
+			array(
+				'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			)
+		);
 
+		global $post;
+		$block     = false;
+		$shortcode = false;
 		// Check if our block is active.
-		$block = false;
-		foreach ( parse_blocks( $post->post_content ) as $block ) {
-			if ( 'onsite-messaging' === $block['blockName'] ) {
-				$block = true;
-				break;
+		if ( ! empty( $post ) ) {
+			foreach ( parse_blocks( $post->post_content ) as $block ) {
+				if ( 'onsite-messaging' === $block['blockName'] ) {
+					$block = true;
+					break;
+				}
+			}
+
+			// Check if our shortcode is active.
+			if ( has_shortcode( $post->post_content, 'onsite_messaging' ) ) {
+				$shortcode = true;
 			}
 		}
 
-		if ( is_product() || is_cart() || has_shortcode( $post->post_content, 'onsite_messaging' ) || $block || is_admin() ) {
+		if ( is_product() || is_cart() || $shortcode || $block ) {
 			if ( ! empty( $this->data_client_id ) ) {
 				wp_enqueue_script( 'klarna-onsite-messaging' );
 			} elseif ( ! empty( $uci ) ) {
