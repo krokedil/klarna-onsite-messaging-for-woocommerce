@@ -11,7 +11,6 @@
 	"author": "Krokedil",
 	"license": "ISC",
 	"devDependencies": {
-		"@babel/plugin-proposal-class-properties": "^7.10.4",
 		"@wordpress/scripts": "3.3.0"
 	}
 }
