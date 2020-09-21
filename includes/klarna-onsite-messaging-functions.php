@@ -121,6 +121,94 @@ function kosm_get_locale_for_klarna_country( $klarna_country ) {
 }
 
 /**
+ * Gets the locale needed for the specified currency.
+ *
+ * @return string
+ */
+function kosm_get_locale_for_currency() {
+	$wp_locale        = get_locale();
+	$currency         = get_woocommerce_currency();
+	$customer_country = ( class_exists( 'WC_Customer' ) ) ? WC()->customer->get_billing_country() : null;
+	switch ( $currency ) {
+		case 'EUR': // Euro.
+			$locale = kosm_process_eur_currency( $customer_country, $wp_locale );
+			break;
+		case 'AUD': // Australian Dollars.
+			$locale = 'en-AU';
+			break;
+		case 'CAD': // Canadian Dollar.
+			$locale = 'en-CA';
+			break;
+		case 'CHF': // Swiss Frank.
+			$locale = ( 'de_CH' === $wp_locale || 'de_CH_informal' === $wp_locale ) ? 'de-CH' : 'en-CH';
+			break;
+		case 'DKK': // Danish Kronor.
+			$locale = ( 'da_DK' === $wp_locale ) ? 'da-DK' : 'en-DK';
+			break;
+		case 'GBP': // Pounds.
+			$locale = 'en-GB';
+			break;
+		case 'NOK': // Norwegian Kronor.
+			$locale = ( 'nn_NO' === $wp_locale ) ? 'no-NO' : 'en-NO';
+			break;
+		case 'SEK': // Swedish Kronor.
+			$locale = ( 'sv_SE' === $wp_locale ) ? 'sv-SE' : 'en-SE';
+			break;
+		case 'USD': // Dollars.
+			$locale = 'en-US';
+			break;
+		default:
+			$locale = 'en-US';
+	}
+	return $locale;
+}
+
+/**
+ * Processes the Euro countries to get the locale.
+ *
+ * @param string $customer_country The Customer country.
+ * @param string $wp_locale The WordPress locale.
+ * @return string
+ */
+function kosm_process_eur_currency( $customer_country, $wp_locale ) {
+	$default_euro_locale = apply_filters( 'kosm_default_euro_locale', 'en-DE' );
+
+	// If we are forcing the euro locale, then return the locale directly.
+	$force_euro_locale = apply_filters( 'kosm_force_euro_locale', false );
+	if ( $force_euro_locale ) {
+		return $default_euro_locale;
+	}
+
+	switch ( $customer_country ) {
+		case 'AT': // Austria.
+			$locale = ( 'de_AT' === $wp_locale ) ? 'de-AT' : 'en-AT';
+			break;
+		case 'BE': // Belgium.
+			$locale = ( 'fr_BE' === $wp_locale ) ? 'fr-BE' : ( 'nl-BE' === $wp_locale ) ? 'nl-BE' : 'en-BE';
+			break;
+		case 'DE': // Germany.
+			$locale = ( 'de_DE' === $wp_locale || 'de_DE_formal' === $wp_locale ) ? 'de-DE' : 'en-DE';
+			break;
+		case 'ES': // Spain.
+			$locale = ( 'es_ES' === $wp_locale ) ? 'es-ES' : 'en-ES';
+			break;
+		case 'FI': // Finland.
+			$locale = ( 'fi' === $wp_locale ) ? 'fi-FI' : ( 'sv_SE' === $wp_locale ) ? 'sv-FI' : 'en-FI';
+			break;
+		case 'IT': // Italy.
+			$locale = ( 'it_IT' === $wp_locale ) ? 'it-IT' : 'en-IT';
+			break;
+		case 'NL': // Netherlands.
+			$locale = ( 'nl_NL' === $wp_locale ) ? 'nl-NL' : 'en-NL';
+			break;
+		default:
+			$locale = $default_euro_locale;
+			break;
+	}
+	return $locale;
+}
+
+/**
  * Gets country for Klarna purchase.
  *
  * @return string
@@ -147,7 +235,7 @@ function kosm_klarna_placement( $args ) {
 	$key             = $args['data-key'];
 	$theme           = $args['data-theme'];
 	$purchase_amount = $args['data-purchase-amount'];
-	$locale          = kosm_get_locale_for_klarna_country( kosm_get_purchase_country() );
+	$locale          = kosm_get_locale_for_currency();
 	?>
 	<klarna-placement
 		data-key="<?php echo esc_html( $key ); ?>"
