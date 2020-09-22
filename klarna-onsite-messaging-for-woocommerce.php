@@ -1,11 +1,11 @@
-<?php // phpcs: ignore.
+<?php // phpcs:ignore
 /**
  * Plugin Name: Klarna On-Site Messaging for WooCommerce
  * Plugin URI:
  * Description: Provides Klarna On-Site Messaging for WooCommerce
  * Author: krokedil, klarna
  * Author URI: https://krokedil.se/
- * Version: 1.4.0
+ * Version: 1.4.1
  * Text Domain: klarna-onsite-messaging-for-woocommerce
  * Domain Path: /languages
  *

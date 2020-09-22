@@ -34,5 +34,10 @@
         "description" : "<ul><li>Feature - Added a widget to add Klarna on-site messaging to a widget field.</li><li>Enhancement - Added support for changing the total value data tag on a page with multiple placements.</li></ul>",
 		"requires" : "4.7.0",
 		"tested" : "5.5.1"
+	},
+	"1.4.1" : {
+        "description" : "<ul><li>Enhancement - Added support for multicurrency plugins.</li><li>Fix - Removed JavaScript defaulted version number. This caused an issue when loading the JavaScript from Klarna when they made an updated their system.</li></ul>",
+		"requires" : "4.7.0",
+		"tested" : "5.5.1"
     }
 }
