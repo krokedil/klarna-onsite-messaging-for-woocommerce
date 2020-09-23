@@ -68,42 +68,24 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	 * @return array $settings
 	 */
 	public function extend_settings( $settings ) {
-		$settings['onsite_messaging'] = array(
+		$settings['onsite_messaging']                  = array(
 			'title'       => 'Klarna On-Site Messaging',
 			'type'        => 'title',
 			'description' => __( 'Klarna is now using Data Client ID (data-client-id) as credentials to configure On-Site Messaging. Please log in to your Klarna Merchant Portal to retrieve your credentials.', 'klarna-onsite-messaging-for-woocommerce' ),
 		);
-		/*
-		$settings['onsite_messaging_uci']                  = array(
-			'title'       => __( 'UCI', 'klarna-onsite-messaging-for-woocommerce' ),
-			'type'        => 'text',
-			'description' => __( 'Enter the UCI given by Klarna for Klarna On-Site Messaging', 'klarna-onsite-messaging-for-woocommerce' ),
-			'default'     => '',
-			'desc_tip'    => true,
-		);
-		*/
-		$settings['data_client_id']                   = array(
+		$settings['data_client_id']                    = array(
 			'title'       => __( 'Data client ID', 'klarna-onsite-messaging-for-woocommerce' ),
 			'type'        => 'text',
 			'description' => __( 'Enter the data-client-id given by Klarna for Klarna On-Site Messaging', 'klarna-onsite-messaging-for-woocommerce' ),
 			'default'     => '',
 			'desc_tip'    => true,
 		);
-		$settings['onsite_messaging_enabled_product'] = array(
+		$settings['onsite_messaging_enabled_product']  = array(
 			'title'   => __( 'Enable/Disable the Product placement', 'klarna-onsite-messaging-for-woocommerce' ),
 			'type'    => 'checkbox',
 			'label'   => __( 'Enable/Disable the Product placement', 'klarna-onsite-messaging-for-woocommerce' ),
 			'default' => 'yes',
 		);
-		/*
-		$settings['onsite_messaging_placement_id_product'] = array(
-			'title'       => __( 'Product page placement id', 'klarna-onsite-messaging-for-woocommerce' ),
-			'type'        => 'text',
-			'description' => __( 'Enter the placement id of the On-Site Messaging placement for the product page.', 'klarna-onsite-messaging-for-woocommerce' ),
-			'default'     => '',
-			'desc_tip'    => true,
-		);
-		*/
 		$settings['placement_data_key_product']        = array(
 			'title'       => __( 'Product page placement data key', 'klarna-onsite-messaging-for-woocommerce' ),
 			'type'        => 'text',
@@ -139,21 +121,12 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 				),
 			),
 		);
-		$settings['onsite_messaging_enabled_cart'] = array(
+		$settings['onsite_messaging_enabled_cart']  = array(
 			'title'   => __( 'Enable/Disable the Cart placement', 'klarna-onsite-messaging-for-woocommerce' ),
 			'type'    => 'checkbox',
 			'label'   => __( 'Enable/Disable the Cart placement', 'klarna-onsite-messaging-for-woocommerce' ),
 			'default' => 'yes',
 		);
-		/*
-		$settings['onsite_messaging_placement_id_cart']    = array(
-			'title'       => __( 'Cart page placement id', 'klarna-onsite-messaging-for-woocommerce' ),
-			'type'        => 'text',
-			'description' => __( 'Enter the placement id of the On-Site Messaging placement for the cart page.', 'klarna-onsite-messaging-for-woocommerce' ),
-			'default'     => '',
-			'desc_tip'    => true,
-		);
-		*/
 		$settings['placement_data_key_cart']        = array(
 			'title'       => __( 'Cart page placement data key', 'klarna-onsite-messaging-for-woocommerce' ),
 			'type'        => 'text',
