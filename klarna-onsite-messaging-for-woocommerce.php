@@ -31,7 +31,7 @@
  */
 
 // Definitions.
-define( 'WC_KLARNA_ONSITE_MESSAGING_VERSION', '1.4.0' );
+define( 'WC_KLARNA_ONSITE_MESSAGING_VERSION', '1.4.1' );
 define( 'WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'WC_KLARNA_ONSITE_MESSAGING_PLUGIN_URL', untrailingslashit( plugin_dir_url( __FILE__ ) ) );
 
