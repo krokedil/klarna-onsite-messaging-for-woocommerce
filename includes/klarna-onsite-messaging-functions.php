@@ -149,7 +149,7 @@ function kosm_get_locale_for_currency() {
 			$locale = 'en-GB';
 			break;
 		case 'NOK': // Norwegian Kronor.
-			$locale = ( 'nn_NO' === $wp_locale ) ? 'no-NO' : 'en-NO';
+			$locale = ( 'nn_NO' === $wp_locale || 'nb_NO' === $wp_locale ) ? 'no-NO' : 'en-NO';
 			break;
 		case 'SEK': // Swedish Kronor.
 			$locale = ( 'sv_SE' === $wp_locale ) ? 'sv-SE' : 'en-SE';
@@ -184,7 +184,13 @@ function kosm_process_eur_currency( $customer_country, $wp_locale ) {
 			$locale = ( 'de_AT' === $wp_locale ) ? 'de-AT' : 'en-AT';
 			break;
 		case 'BE': // Belgium.
-			$locale = ( 'fr_BE' === $wp_locale ) ? 'fr-BE' : ( 'nl-BE' === $wp_locale ) ? 'nl-BE' : 'en-BE';
+			if ( 'fr_BE' === $wp_locale ) {
+				$locale = 'fr-BE';
+			} elseif ( 'nl_BE' === $wp_locale ) {
+				$locale = 'nl-BE';
+			} else {
+				$locale = 'en-BE';
+			}
 			break;
 		case 'DE': // Germany.
 			$locale = ( 'de_DE' === $wp_locale || 'de_DE_formal' === $wp_locale ) ? 'de-DE' : 'en-DE';
@@ -193,7 +199,13 @@ function kosm_process_eur_currency( $customer_country, $wp_locale ) {
 			$locale = ( 'es_ES' === $wp_locale ) ? 'es-ES' : 'en-ES';
 			break;
 		case 'FI': // Finland.
-			$locale = ( 'fi' === $wp_locale ) ? 'fi-FI' : ( 'sv_SE' === $wp_locale ) ? 'sv-FI' : 'en-FI';
+			if ( 'fi' === $wp_locale ) {
+				$locale = 'fi-FI';
+			} elseif ( 'sv_SE' === $wp_locale ) {
+				$locale = 'sv-FI';
+			} else {
+				$locale = 'en-FI';
+			}
 			break;
 		case 'IT': // Italy.
 			$locale = ( 'it_IT' === $wp_locale ) ? 'it-IT' : 'en-IT';
@@ -205,6 +217,7 @@ function kosm_process_eur_currency( $customer_country, $wp_locale ) {
 			$locale = $default_euro_locale;
 			break;
 	}
+
 	return $locale;
 }
 
