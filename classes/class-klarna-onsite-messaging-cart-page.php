@@ -54,13 +54,9 @@ class Klarna_OnSite_Messaging_Cart_Page {
 	 * @return boolean
 	 */
 	public function is_enabled() {
-		$store_base_location = apply_filters( 'klarna_onsite_messaging_store_location', wc_get_base_location()['country'] );
-		$customer_location   = apply_filters( 'klarna_onsite_messaging_customer_location', WC()->customer->get_billing_country() );
-		if ( $store_base_location === $customer_location ) {
-			$this->settings = Klarna_OnSite_Messaging_For_WooCommerce::get_settings();
-			if ( ! isset( $this->settings['onsite_messaging_enabled_cart'] ) || 'yes' === $this->settings['onsite_messaging_enabled_cart'] ) {
-				return true;
-			}
+		$this->settings = Klarna_OnSite_Messaging_For_WooCommerce::get_settings();
+		if ( ! isset( $this->settings['onsite_messaging_enabled_cart'] ) || 'yes' === $this->settings['onsite_messaging_enabled_cart'] ) {
+			return true;
 		}
 		return false;
 	}

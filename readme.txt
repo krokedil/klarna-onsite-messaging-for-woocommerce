@@ -24,6 +24,9 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 	
 
 == Changelog ==
+= 2020.10.02    - version 1.4.2 =
+* Fix           - Fixed Norwegian, Finish and Dutch locales.
+
 = 2020.09.22    - version 1.4.1 =
 * Enhancement   - Added support for multicurrency plugins.
 * Fix           - Removed JavaScript defaulted version number. This caused an issue when loading the JavaScript from Klarna when they made an updated their system.
