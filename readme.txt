@@ -2,10 +2,10 @@
 Contributors: krokedil
 Tags: woocommerce, klarna, ecommerce, e-commerce, on-site messaging
 Requires at least: 4.7
-Tested up to: 5.4.2
+Tested up to: 5.5.2
 Requires PHP: 5.6
 WC requires at least: 3.8.0
-WC tested up to: 4.3.2
+WC tested up to: 4.7.0
 Stable tag: trunk
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -24,6 +24,9 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 	
 
 == Changelog ==
+= 2020.11.24    - version 1.4.3 =
+* Tweak         - Remove code that overwrote Klarnas cookie.
+
 = 2020.10.02    - version 1.4.2 =
 * Fix           - Fixed Norwegian, Finish and Dutch locales.
 
