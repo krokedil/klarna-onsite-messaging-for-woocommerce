@@ -44,5 +44,10 @@
         "description" : "<ul><li>Fix - Fixed Norwegian, Finish and Dutch locales.</li></ul>",
 		"requires" : "4.7.0",
 		"tested" : "5.5.1"
+	},
+	"1.4.3" : {
+        "description" : "<ul><li>Tweak - Remove code that overwrote Klarnas cookie.</li></ul>",
+		"requires" : "4.7.0",
+		"tested" : "5.5.1"
     }
 }
