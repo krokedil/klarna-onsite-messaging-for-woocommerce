@@ -21,6 +21,10 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 * WooCommerce 3.0 or newer is required.
 * PHP 5.6 or higher is required.
 
+== Frequently Asked Questions ==
+= Where can I find On-Site Messaging for WooCommerce documentation? =
+For help setting up and configuring On-Site Messaging for WooCommerce please refer to our [documentation](https://docs.krokedil.com/article/259-klarna-on-site-messaging/).
+
 	
 
 == Changelog ==
