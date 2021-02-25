@@ -24,6 +24,9 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 	
 
 == Changelog ==
+= 2021.02.25    - version 1.4.4 =
+* Enhancement   - Add support for France, Canada and New Zealand.
+
 = 2020.11.24    - version 1.4.3 =
 * Tweak         - Remove code that overwrote Klarnas cookie.
 
