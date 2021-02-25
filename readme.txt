@@ -28,6 +28,9 @@ For help setting up and configuring On-Site Messaging for WooCommerce please ref
 	
 
 == Changelog ==
+= 2021.02.25    - version 1.4.4 =
+* Enhancement   - Add support for France, Canada and New Zealand.
+
 = 2020.11.24    - version 1.4.3 =
 * Tweak         - Remove code that overwrote Klarnas cookie.
 
