@@ -45,6 +45,7 @@ class Klarna_OnSite_Messaging_Cart_Page {
 			$target   = apply_filters( 'klarna_onsite_messaging_cart_target', ( isset( $this->settings['onsite_messaging_cart_location'] ) ? $this->settings['onsite_messaging_cart_location'] : 'woocommerce_cart_collaterals' ) );
 			$priority = apply_filters( 'klarna_onsite_messaging_cart_priority', '5' );
 			add_action( $target, array( $this, 'add_iframe' ), $priority );
+			add_action( 'woocommerce_cart_totals_after_order_total', array( $this, 'add_cart_total_input' ) );
 		}
 	}
 
@@ -133,6 +134,17 @@ class Klarna_OnSite_Messaging_Cart_Page {
 				></klarna-placement>
 			<?php
 		}
+	}
+
+	/**
+	 * Add a hidden input field with the cart totals.
+	 *
+	 * @return void
+	 */
+	public function add_cart_total_input() {
+		?>
+		<input type="hidden" id="kosm_cart_total" name="kosm_cart_total" value="<?php echo esc_html( WC()->cart->get_total( 'klarna_onsite_messaging' ) ); ?>">
+		<?php
 	}
 }
 new Klarna_OnSite_Messaging_Cart_Page();
