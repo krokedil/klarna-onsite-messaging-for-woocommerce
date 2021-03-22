@@ -147,17 +147,17 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 				'woocommerce_after_cart_totals'   => __( 'After proceed to checkout button', 'klarna-onsite-messaging-for-woocommerce' ),
 				'woocommerce_after_cart'          => __( 'Bottom of the page', 'klarna-onsite-messaging-for-woocommerce' ),
 			),
-			$settings['onsite_messaging_theme_cart']       = array(
-				'title'   => __( 'Cart Placement Theme', 'klarna-onsite-messaging-for-woocommerce' ),
-				'desc'    => __( 'Select wich theme to use for the cart page.', 'klarna-onsite-messaging-for-woocommerce' ),
-				'id'      => '',
-				'default' => '',
-				'type'    => 'select',
-				'options' => array(
-					'default' => __( 'Light', 'klarna-onsite-messaging-for-woocommerce' ),
-					'dark'    => __( 'Dark', 'klarna-onsite-messaging-for-woocommerce' ),
-					'none'    => __( 'None', 'klarna-onsite-messaging-for-woocommerce' ),
-				),
+		);
+		$settings['onsite_messaging_theme_cart']    = array(
+			'title'   => __( 'Cart Placement Theme', 'klarna-onsite-messaging-for-woocommerce' ),
+			'desc'    => __( 'Select wich theme to use for the cart page.', 'klarna-onsite-messaging-for-woocommerce' ),
+			'id'      => '',
+			'default' => '',
+			'type'    => 'select',
+			'options' => array(
+				'default' => __( 'Light', 'klarna-onsite-messaging-for-woocommerce' ),
+				'dark'    => __( 'Dark', 'klarna-onsite-messaging-for-woocommerce' ),
+				'none'    => __( 'None', 'klarna-onsite-messaging-for-woocommerce' ),
 			),
 		);
 
