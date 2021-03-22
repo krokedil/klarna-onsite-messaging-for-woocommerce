@@ -254,7 +254,7 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 				)
 			);
 
-		if ( is_product() || is_cart() || has_shortcode( $post->post_content, 'onsite_messaging' ) ) {
+		if ( is_product() || is_cart() || ( ! empty( $post ) && has_shortcode( $post->post_content, 'onsite_messaging' ) ) ) {
 			if ( ! empty( $this->data_client_id ) ) {
 				wp_enqueue_script( 'klarna-onsite-messaging' );
 			} elseif ( ! empty( $uci ) ) {
