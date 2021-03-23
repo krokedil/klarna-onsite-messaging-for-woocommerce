@@ -2,10 +2,10 @@
 Contributors: krokedil
 Tags: woocommerce, klarna, ecommerce, e-commerce, on-site messaging
 Requires at least: 4.7
-Tested up to: 5.5.2
+Tested up to: 5.7.0
 Requires PHP: 5.6
 WC requires at least: 3.8.0
-WC tested up to: 4.7.0
+WC tested up to: 5.1.0
 Stable tag: trunk
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -24,6 +24,12 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 	
 
 == Changelog ==
+= 2021.03.23    - version 1.5.0 =
+* Feature       - Added support to automatically populate the data-purchase-amount when using a shortcode on a product or cart page as long as no purchase amount has been specified.
+* Fix           - We now update the placement purchase amount properly when updating the cart on the cart page.
+* Fix           - Fixed an issue of not including taxes in the variable product price.
+* Fix           - Fixed a error caused by the global post variable not being present on a page.
+
 = 2021.02.25    - version 1.4.4 =
 * Enhancement   - Add support for France, Canada and New Zealand.
 
