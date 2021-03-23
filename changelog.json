@@ -54,5 +54,10 @@
 		"description" : "<ul><li>Enhancement - Add support for France, Canada and New Zealand.</li></ul>",
 		"requires" : "4.7.0",
 		"tested" : "5.5.1"
+	},
+	"1.5.0" : {
+		"description" : "<ul><li>Feature - Added support to automatically populate the data-purchase-amount when using a shortcode on a product or cart page as long as no purchase amount has been specified.</li><li>Fix - We now update the placement purchase amount properly when updating the cart on the cart page.</li><li>Fix - Fixed an issue of not including taxes in the variable product price.</li><li>Fix - Fixed a error caused by the global post variable not being present on a page.</li></ul>",
+		"requires" : "4.7.0",
+		"tested" : "5.7.0"
 	}
 }
