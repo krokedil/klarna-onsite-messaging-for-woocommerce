@@ -55,11 +55,11 @@ class Klarna_OnSite_Messaging_Shortcode {
 		if ( is_product() ) {
 			global $product;
 			if ( $product->is_type( 'variable' ) ) {
-				$price = $product->get_variation_price( 'min', true ) * 100;
+				$price = $product->get_variation_price( 'min', true );
 			} elseif ( $product->is_type( 'bundle' ) ) {
-				$price = $product->get_bundle_price( 'min' ) * 100;
+				$price = $product->get_bundle_price( 'min' );
 			} else {
-				$price = wc_get_price_to_display( $product ) * 100;
+				$price = wc_get_price_to_display( $product );
 			}
 
 			// Force a nummeric value.
