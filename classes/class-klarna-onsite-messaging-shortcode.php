@@ -56,6 +56,8 @@ class Klarna_OnSite_Messaging_Shortcode {
 			global $product;
 			if ( $product->is_type( 'variable' ) ) {
 				$price = $product->get_variation_price( 'min', true ) * 100;
+			} elseif ( $product->is_type( 'bundle' ) ) {
+				$price = $product->get_bundle_price( 'min' ) * 100;
 			} else {
 				$price = wc_get_price_to_display( $product ) * 100;
 			}
