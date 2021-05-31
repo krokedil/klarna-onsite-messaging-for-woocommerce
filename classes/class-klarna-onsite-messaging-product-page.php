@@ -116,10 +116,15 @@ class Klarna_OnSite_Messaging_Product_Page {
 	public function add_iframe() {
 		global $product;
 		if ( $product->is_type( 'variable' ) ) {
-			$price = $product->get_variation_price( 'min' ) * 100;
+			$price = $product->get_variation_price( 'min' );
+		} elseif ( $product->is_type( 'bundle' ) ) {
+			$price = $product->get_bundle_price( 'min' );
 		} else {
-			$price = wc_get_price_to_display( $product ) * 100;
+			$price = wc_get_price_to_display( $product );
 		}
+
+		// Force a nummeric value.
+		$price = floatval( $price ) * 100;
 
 		$locale = kosm_get_locale_for_currency();
 		if ( ! empty( $this->data_client_id ) ) {

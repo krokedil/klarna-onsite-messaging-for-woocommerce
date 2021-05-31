@@ -2,10 +2,10 @@
 Contributors: krokedil
 Tags: woocommerce, klarna, ecommerce, e-commerce, on-site messaging
 Requires at least: 4.7
-Tested up to: 5.7.0
+Tested up to: 5.7.2
 Requires PHP: 5.6
 WC requires at least: 3.8.0
-WC tested up to: 5.1.0
+WC tested up to: 5.3.1
 Stable tag: trunk
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -28,6 +28,10 @@ For help setting up and configuring On-Site Messaging for WooCommerce please ref
 	
 
 == Changelog ==
+= 2021.05.31    - version 1.5.1 =
+* Enhancement   - Add support to handle product bundles with pricing set to keep the price of the bundled products.
+* Fix           - Add a check to make sure we only run calculations on numeric values. WooCommerce could sometimes return prices as empty strings, which has now been considered and solved.
+
 = 2021.03.23    - version 1.5.0 =
 * Feature       - Added support to automatically populate the data-purchase-amount when using a shortcode on a product or cart page as long as no purchase amount has been specified.
 * Fix           - We now update the placement purchase amount properly when updating the cart on the cart page.
