@@ -61,6 +61,9 @@ class Klarna_OnSite_Messaging_Shortcode {
 			} else {
 				$price = wc_get_price_to_display( $product ) * 100;
 			}
+
+			// Force a nummeric value.
+			$price = floatval( $price ) * 100;
 		} elseif ( is_cart() ) {
 			$price = WC()->cart->get_total( 'klarna_onsite_messaging' ) * 100;
 		}
