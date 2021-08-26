@@ -9,6 +9,7 @@
  * On-Site Messaging product page class.
  */
 class Klarna_OnSite_Messaging_Product_Page {
+
 	/**
 	 * Placement id
 	 *
@@ -124,9 +125,9 @@ class Klarna_OnSite_Messaging_Product_Page {
 		}
 
 		// Force a nummeric value.
-		$price = floatval( $price ) * 100;
-
+		$price  = floatval( $price ) * 100;
 		$locale = kosm_get_locale_for_currency();
+
 		if ( ! empty( $this->data_client_id ) ) {
 			$args = array(
 				'data-key'             => $this->data_key,
@@ -134,6 +135,14 @@ class Klarna_OnSite_Messaging_Product_Page {
 				'data-theme'           => $this->theme,
 			);
 			kosm_klarna_placement( $args );
+
+			Klarna_OnSite_Messaging_For_WooCommerce::debug_init(
+				array(
+					'page'   => 'product',
+					'locale' => $locale,
+					'msg'    => 'Attempting to get OSM from Klarna.',
+				)
+			);
 		} else {
 			?>
 			<klarna-placement 
@@ -143,6 +152,14 @@ class Klarna_OnSite_Messaging_Product_Page {
 				data-total_amount="<?php echo esc_html( $price ); ?>"
 				></klarna-placement>
 			<?php
+
+			Klarna_OnSite_Messaging_For_WooCommerce::debug_init(
+				array(
+					'page'   => 'product',
+					'locale' => $locale,
+					'msg'    => 'Data client id is missing.',
+				)
+			);
 		}
 	}
 } new Klarna_OnSite_Messaging_Product_Page();

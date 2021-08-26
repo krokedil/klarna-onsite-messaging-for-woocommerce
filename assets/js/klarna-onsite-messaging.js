@@ -32,12 +32,51 @@ jQuery( function($) {
 			klarna_onsite_messaging.update_iframe();
 		},
 
+		debug_info: function( msg )
+		{
+			if(/[?&]osmDebug=1/.test(location.search))
+			{
+				const client_msg = (msg === 'show') ?
+					'Fetched OSM.' : 'Unable to fetch OSM. Are the credentials correct?';
+
+				if(typeof debug_server_info !== 'undefined')
+				{
+					console.log('%cDebug info: ', 'color: #ff0000');
+
+					if(typeof debug_server_info.page !== 'undefined')
+					{
+						console.log('OSM type loaded: ' + debug_server_info.page);
+					}
+
+					if(typeof debug_server_info.locale !== 'undefined')
+					{
+						console.log('Locale: ' + debug_server_info.locale);
+					}
+
+					if(typeof debug_server_info.currency !== 'undefined')
+					{
+						console.log('Currency: ' + debug_server_info.currency);
+					}
+
+					if(typeof debug_server_info.msg !== 'undefined')
+					{
+						console.log('Message from server: ' + debug_server_info.msg);
+					}
+
+					console.log('Message from Klarna: ' + client_msg);
+				}
+			}
+
+		},
+
 		init: function() {
 			$(document).ready( function() {
 				if( false === klarna_onsite_messaging.check_variable ) {
 					$('klarna-placement').hide();
+					klarna_onsite_messaging.debug_info('hide' );
 				} else {
 					$('klarna-placement').show();
+					klarna_onsite_messaging.debug_info('show' );
 				}
 			});
 			
@@ -47,7 +86,7 @@ jQuery( function($) {
 			$(document).on( 'found_variation', function( e, variation ) {
 				klarna_onsite_messaging.update_total_variation( variation );
 			});
-		}
+		},
 	}
 	klarna_onsite_messaging.init();
 });
