@@ -47,13 +47,6 @@ class Klarna_OnSite_Messaging_Widget extends WP_Widget {
 
 		echo esc_attr( kosm_klarna_placement( $instance ) );
 
-		Klarna_OnSite_Messaging_For_WooCommerce::debug_init(
-			array(
-				'page' => 'shortcode',
-				'msg'  => 'trying to get info from klarna',
-			)
-		);
-
 		echo $args['after_widget']; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
 	}
 

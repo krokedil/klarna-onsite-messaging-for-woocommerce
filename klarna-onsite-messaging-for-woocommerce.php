@@ -245,13 +245,25 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 		}
 
 		wp_register_script( 'klarna_onsite_messaging', plugins_url( '/assets/js/klarna-onsite-messaging.js', __FILE__ ), array( 'jquery' ), WC_KLARNA_ONSITE_MESSAGING_VERSION );
-			wp_localize_script(
-				'klarna_onsite_messaging',
-				'klarna_onsite_messaging_params',
-				array(
-					'ajaxurl' => admin_url( 'admin-ajax.php' ),
-				)
+
+		$localize = array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) );
+
+		if ( isset( $_GET['osmDebug'] ) && '1' === $_GET['osmDebug'] ) {
+			$localize['debug_info'] = array(
+				'product'     => is_product(),
+				'cart'        => is_cart(),
+				'shortcode'   => ( ! empty( $post ) && has_shortcode( $post->post_content, 'onsite_messaging' ) ),
+				'data_client' => ! ( empty( $this->data_client_id ) ),
+				'locale'      => kosm_get_locale_for_currency(),
+				'currency'    => get_woocommerce_currency(),
 			);
+		}
+
+		wp_localize_script(
+			'klarna_onsite_messaging',
+			'klarna_onsite_messaging_params',
+			$localize
+		);
 
 		if ( is_product() || is_cart() || ( ! empty( $post ) && has_shortcode( $post->post_content, 'onsite_messaging' ) ) ) {
 			if ( ! empty( $this->data_client_id ) ) {
@@ -300,27 +312,6 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	 */
 	public function register_klarna_osm_widget() {
 		register_widget( 'Klarna_OnSite_Messaging_Widget' );
-	}
-
-	/**
-	 * Debug information
-	 *
-	 * @return string
-	 */
-	public static function debug_init( $content = array() ) {
-
-		if ( isset( $_GET['osmDebug'] ) && $_GET['osmDebug'] == '1' ) {
-			$content_defaults = array(
-				'page'     => 'unknown',
-				'msg'      => '',
-				'locale'   => '',
-				'currency' => get_woocommerce_currency(),
-			);
-
-			echo '<script>';
-			echo 'var debug_server_info = ' . wp_json_encode( array_merge( $content_defaults, $content ) ) . ';';
-			echo '</script>';
-		}
 	}
 
 } new Klarna_OnSite_Messaging_For_WooCommerce();

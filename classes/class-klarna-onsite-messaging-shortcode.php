@@ -39,14 +39,6 @@ class Klarna_OnSite_Messaging_Shortcode {
 			);
 			ob_start();
 			kosm_klarna_placement( $atts );
-
-			Klarna_OnSite_Messaging_For_WooCommerce::debug_init(
-				array(
-					'page' => 'product',
-					'msg'  => 'Attempting to get OSM from Klarna.',
-				)
-			);
-
 			$html = ob_get_clean();
 
 			return $html;

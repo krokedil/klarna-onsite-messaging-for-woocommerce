@@ -126,15 +126,6 @@ class Klarna_OnSite_Messaging_Cart_Page {
 				'data-theme'           => $this->theme,
 			);
 			kosm_klarna_placement( $args );
-
-			Klarna_OnSite_Messaging_For_WooCommerce::debug_init(
-				array(
-					'page'   => 'cart',
-					'locale' => $locale,
-					'msg'    => 'Attempting to get OSM from Klarna.',
-				)
-			);
-
 		} else {
 			?>
 			<klarna-placement 
@@ -144,14 +135,6 @@ class Klarna_OnSite_Messaging_Cart_Page {
 				data-total_amount="<?php echo esc_html( $total ); ?>"
 				></klarna-placement>
 			<?php
-
-			Klarna_OnSite_Messaging_For_WooCommerce::debug_init(
-				array(
-					'page'   => 'cart',
-					'locale' => $locale,
-					'msg'    => 'Data client id is missing.',
-				)
-			);
 		}
 	}
 

@@ -32,52 +32,63 @@ jQuery( function($) {
 			klarna_onsite_messaging.update_iframe();
 		},
 
-		debug_info: function( msg )
+		debug_info: function()
 		{
 			if(/[?&]osmDebug=1/.test(location.search))
 			{
-				const client_msg = (msg === 'show') ?
-					'Fetched OSM.' : 'Unable to fetch OSM. Are the credentials correct?';
-
-				if(typeof debug_server_info !== 'undefined')
+				const d = klarna_onsite_messaging_params.debug_info;
+				
+				if(typeof d !== 'undefined')
 				{
 					console.log('%cDebug info: ', 'color: #ff0000');
 
-					if(typeof debug_server_info.page !== 'undefined')
+					if(typeof d.product !== 'undefined' && d.product)
 					{
-						console.log('OSM type loaded: ' + debug_server_info.page);
+						console.log('Page has Product OSM.');
 					}
 
-					if(typeof debug_server_info.locale !== 'undefined')
+					if(typeof d.cart !== 'undefined' && d.cart)
 					{
-						console.log('Locale: ' + debug_server_info.locale);
+						console.log('Page has Cart OSM.');
 					}
 
-					if(typeof debug_server_info.currency !== 'undefined')
+					if(typeof d.shortcode !== 'undefined' && d.shortcode)
 					{
-						console.log('Currency: ' + debug_server_info.currency);
+						console.log('Page has Shortcode OSM.');
 					}
 
-					if(typeof debug_server_info.msg !== 'undefined')
+					if(typeof d.locale !== 'undefined')
 					{
-						console.log('Message from server: ' + debug_server_info.msg);
+						console.log('Locale: ' + d.locale);
 					}
 
-					console.log('Message from Klarna: ' + client_msg);
+					if(typeof d.currency !== 'undefined')
+					{
+						console.log('Currency: ' + d.currency);
+					}
+
+					if(typeof d.data_client !== 'undefined')
+					{
+						console.log((!d.data_client) ? 'Data client is missing.' : 'Data client exists.');
+					}
+
+					if(typeof window.KlarnaOnsiteService !== 'undefined' && typeof window.KlarnaOnsiteService.loaded !== 'undefined')
+					{
+						console.log('Klarna loaded status: ' + window.KlarnaOnsiteService.loaded);
+					}
 				}
 			}
-
 		},
 
 		init: function() {
 			$(document).ready( function() {
 				if( false === klarna_onsite_messaging.check_variable ) {
 					$('klarna-placement').hide();
-					klarna_onsite_messaging.debug_info('hide' );
 				} else {
 					$('klarna-placement').show();
-					klarna_onsite_messaging.debug_info('show' );
 				}
+
+				klarna_onsite_messaging.debug_info();
 			});
 			
 			$(document.body).on("updated_cart_totals", function () {
