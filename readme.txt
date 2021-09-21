@@ -3,8 +3,8 @@ Contributors: krokedil
 Tags: woocommerce, klarna, ecommerce, e-commerce, on-site messaging
 Requires at least: 4.7
 Tested up to: 5.7.2
-Requires PHP: 5.6
-WC requires at least: 3.8.0
+Requires PHP: 7.0
+WC requires at least: 4.0.0
 WC tested up to: 5.3.1
 Stable tag: trunk
 License: GPLv3 or later
