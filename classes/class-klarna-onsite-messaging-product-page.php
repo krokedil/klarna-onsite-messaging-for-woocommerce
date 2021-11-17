@@ -9,6 +9,7 @@
  * On-Site Messaging product page class.
  */
 class Klarna_OnSite_Messaging_Product_Page {
+
 	/**
 	 * Placement id
 	 *
@@ -124,9 +125,9 @@ class Klarna_OnSite_Messaging_Product_Page {
 		}
 
 		// Force a nummeric value.
-		$price = floatval( $price ) * 100;
-
+		$price  = floatval( $price ) * 100;
 		$locale = kosm_get_locale_for_currency();
+
 		if ( ! empty( $this->data_client_id ) ) {
 			$args = array(
 				'data-key'             => $this->data_key,
