@@ -245,13 +245,25 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 		}
 
 		wp_register_script( 'klarna_onsite_messaging', plugins_url( '/assets/js/klarna-onsite-messaging.js', __FILE__ ), array( 'jquery' ), WC_KLARNA_ONSITE_MESSAGING_VERSION );
-			wp_localize_script(
-				'klarna_onsite_messaging',
-				'klarna_onsite_messaging_params',
-				array(
-					'ajaxurl' => admin_url( 'admin-ajax.php' ),
-				)
+
+		$localize = array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) );
+
+		if ( isset( $_GET['osmDebug'] ) && '1' === $_GET['osmDebug'] ) {
+			$localize['debug_info'] = array(
+				'product'     => is_product(),
+				'cart'        => is_cart(),
+				'shortcode'   => ( ! empty( $post ) && has_shortcode( $post->post_content, 'onsite_messaging' ) ),
+				'data_client' => ! ( empty( $this->data_client_id ) ),
+				'locale'      => kosm_get_locale_for_currency(),
+				'currency'    => get_woocommerce_currency(),
 			);
+		}
+
+		wp_localize_script(
+			'klarna_onsite_messaging',
+			'klarna_onsite_messaging_params',
+			$localize
+		);
 
 		if ( is_product() || is_cart() || ( ! empty( $post ) && has_shortcode( $post->post_content, 'onsite_messaging' ) ) ) {
 			if ( ! empty( $this->data_client_id ) ) {

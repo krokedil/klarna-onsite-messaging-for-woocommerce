@@ -116,7 +116,9 @@ class Klarna_OnSite_Messaging_Cart_Page {
 	 * @return void
 	 */
 	public function add_iframe() {
-		$total = WC()->cart->get_total( 'klarna_onsite_messaging' ) * 100;
+		$total  = WC()->cart->get_total( 'klarna_onsite_messaging' ) * 100;
+		$locale = kosm_get_locale_for_currency();
+
 		if ( ! empty( $this->data_client_id ) ) {
 			$args = array(
 				'data-key'             => $this->data_key,

@@ -31,7 +31,6 @@ class Klarna_OnSite_Messaging_Widget extends WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 		wp_enqueue_script( 'klarna-onsite-messaging' );
-		wp_enqueue_script( 'klarna_onsite_messaging' );
 
 		$default_args = array(
 			'data-key'             => 'homepage-promotion-wide',
