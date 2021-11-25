@@ -55,7 +55,7 @@ class Klarna_OnSite_Messaging_Product_Page {
 	 * @return self
 	 */
 	private function set_data_key() {
-		$this->data_key = $this->settings['placement_data_key_product'];
+		$this->data_key = isset( $this->settings['placement_data_key_product'] ) ? $this->settings['placement_data_key_product'] : '';
 		return $this->data_key;
 	}
 
