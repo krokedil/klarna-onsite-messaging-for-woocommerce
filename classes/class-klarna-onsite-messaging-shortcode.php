@@ -40,6 +40,7 @@ class Klarna_OnSite_Messaging_Shortcode {
 			ob_start();
 			kosm_klarna_placement( $atts );
 			$html = ob_get_clean();
+
 			return $html;
 		}
 	}

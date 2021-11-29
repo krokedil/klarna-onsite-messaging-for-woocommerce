@@ -5,12 +5,12 @@
  * Description: Provides Klarna On-Site Messaging for WooCommerce
  * Author: krokedil, klarna
  * Author URI: https://krokedil.se/
- * Version: 1.5.1
+ * Version: 1.6.0
  * Text Domain: klarna-onsite-messaging-for-woocommerce
  * Domain Path: /languages
  *
  * WC requires at least: 3.8
- * WC tested up to: 5.3.0
+ * WC tested up to: 5.9.0
  *
  * @package Klarna_OnSite_Messaging
  *
@@ -31,7 +31,7 @@
  */
 
 // Definitions.
-define( 'WC_KLARNA_ONSITE_MESSAGING_VERSION', '1.5.1' );
+define( 'WC_KLARNA_ONSITE_MESSAGING_VERSION', '1.6.0' );
 define( 'WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'WC_KLARNA_ONSITE_MESSAGING_PLUGIN_URL', untrailingslashit( plugin_dir_url( __FILE__ ) ) );
 
@@ -69,9 +69,8 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	 */
 	public function extend_settings( $settings ) {
 		$settings['onsite_messaging']                  = array(
-			'title'       => 'Klarna On-Site Messaging',
-			'type'        => 'title',
-			'description' => __( 'Klarna is now using Data Client ID (data-client-id) as credentials to configure On-Site Messaging. Please log in to your Klarna Merchant Portal to retrieve your credentials.', 'klarna-onsite-messaging-for-woocommerce' ),
+			'title' => 'Klarna On-Site Messaging',
+			'type'  => 'title',
 		);
 		$settings['data_client_id']                    = array(
 			'title'       => __( 'Data client ID', 'klarna-onsite-messaging-for-woocommerce' ),
@@ -246,13 +245,25 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 		}
 
 		wp_register_script( 'klarna_onsite_messaging', plugins_url( '/assets/js/klarna-onsite-messaging.js', __FILE__ ), array( 'jquery' ), WC_KLARNA_ONSITE_MESSAGING_VERSION );
-			wp_localize_script(
-				'klarna_onsite_messaging',
-				'klarna_onsite_messaging_params',
-				array(
-					'ajaxurl' => admin_url( 'admin-ajax.php' ),
-				)
+
+		$localize = array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) );
+
+		if ( isset( $_GET['osmDebug'] ) && '1' === $_GET['osmDebug'] ) {
+			$localize['debug_info'] = array(
+				'product'     => is_product(),
+				'cart'        => is_cart(),
+				'shortcode'   => ( ! empty( $post ) && has_shortcode( $post->post_content, 'onsite_messaging' ) ),
+				'data_client' => ! ( empty( $this->data_client_id ) ),
+				'locale'      => kosm_get_locale_for_currency(),
+				'currency'    => get_woocommerce_currency(),
 			);
+		}
+
+		wp_localize_script(
+			'klarna_onsite_messaging',
+			'klarna_onsite_messaging_params',
+			$localize
+		);
 
 		if ( is_product() || is_cart() || ( ! empty( $post ) && has_shortcode( $post->post_content, 'onsite_messaging' ) ) ) {
 			if ( ! empty( $this->data_client_id ) ) {

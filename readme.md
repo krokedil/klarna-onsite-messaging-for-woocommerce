@@ -11,11 +11,11 @@ To install this plugin you first need to have either Klarna Checkout for WooComm
 3. Upload the entire plugin directory to your /wp-content/plugins/ directory.
 4. Activate the plugin through the ‘Plugins’ menu in WordPress Administration.
 
-You also need two things from Klarna to integrate On-Site Messaging. The placement ID and UCI. Both of these you can get from your merchant portal. You can find more information about that [here](https://developers.klarna.com/en/gb/kco-v3/on-site-messaging/getting-started).
+You also need a few things from Klarna to integrate On-Site Messaging. The **Data client ID** and **Placement data keys** for product page placement and/or cart page placement. You can get both the Data client ID and the Placement data keys from your Klarna merchant portal. You can find more information about that [here](https://docs.klarna.com/on-site-messaging/get-started/).
 
-Then go to the settings for either the Klarna Checkout or Klarna Payments gateway ( WooCommerce –> Settings –> Payments ). At the bottom of these pages you should now see a section called *Klarna On-Site Messaging*. Here you can enter the Placement IDs and your UCI.
+Then go to the settings for either the Klarna Checkout or Klarna Payments gateway ( WooCommerce –> Settings –> Payments ). At the bottom of these pages you should now see a section called *Klarna On-Site Messaging*. Here you can enter the Data client ID and your Placement data keys.
 
-Now when you go to either your product or cart page you should be seeing the widget that you settup in your merchant portal.
+Now when you go to either your product or cart page you should be seeing the widget that you set up in your merchant portal.
 
 #### Changing widget location.
 In your Klarna settings there is a select option to select where on the page you want to display the widgets.
@@ -48,6 +48,6 @@ function change_klarna_onsite_messaging_cart_priority( $priority ) {
     return $priority;
 }
 ```
-These can be used with any action that you want. You can find a list of all WooCommerce actions and where they operate [here](https://docs.woocommerce.com/wc-apidocs/hook-docs.html)
+These can be used with any action that you want. You can find a list of all WooCommerce actions and where they operate [here](https://woocommerce.github.io/code-reference/hooks/hooks.html)
 
 **We do not support individual themes. If you want to change the appearance of the widget outside of what we can do with the filter then this requires custom CSS code. Use the classes *klarna-onsite-messaging-product* and *klarna-onsite-messaging-cart* respectively.**

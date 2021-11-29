@@ -32,6 +32,54 @@ jQuery( function($) {
 			klarna_onsite_messaging.update_iframe();
 		},
 
+		debug_info: function()
+		{
+			if(/[?&]osmDebug=1/.test(location.search))
+			{
+				const d = klarna_onsite_messaging_params.debug_info;
+				
+				if(typeof d !== 'undefined')
+				{
+					console.log('%cDebug info: ', 'color: #ff0000');
+
+					if(typeof d.product !== 'undefined' && d.product)
+					{
+						console.log('Page has Product OSM.');
+					}
+
+					if(typeof d.cart !== 'undefined' && d.cart)
+					{
+						console.log('Page has Cart OSM.');
+					}
+
+					if(typeof d.shortcode !== 'undefined' && d.shortcode)
+					{
+						console.log('Page has Shortcode OSM.');
+					}
+
+					if(typeof d.locale !== 'undefined')
+					{
+						console.log('Locale: ' + d.locale);
+					}
+
+					if(typeof d.currency !== 'undefined')
+					{
+						console.log('Currency: ' + d.currency);
+					}
+
+					if(typeof d.data_client !== 'undefined')
+					{
+						console.log((!d.data_client) ? 'Data client is missing.' : 'Data client exists.');
+					}
+
+					if(typeof window.KlarnaOnsiteService !== 'undefined' && typeof window.KlarnaOnsiteService.loaded !== 'undefined')
+					{
+						console.log('Klarna loaded status: ' + window.KlarnaOnsiteService.loaded);
+					}
+				}
+			}
+		},
+
 		init: function() {
 			$(document).ready( function() {
 				if( false === klarna_onsite_messaging.check_variable ) {
@@ -39,6 +87,8 @@ jQuery( function($) {
 				} else {
 					$('klarna-placement').show();
 				}
+
+				klarna_onsite_messaging.debug_info();
 			});
 			
 			$(document.body).on("updated_cart_totals", function () {
@@ -47,7 +97,7 @@ jQuery( function($) {
 			$(document).on( 'found_variation', function( e, variation ) {
 				klarna_onsite_messaging.update_total_variation( variation );
 			});
-		}
+		},
 	}
 	klarna_onsite_messaging.init();
 });
