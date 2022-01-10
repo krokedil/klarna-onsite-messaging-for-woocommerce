@@ -147,7 +147,7 @@ function kosm_get_locale_for_klarna_country( $klarna_country ) {
 /**
  * Gets the locale needed for the specified currency.
  *
- * @return string
+ * @return string|bool
  */
 function kosm_get_locale_for_currency() {
 	$wp_locale        = get_locale();
@@ -188,7 +188,7 @@ function kosm_get_locale_for_currency() {
 			$locale = 'en-NZ';
 			break;
 		default:
-			$locale = 'en-US';
+			$locale = false;
 	}
 	return $locale;
 }
@@ -287,7 +287,12 @@ function kosm_klarna_placement( $args ) {
 	$key             = $args['data-key'];
 	$theme           = $args['data-theme'];
 	$purchase_amount = $args['data-purchase-amount'];
-	$locale          = kosm_get_locale_for_currency();
+	$locale = kosm_get_locale_for_currency();
+
+	if ( empty( $locale ) ) {
+		return;
+	}
+
 	?>
 	<klarna-placement
 		data-key="<?php echo esc_html( $key ); ?>"
