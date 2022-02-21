@@ -64,5 +64,10 @@
 		"description" : "<ul><li>Enhancement - Add support to handle product bundles with pricing set to keep the price of the bundled products.</li><li>Fix - Add a check to make sure we only run calculations on numeric values. WooCommerce could sometimes return prices as empty strings, which has now been considered and solved</li></ul>",
 		"requires" : "4.7.0",
 		"tested" : "5.7.2"
+	},
+	"1.6.1" : {
+		"description" : "<ul><li>Fix - Fixed an issue with defaulting the locale for the Placement to en-US. Now the placement wont show if the locale is not set.</li></ul>",
+		"requires" : "4.7.0",
+		"tested" : "5.7.2"
 	}
 }

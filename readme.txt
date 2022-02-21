@@ -2,10 +2,10 @@
 Contributors: krokedil
 Tags: woocommerce, klarna, ecommerce, e-commerce, on-site messaging
 Requires at least: 4.7
-Tested up to: 5.8.2
+Tested up to: 5.9.0
 Requires PHP: 7.0
 WC requires at least: 4.0.0
-WC tested up to: 5.9.0
+WC tested up to: 6.2.0
 Stable tag: trunk
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -28,6 +28,9 @@ For help setting up and configuring On-Site Messaging for WooCommerce please ref
 	
 
 == Changelog ==
+= 2022.02.21    - version 1.6.1 =
+* Fix           - Fixed an issue with defaulting the locale for the Placement to en-US. Now the placement wont show if the locale is not set.
+
 = 2021.05.31    - version 1.6.0 =
 * Feature       - Add support for Ireland.
 * Feature       - Add support for Portugal.
