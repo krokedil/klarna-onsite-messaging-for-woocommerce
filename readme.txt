@@ -28,6 +28,9 @@ For help setting up and configuring On-Site Messaging for WooCommerce please ref
 	
 
 == Changelog ==
+= 2022.03.01    - version 1.6.2 =
+* Fix           - We now enqueue the scripts directly in the shortcode, this solves an issue where the needed scripts did not get loaded when using the shortcode in the footer or header using widget areas with Gutenberg Blocks.
+
 = 2022.02.21    - version 1.6.1 =
 * Fix           - Fixed an issue with defaulting the locale for the Placement to en-US. Now the placement wont show if the locale is not set.
 
