@@ -53,6 +53,8 @@ class Klarna_OnSite_Messaging_Shortcode {
 	 */
 	public function set_price( $atts ) {
 		$price = '';
+		wp_enqueue_script( 'klarna-onsite-messaging' );
+		wp_enqueue_script( 'klarna_onsite_messaging' );
 		if ( is_product() ) {
 			global $product;
 			if ( $product->is_type( 'variable' ) ) {
