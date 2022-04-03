@@ -53,7 +53,6 @@ class Klarna_OnSite_Messaging_Shortcode {
 	 */
 	public function set_price( $atts ) {
 		$price = '';
-		wp_enqueue_script( 'klarna-onsite-messaging' );
 		wp_enqueue_script( 'klarna_onsite_messaging' );
 		if ( is_product() ) {
 			global $product;
@@ -65,7 +64,7 @@ class Klarna_OnSite_Messaging_Shortcode {
 				$price = wc_get_price_to_display( $product );
 			}
 
-			// Force a nummeric value.
+			// Force a numeric value.
 			$price = floatval( $price ) * 100;
 		} elseif ( is_cart() ) {
 			$price = WC()->cart->get_total( 'klarna_onsite_messaging' ) * 100;
