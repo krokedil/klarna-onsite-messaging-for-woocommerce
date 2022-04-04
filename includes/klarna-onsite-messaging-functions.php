@@ -179,7 +179,7 @@ function kosm_get_locale_for_currency() {
 			$locale = ( 'sv_SE' === $wp_locale ) ? 'sv-SE' : 'en-SE';
 			break;
 		case 'PLN': // Polish złoty.
-			$locale = ( 'pl-PL' === $wp_locale ) ? 'pl-PL' : 'en-PL';
+			$locale = ( 'pl_PL' === $wp_locale ) ? 'pl-PL' : 'en-PL';
 			break;
 		case 'USD': // Dollars.
 			$locale = 'en-US';
