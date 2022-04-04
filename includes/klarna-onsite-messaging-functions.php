@@ -152,7 +152,7 @@ function kosm_get_locale_for_klarna_country( $klarna_country ) {
 function kosm_get_locale_for_currency() {
 	$wp_locale        = get_locale();
 	$currency         = get_woocommerce_currency();
-	$customer_country = ( method_exists( WC()->customer, 'get_billing_country' ) ) ? WC()->customer->get_billing_country() : null;
+	$customer_country = ( isset( WC()->customer ) && method_exists( WC()->customer, 'get_billing_country' ) ) ? WC()->customer->get_billing_country() : null;
 	switch ( $currency ) {
 		case 'EUR': // Euro.
 			$locale = kosm_process_eur_currency( $customer_country, $wp_locale );
@@ -287,7 +287,7 @@ function kosm_klarna_placement( $args ) {
 	$key             = $args['data-key'];
 	$theme           = $args['data-theme'];
 	$purchase_amount = $args['data-purchase-amount'];
-	$locale = kosm_get_locale_for_currency();
+	$locale          = kosm_get_locale_for_currency();
 
 	if ( empty( $locale ) ) {
 		return;
