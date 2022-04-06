@@ -28,6 +28,10 @@ For help setting up and configuring On-Site Messaging for WooCommerce please ref
 	
 
 == Changelog ==
+= 2022.04.06    - version 1.6.3 =
+* Fix           - Fixed the locale for Polish to be passed correctly.
+* Fix           - Fixed an issue caused by the customer object in WooCommerce missing.</
+
 = 2022.03.01    - version 1.6.2 =
 * Fix           - We now enqueue the scripts directly in the shortcode, this solves an issue where the needed scripts did not get loaded when using the shortcode in the footer or header using widget areas with Gutenberg Blocks.
 

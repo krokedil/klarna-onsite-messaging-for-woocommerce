@@ -74,5 +74,10 @@
 		"description" : "<ul><li>Fix - We now enqueue the scripts directly in the shortcode, this solves an issue where the needed scripts did not get loaded when using the shortcode in the footer or header using widget areas with Gutenberg Blocks.</li></ul>",
 		"requires" : "4.7.0",
 		"tested" : "5.9.1"
+	},
+	"1.6.3" : {
+		"description" : "<ul><li>Fix - Fixed the locale for Polish to be passed correctly.</li><li>Fix - Fixed an issue caused by the customer object in WooCommerce missing.</li></ul>",
+		"requires" : "4.7.0",
+		"tested" : "5.9.3"
 	}
 }
