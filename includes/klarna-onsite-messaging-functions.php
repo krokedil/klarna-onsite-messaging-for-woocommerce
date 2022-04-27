@@ -293,6 +293,19 @@ function kosm_klarna_placement( $args ) {
 		return;
 	}
 
+	global $product;
+	if ( ! empty( $product ) && empty( $purchase_amount ) ) {
+		if ( $product->is_type( 'variable' ) ) {
+			$purchase_amount = $product->get_variation_price( 'min' );
+		} elseif ( $product->is_type( 'bundle' ) ) {
+			$purchase_amount = $product->get_bundle_price( 'min' );
+		} else {
+			$purchase_amount = wc_get_price_to_display( $product );
+		}
+
+		$purchase_amount = floatval( $purchase_amount ) * 100;
+	}
+
 	?>
 	<klarna-placement
 		data-key="<?php echo esc_html( $key ); ?>"
