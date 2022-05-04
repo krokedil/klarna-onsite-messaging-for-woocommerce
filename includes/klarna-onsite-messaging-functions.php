@@ -294,6 +294,10 @@ function kosm_klarna_placement( $args ) {
 	}
 
 	global $product;
+	if ( ! is_object( $product ) ) {
+		$product = wc_get_product( get_the_ID() );
+	}
+
 	if ( ! empty( $product ) && empty( $purchase_amount ) ) {
 		if ( $product->is_type( 'variable' ) ) {
 			$purchase_amount = $product->get_variation_price( 'min' );
