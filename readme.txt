@@ -2,10 +2,10 @@
 Contributors: krokedil
 Tags: woocommerce, klarna, ecommerce, e-commerce, on-site messaging
 Requires at least: 4.7
-Tested up to: 5.9.0
+Tested up to: 6.0
 Requires PHP: 7.0
 WC requires at least: 4.0.0
-WC tested up to: 6.2.0
+WC tested up to: 6.5.0
 Stable tag: trunk
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -28,6 +28,11 @@ For help setting up and configuring On-Site Messaging for WooCommerce please ref
 	
 
 == Changelog ==
+= 2022.05.12    - version 1.7.0 =
+* Feature       - Added filter 'kosm_data_client_id' for filtering data client ID.
+* Enhancement   - Fixed an issue where the placement would not appear on the page when added through the Elementor Builder's widget.
+* Fix           - Fixed critical error happening when the widget or shortcode is used in the header.
+
 = 2022.04.06    - version 1.6.3 =
 * Fix           - Fixed the locale for Polish to be passed correctly.
 * Fix           - Fixed an issue caused by the customer object in WooCommerce missing.</

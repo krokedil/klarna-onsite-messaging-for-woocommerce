@@ -5,12 +5,12 @@
  * Description: Provides Klarna On-Site Messaging for WooCommerce
  * Author: krokedil, klarna
  * Author URI: https://krokedil.se/
- * Version: 1.6.3
+ * Version: 1.7.0
  * Text Domain: klarna-onsite-messaging-for-woocommerce
  * Domain Path: /languages
  *
  * WC requires at least: 3.8
- * WC tested up to: 6.3.0
+ * WC tested up to: 6.5.0
  *
  * @package Klarna_OnSite_Messaging
  *
@@ -31,7 +31,7 @@
  */
 
 // Definitions.
-define( 'WC_KLARNA_ONSITE_MESSAGING_VERSION', '1.6.3' );
+define( 'WC_KLARNA_ONSITE_MESSAGING_VERSION', '1.7.0' );
 define( 'WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'WC_KLARNA_ONSITE_MESSAGING_PLUGIN_URL', untrailingslashit( plugin_dir_url( __FILE__ ) ) );
 
@@ -176,7 +176,7 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 			return $tag;
 		}
 		$tag = str_replace( ' src', ' async src', $tag );
-		$tag = str_replace( '></script>', ' data-client-id="' . $this->data_client_id . '"></script>', $tag );
+		$tag = str_replace( '></script>', ' data-client-id="' . apply_filters( 'kosm_data_client_id', $this->data_client_id ) . '"></script>', $tag );
 
 		return $tag;
 	}
@@ -205,7 +205,7 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 		$settings             = self::get_settings();
 		$this->data_client_id = '';
 		if ( isset( $settings['data_client_id'] ) ) {
-			$this->data_client_id = $settings['data_client_id'];
+			$this->data_client_id = apply_filters( 'kosm_data_client_id', $settings['data_client_id'] );
 		}
 		return $this->data_client_id;
 	}
