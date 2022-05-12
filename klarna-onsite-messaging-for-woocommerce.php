@@ -176,7 +176,7 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 			return $tag;
 		}
 		$tag = str_replace( ' src', ' async src', $tag );
-		$tag = str_replace( '></script>', ' data-client-id="' . $this->data_client_id . '"></script>', $tag );
+		$tag = str_replace( '></script>', ' data-client-id="' . apply_filters( 'kosm_data_client_id', $this->data_client_id ) . '"></script>', $tag );
 
 		return $tag;
 	}
@@ -205,7 +205,7 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 		$settings             = self::get_settings();
 		$this->data_client_id = '';
 		if ( isset( $settings['data_client_id'] ) ) {
-			$this->data_client_id = $settings['data_client_id'];
+			$this->data_client_id = apply_filters( 'kosm_data_client_id', $settings['data_client_id'] );
 		}
 		return $this->data_client_id;
 	}
