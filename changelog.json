@@ -79,5 +79,10 @@
 		"description" : "<ul><li>Fix - Fixed the locale for Polish to be passed correctly.</li><li>Fix - Fixed an issue caused by the customer object in WooCommerce missing.</li></ul>",
 		"requires" : "4.7.0",
 		"tested" : "5.9.3"
+	},
+	"1.7.0": {
+		"description": "<ul><li>Feature - Added filter 'kosm_data_client_id' for filtering data client ID.</li><li>Enhancement - Fixed an issue where the placement would not appear on the page when added through the Elementor Builder's widget.</li><li>Fix - Fixed critical error happening when the widget or shortcode is used in the header.</li></ul>",
+		"requires" : "4.7.0",
+		"tested": "6.0"
 	}
 }
