@@ -90,7 +90,7 @@ class Klarna_OnSite_Messaging_Cart_Page {
 	private function set_data_client_id() {
 		$this->data_client_id = '';
 		if ( isset( $this->settings['data_client_id'] ) ) {
-			$this->data_client_id = $this->settings['data_client_id'];
+			$this->data_client_id = apply_filters( 'kosm_data_client_id', $this->settings['data_client_id'] );
 		}
 		return $this->data_client_id;
 	}
