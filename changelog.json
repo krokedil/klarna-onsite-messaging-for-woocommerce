@@ -84,5 +84,10 @@
 		"description": "<ul><li>Feature - Added filter 'kosm_data_client_id' for filtering data client ID.</li><li>Enhancement - Fixed an issue where the placement would not appear on the page when added through the Elementor Builder's widget.</li><li>Fix - Fixed critical error happening when the widget or shortcode is used in the header.</li></ul>",
 		"requires" : "4.7.0",
 		"tested": "6.0"
+	},
+	"1.7.1": {
+		"description": "<ul><li>Fix - Update kernl.</li></ul>",
+		"requires" : "4.7.0",
+		"tested": "6.0"
 	}
 }

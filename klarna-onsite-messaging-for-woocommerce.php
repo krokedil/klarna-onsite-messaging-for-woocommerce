@@ -5,7 +5,7 @@
  * Description: Provides Klarna On-Site Messaging for WooCommerce
  * Author: krokedil, klarna
  * Author URI: https://krokedil.se/
- * Version: 1.7.0
+ * Version: 1.7.1
  * Text Domain: klarna-onsite-messaging-for-woocommerce
  * Domain Path: /languages
  *
@@ -31,7 +31,7 @@
  */
 
 // Definitions.
-define( 'WC_KLARNA_ONSITE_MESSAGING_VERSION', '1.7.0' );
+define( 'WC_KLARNA_ONSITE_MESSAGING_VERSION', '1.7.1' );
 define( 'WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'WC_KLARNA_ONSITE_MESSAGING_PLUGIN_URL', untrailingslashit( plugin_dir_url( __FILE__ ) ) );
 
@@ -281,12 +281,12 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	 * @return void
 	 */
 	public function check_version() {
-		require WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH . '/includes/plugin_update_check.php';
-		$kernl_updater = new PluginUpdateChecker_2_0(
+		require WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH . '/kernl-update-checker/kernl-update-checker.php';
+
+		$MyUpdateChecker = Puc_v4_FactoryKernl::buildUpdateChecker(
 			'https://kernl.us/api/v1/updates/5c763fe5f22bcc016dd96618/',
 			__FILE__,
-			'klarna-onsite-messaging-for-woocommerce',
-			1
+			'klarna-onsite-messaging-for-woocommerce'
 		);
 	}
 

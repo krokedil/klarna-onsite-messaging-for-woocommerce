@@ -28,6 +28,9 @@ For help setting up and configuring On-Site Messaging for WooCommerce please ref
 	
 
 == Changelog ==
+= 2022.05.24    - version 1.7.1 =
+* Fix       - Update kernl.
+
 = 2022.05.12    - version 1.7.0 =
 * Feature       - Added filter 'kosm_data_client_id' for filtering data client ID.
 * Enhancement   - Fixed an issue where the placement would not appear on the page when added through the Elementor Builder's widget.
