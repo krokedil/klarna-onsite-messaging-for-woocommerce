@@ -76,6 +76,10 @@ jQuery( function($) {
 					{
 						console.log('Klarna loaded status: ' + window.KlarnaOnsiteService.loaded);
 					}
+
+					if (d.library) {
+						console.log('Library: ', d.library);
+					}
 				}
 			}
 		},
