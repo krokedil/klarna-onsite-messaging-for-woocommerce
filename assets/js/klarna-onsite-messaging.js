@@ -107,7 +107,7 @@ jQuery( function($) {
 			// "WooCommerce Measurement Price Calculator".
 			$('.product_price').on('wc-measurement-price-calculator-product-price-change', function (e, measurement, price) {
 				if (price) {
-					klarna_onsite_messaging.update_total_price(price * 100)
+					klarna_onsite_messaging.update_total_price(Math.round(price * 100))
 				}
 			});
 		},
