@@ -97,6 +97,19 @@ jQuery( function($) {
 			$(document).on( 'found_variation', function( e, variation ) {
 				klarna_onsite_messaging.update_total_variation( variation );
 			});
+
+			// "WooCommerce Measurement Price Calculator".
+			$('.product_price').on('wc-measurement-price-calculator-product-price-change', function (e, measurement, price) {
+				if (price) {
+					price *= 100;
+					$("klarna-placement").each(function () {
+						$(this).attr("data-total_amount", price);
+						$(this).attr("data-purchase-amount", price);
+					});
+
+					klarna_onsite_messaging.update_iframe();
+				}
+			});
 		},
 	}
 	klarna_onsite_messaging.init();
