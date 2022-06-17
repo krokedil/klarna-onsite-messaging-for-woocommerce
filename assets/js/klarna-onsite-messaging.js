@@ -15,20 +15,26 @@ jQuery( function($) {
 		},
 
 		update_total_cart: function() {
-			let price = Math.round( $("#kosm_cart_total").val() * 100 );
-			$("klarna-placement").each( function() {
-				$( this ).attr("data-total_amount", price );
-				$( this ).attr("data-purchase-amount", price );
-			});
-			klarna_onsite_messaging.update_iframe();
+			let price = Math.round($("#kosm_cart_total").val() * 100);
+			klarna_onsite_messaging.update_total_price(price)
 		},
 
 		update_total_variation: function( variation ) {
-			let price = Math.round( variation.display_price * 100 );
+			let price = Math.round(variation.display_price * 100);
+			klarna_onsite_messaging.update_total_price(price);
+		},
+
+		update_total_price: function (price) {
+			/* If the price is undefined, OSM won't appear. Let this be known. */
+			if (!price) {
+				console.warn('OSM price error: ', price)
+			}
+
 			$("klarna-placement").each( function() {
 				$( this ).attr("data-total_amount", price );
 				$( this ).attr("data-purchase-amount", price );
 			});
+
 			klarna_onsite_messaging.update_iframe();
 		},
 
@@ -101,13 +107,7 @@ jQuery( function($) {
 			// "WooCommerce Measurement Price Calculator".
 			$('.product_price').on('wc-measurement-price-calculator-product-price-change', function (e, measurement, price) {
 				if (price) {
-					price *= 100;
-					$("klarna-placement").each(function () {
-						$(this).attr("data-total_amount", price);
-						$(this).attr("data-purchase-amount", price);
-					});
-
-					klarna_onsite_messaging.update_iframe();
+					klarna_onsite_messaging.update_total_price(price * 100)
 				}
 			});
 		},
