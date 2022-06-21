@@ -105,15 +105,19 @@ jQuery( function($) {
 			});
 
 			/* "WooCommerce Measurement Price Calculator". */
-			const mpc = function (e, _, price) {
+			
+			// Measurement with more than one unit/field, is handled by .total_price. For single unit, .product_price.
+			$('.total_price').on('wc-measurement-price-calculator-total-price-change', function (e, quantity, price) {
+				if (price) {
+					klarna_onsite_messaging.update_total_price(Math.round(quantity * price * 100))
+				}
+			});
+
+			$('.product_price').on('wc-measurement-price-calculator-product-price-change', function (e, measurement, price) {
 				if (price) {
 					klarna_onsite_messaging.update_total_price(Math.round(price * 100))
-				}
-			};
-
-			// Depending on the measurement, the class used is different (total_price vs product_price).
-			$('.total_price').on('wc-measurement-price-calculator-total-price-change', mpc);
-			$('.product_price').on('wc-measurement-price-calculator-product-price-change', mpc);
+				} 
+			});
 		},
 	}
 	klarna_onsite_messaging.init();
