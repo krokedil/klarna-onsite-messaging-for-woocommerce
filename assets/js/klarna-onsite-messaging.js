@@ -104,12 +104,16 @@ jQuery( function($) {
 				klarna_onsite_messaging.update_total_variation( variation );
 			});
 
-			// "WooCommerce Measurement Price Calculator".
-			$('.product_price').on('wc-measurement-price-calculator-product-price-change', function (e, measurement, price) {
+			/* "WooCommerce Measurement Price Calculator". */
+			const mpc = function (e, _, price) {
 				if (price) {
 					klarna_onsite_messaging.update_total_price(Math.round(price * 100))
 				}
-			});
+			};
+
+			// Depending on the measurement, the class used is different (total_price vs product_price).
+			$('.total_price').on('wc-measurement-price-calculator-total-price-change', mpc);
+			$('.product_price').on('wc-measurement-price-calculator-product-price-change', mpc);
 		},
 	}
 	klarna_onsite_messaging.init();
