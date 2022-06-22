@@ -106,18 +106,43 @@ jQuery( function($) {
 
 			/* "WooCommerce Measurement Price Calculator". */
 			
-			// Measurement with more than one unit/field, is handled by .total_price. For single unit, .product_price.
+			// Measurement with a "total price". These have more than one field/unit.
 			$('.total_price').on('wc-measurement-price-calculator-total-price-change', function (e, quantity, price) {
 				if (price) {
 					klarna_onsite_messaging.update_total_price(Math.round(quantity * price * 100))
 				}
 			});
 
+			// Triggered when the customer manually adjusts the quantity (rather than the measurements).
+			$('form.cart').on('wc-measurement-price-calculator-quantity-changed', function (e, quantity) {
+				if (quantity) {
+					price = 100 * quantity * parseFloat(wc_price_calculator_params.product_price);
+					klarna_onsite_messaging.update_total_price(price)
+				}
+			});
+
+			// Measurements with a "product price". These have a single field/unit.
+			// The product price does not account for quantity, instead we have to account for this when updating OSM.
 			$('.product_price').on('wc-measurement-price-calculator-product-price-change', function (e, measurement, price) {
-				if (price) {
-					klarna_onsite_messaging.update_total_price(Math.round(price * 100))
+				quantity = parseInt($('form.cart .qty').val())
+				if (price && quantity > 0) {
+					klarna_onsite_messaging.update_total_price(Math.round(price * 100 * quantity))
 				} 
 			});
+
+			$('form.cart').on('change', 'input.qty', function () {
+				quantity = this.value
+				unit_price = parseFloat($('.product_price span').text()) // NaN - if the customer has not yet entered any units in the MPC fields.
+
+				if (quantity > 0) {
+					price = 100 * quantity * parseFloat(wc_price_calculator_params.product_price);
+					if (! isNaN(unit_price)) {
+						price = 100 * unit_price * quantity;
+					}
+
+					klarna_onsite_messaging.update_total_price(price)
+				}
+			})
 		},
 	}
 	klarna_onsite_messaging.init();
