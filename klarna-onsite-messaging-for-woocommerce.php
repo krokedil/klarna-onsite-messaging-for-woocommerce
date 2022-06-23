@@ -231,6 +231,8 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 			$region = 'eu-library';
 		}
 
+		$region = apply_filters( 'kosm_region_library', $region );
+
 		if ( 'yes' === $settings['testmode'] ) {
 			$environment = 'playground.';
 		} else {
