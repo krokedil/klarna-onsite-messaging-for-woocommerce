@@ -131,6 +131,10 @@ jQuery( function($) {
 			});
 
 			$('form.cart').on('change', 'input.qty', function () {
+				if (typeof wc_price_calculator_params === 'undefined') {
+					return;
+				}
+
 				quantity = this.value
 				unit_price = parseFloat($('.product_price span').text()) // NaN - if the customer has not yet entered any units in the MPC fields.
 
