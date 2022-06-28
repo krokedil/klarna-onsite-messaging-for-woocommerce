@@ -28,8 +28,13 @@ For help setting up and configuring On-Site Messaging for WooCommerce please ref
 	
 
 == Changelog ==
+= 2022.06.28    - version 1.8.0 =
+* Feature       - Added support for the third-party plugin "WooCommerce Measurement Price Calculator".
+* Enhancement   - You can now use the 'kosm_region_library' filter to force a specific regional library. See [documentation](https://docs.krokedil.com/klarna-for-woocommerce/additional-klarna-plugins/klarna-on-site-messaging/#customize-region-dependent-js-libraries).
+* Tweak         - The osmDebug option will now also tell which library is being used. Used for debugging purposes.
+
 = 2022.05.24    - version 1.7.1 =
-* Fix       - Update kernl.
+* Fix           - Update kernl.
 
 = 2022.05.12    - version 1.7.0 =
 * Feature       - Added filter 'kosm_data_client_id' for filtering data client ID.
