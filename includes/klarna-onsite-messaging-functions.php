@@ -84,6 +84,9 @@ function kosm_get_locale_for_klarna_country( $klarna_country ) {
 				$klarna_locale = 'fr-FR';
 			}
 			break;
+		case 'GR': // Greece.
+			$klarna_locale = $has_english_locale ? 'en-GR' : 'el-GR';
+			break;
 		case 'IE':
 			$klarna_locale = 'en-IE';
 			break;
@@ -239,6 +242,9 @@ function kosm_process_eur_currency( $customer_country, $wp_locale ) {
 			break;
 		case 'FR': // France.
 			$locale = ( 'fr_FR' === $wp_locale ) ? 'fr-FR' : 'en-FR';
+			break;
+		case 'GR': // Greece.
+			$locale = 'el-GR';
 			break;
 		case 'IE': // Ireland.
 			$locale = 'en-IE';
