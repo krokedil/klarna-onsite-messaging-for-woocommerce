@@ -94,5 +94,10 @@
 		"description": "<ul><li>Feature - Added support for the third-party plugin 'WooCommerce Measurement Price Calculator'.</li><li>Enhancement - You can now use the 'kosm_region_library' filter to force a specific regional library. See [documentation](https://docs.krokedil.com/klarna-for-woocommerce/additional-klarna-plugins/klarna-on-site-messaging/#customize-region-dependent-js-libraries).</li><li>Tweak - The osmDebug option will now also tell which library is being used. Used for debugging purposes.</li></ul>",
 		"requires" : "4.7.0",
 		"tested": "6.0"
+	},
+	"1.9.0": {
+		"description": "<ul><li>Feature - Added support for Greece.</li></ul>",
+		"requires" : "4.7.0",
+		"tested": "6.0.4"
 	}
 }
