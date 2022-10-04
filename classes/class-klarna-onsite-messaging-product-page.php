@@ -124,7 +124,7 @@ class Klarna_OnSite_Messaging_Product_Page {
 			$price = wc_get_price_to_display( $product );
 		}
 
-		// Force a nummeric value.
+		// Force a numeric value.
 		$price  = floatval( $price ) * 100;
 		$locale = kosm_get_locale_for_currency();
 
