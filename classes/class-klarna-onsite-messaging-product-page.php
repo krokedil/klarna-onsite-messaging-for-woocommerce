@@ -124,8 +124,15 @@ class Klarna_OnSite_Messaging_Product_Page {
 			$price = wc_get_price_to_display( $product );
 		}
 
-		// Force a nummeric value.
-		$price  = floatval( $price ) * 100;
+		// WOO-DISCOUNT-RULES: Check if the filter for retrieving the discounted price exists. Note: by default, quantity is 1.
+		// Link: https://gist.github.com/AshlinRejo/c37a155a42c0e30beafbbad183f0c4e8
+		if ( has_filter( 'advanced_woo_discount_rules_get_product_discount_price_from_custom_price' ) ) {
+			$maybe_price = apply_filters( 'advanced_woo_discount_rules_get_product_discount_price_from_custom_price', $price, $product, 1, $price, 'discounted_price', true );
+			$price       = false !== $maybe_price ? $maybe_price : $price;
+		}
+
+		// Force a numeric value.
+		$price  = intval( number_format( $price * 100, 0, '', '' ) );
 		$locale = kosm_get_locale_for_currency();
 
 		if ( empty( $locale ) ) {
