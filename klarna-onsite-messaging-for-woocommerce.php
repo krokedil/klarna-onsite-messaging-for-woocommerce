@@ -187,13 +187,11 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	 * @return array
 	 */
 	public static function get_settings() {
-		if ( class_exists( 'WC_Klarna_Payments' ) ) {
-			return get_option( 'woocommerce_klarna_payments_settings' );
-		} elseif ( class_exists( 'Klarna_Checkout_For_WooCommerce' ) ) {
-			return get_option( 'woocommerce_kco_settings' );
-		} elseif ( class_exists( 'KCO' ) ) {
+		$settings = get_option( 'woocommerce_klarna_payments_settings' );
+		if ( empty( $settings ) ) {
 			return get_option( 'woocommerce_kco_settings' );
 		}
+		return $settings;
 	}
 
 	/**
