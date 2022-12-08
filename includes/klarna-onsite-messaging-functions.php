@@ -313,7 +313,7 @@ function kosm_klarna_placement( $args ) {
 			$purchase_amount = wc_get_price_to_display( $product );
 		}
 
-		$purchase_amount = floatval( $purchase_amount ) * 100;
+		$purchase_amount = intval( number_format( $purchase_amount * 100, 0, '', '' ) );
 	}
 
 	?>
