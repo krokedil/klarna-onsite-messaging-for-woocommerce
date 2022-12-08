@@ -99,5 +99,10 @@
 		"description": "<ul><li>Feature - Added support for Greece.</li></ul>",
 		"requires" : "4.7.0",
 		"tested": "6.0.4"
+	},
+	"1.10.0": {
+		"description": "<ul><li>Feature - Added support for Flycart's Discount Rules.</li><li>Tweak - Removed redundant enqueue.</li></ul>",
+		"requires" : "4.7.0",
+		"tested": "6.1.1"
 	}
 }
