@@ -43,8 +43,8 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	 * Class cunstructor.
 	 */
 	public function __construct() {
-		add_filter( 'wc_gateway_klarna_payments_settings', array( $this, 'extend_settings' ) );
-		add_filter( 'kco_wc_gateway_settings', array( $this, 'extend_settings' ) );
+		add_filter( 'wc_gateway_klarna_payments_settings', array( __CLASS__, 'extend_settings' ) );
+		add_filter( 'kco_wc_gateway_settings', array( __CLASS__, 'extend_settings' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_filter( 'script_loader_tag', array( $this, 'load_klarna_async' ), 10, 3 );
 
@@ -67,7 +67,7 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	 * @param array $settings The plugin settings.
 	 * @return array $settings
 	 */
-	public function extend_settings( $settings ) {
+	public static function extend_settings( $settings ) {
 		$settings['onsite_messaging']                  = array(
 			'title' => 'Klarna On-Site Messaging',
 			'type'  => 'title',
@@ -187,11 +187,13 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	 * @return array
 	 */
 	public static function get_settings() {
-		$settings = get_option( 'woocommerce_klarna_payments_settings' );
-		if ( empty( $settings ) ) {
-			return get_option( 'woocommerce_kco_settings' );
+		if ( isset( WC()->payment_gateways->payment_gateways()['kco'] ) ) {
+			$settings = get_option( 'woocommerce_kco_settings' );
+		} elseif ( class_exists( 'WC_Klarna_Payments' ) ) {
+			$settings = get_option( 'woocommerce_klarna_payments_settings', array() );
 		}
-		return $settings;
+
+		return wp_parse_args( $settings, self::extend_settings( array() ) );
 	}
 
 	/**
