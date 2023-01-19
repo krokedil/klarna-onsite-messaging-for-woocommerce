@@ -10,7 +10,7 @@
  * Domain Path: /languages
  *
  * WC requires at least: 3.8
- * WC tested up to: 7.2.0
+ * WC tested up to: 7.3.0
  *
  * @package Klarna_OnSite_Messaging
  *
