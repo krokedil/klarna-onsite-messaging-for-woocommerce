@@ -190,6 +190,9 @@ function kosm_get_locale_for_currency() {
 		case 'NZD': // New Zealand Dollars.
 			$locale = 'en-NZ';
 			break;
+		case 'RON':
+			$locale = ( 'ro_RO' === $wp_locale ) ? 'ro-RO' : 'en-RO';
+			break;
 		default:
 			$locale = false;
 	}
