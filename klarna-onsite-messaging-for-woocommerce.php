@@ -58,6 +58,10 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	 * Init the plugin after plugins_loaded so environment variables are set.
 	 */
 	public function init() {
+		if ( ! class_exists( 'WooCommerce' ) ) {
+			return;
+		}
+
 		$this->set_data_client_id();
 	}
 
@@ -215,7 +219,11 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	 *
 	 * @return void
 	 */
+
 	public function enqueue_scripts() {
+		if ( ! class_exists( 'WooCommerce' ) ) {
+			return;
+		}
 		$settings = self::get_settings();
 		$uci      = '';
 
