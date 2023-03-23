@@ -28,6 +28,10 @@ For help setting up and configuring On-Site Messaging for WooCommerce please ref
 	
 
 == Changelog ==
+= 2023.03.23    - version 1.11.0 =
+* Feature       - Added support for Romanian.
+* Tweak         - Added a check for if WooCommerce is enabled before initializing the plugin.
+
 = 2022.12.08    - version 1.10.0 =
 * Feature       - Added support for Flycart's Discount Rules.
 * Tweak         - Removed redundant enqueue.
