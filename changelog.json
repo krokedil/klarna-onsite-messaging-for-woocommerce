@@ -104,5 +104,10 @@
 		"description": "<ul><li>Feature - Added support for Flycart's Discount Rules.</li><li>Tweak - Removed redundant enqueue.</li></ul>",
 		"requires" : "4.7.0",
 		"tested": "6.1.1"
+	},
+	"1.11.0": {
+		"description": "<ul><li>Feature - Added support for Romanian.</li><li>Tweak - Added a check for if WooCommerce is enabled before initializing the plugin.</li></ul>",
+		"requires" : "4.7.0",
+		"tested": "6.1.1"
 	}
 }

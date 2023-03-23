@@ -5,7 +5,7 @@ Requires at least: 4.7
 Tested up to: 6.1.1
 Requires PHP: 7.0
 WC requires at least: 4.0.0
-WC tested up to: 7.2.0
+WC tested up to: 7.4.1
 Stable tag: trunk
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -28,6 +28,10 @@ For help setting up and configuring On-Site Messaging for WooCommerce please ref
 	
 
 == Changelog ==
+= 2023.03.23    - version 1.11.0 =
+* Feature       - Added support for Romanian.
+* Tweak         - Added a check for if WooCommerce is enabled before initializing the plugin.
+
 = 2022.12.08    - version 1.10.0 =
 * Feature       - Added support for Flycart's Discount Rules.
 * Tweak         - Removed redundant enqueue.

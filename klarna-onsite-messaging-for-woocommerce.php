@@ -5,12 +5,12 @@
  * Description: Provides Klarna On-Site Messaging for WooCommerce
  * Author: krokedil, klarna
  * Author URI: https://krokedil.se/
- * Version: 1.10.0
+ * Version: 1.11.0
  * Text Domain: klarna-onsite-messaging-for-woocommerce
  * Domain Path: /languages
  *
  * WC requires at least: 3.8
- * WC tested up to: 7.2.0
+ * WC tested up to: 7.4.1
  *
  * @package Klarna_OnSite_Messaging
  *
@@ -31,7 +31,7 @@
  */
 
 // Definitions.
-define( 'WC_KLARNA_ONSITE_MESSAGING_VERSION', '1.10.0' );
+define( 'WC_KLARNA_ONSITE_MESSAGING_VERSION', '1.11.0' );
 define( 'WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'WC_KLARNA_ONSITE_MESSAGING_PLUGIN_URL', untrailingslashit( plugin_dir_url( __FILE__ ) ) );
 
@@ -58,6 +58,10 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	 * Init the plugin after plugins_loaded so environment variables are set.
 	 */
 	public function init() {
+		if ( ! class_exists( 'WooCommerce' ) ) {
+			return;
+		}
+
 		$this->set_data_client_id();
 	}
 
@@ -215,7 +219,11 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	 *
 	 * @return void
 	 */
+
 	public function enqueue_scripts() {
+		if ( ! class_exists( 'WooCommerce' ) ) {
+			return;
+		}
 		$settings = self::get_settings();
 		$uci      = '';
 
