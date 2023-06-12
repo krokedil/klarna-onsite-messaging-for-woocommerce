@@ -269,7 +269,7 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 				'locale'        => kosm_get_locale_for_currency(),
 				'currency'      => get_woocommerce_currency(),
 				'library'       => ( wp_scripts() )->registered['klarna-onsite-messaging']->src ?? $region,
-				'base_location' => $base_location,
+				'base_location' => $base_location['country'],
 			);
 		}
 
