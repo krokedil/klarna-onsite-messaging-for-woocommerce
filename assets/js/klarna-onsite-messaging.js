@@ -1,8 +1,7 @@
 jQuery( function($) {
 	var klarna_onsite_messaging = {
 		update_iframe: function() {
-			window.kudt = window.kudt || [];
-			window.kudt.push({eventName: 'refresh-placements'});
+			window.Klarna.OnsiteMessaging.refresh()
 			$('klarna-placement').show();
 		},
 
@@ -99,6 +98,7 @@ jQuery( function($) {
 				}
 
 				klarna_onsite_messaging.debug_info();
+				klarna_onsite_messaging.update_iframe();
 			});
 			
 			$(document.body).on("updated_cart_totals", function () {
