@@ -38,14 +38,22 @@ class Klarna_OnSite_Messaging_Product_Page {
 	 * @return void
 	 */
 	public function init_class() {
+		$this->set_placement_id();
+		$this->set_data_key();
+		$this->set_data_client_id();
+		$this->set_theme();
+
 		if ( $this->is_enabled() && is_product() ) {
-			$this->set_placement_id();
-			$this->set_data_key();
-			$this->set_data_client_id();
-			$this->set_theme();
 			$target   = apply_filters( 'klarna_onsite_messaging_product_target', 'woocommerce_single_product_summary' );
 			$priority = apply_filters( 'klarna_onsite_messaging_product_priority', ( isset( $this->settings['onsite_messaging_product_location'] ) ? $this->settings['onsite_messaging_product_location'] : '45' ) );
 			add_action( $target, array( $this, 'add_iframe' ), $priority );
+		}
+
+		// Hook onto the custom hooks to add the OSM widget.
+		if ( isset( $this->settings['custom_product_page_widget_enabled'] ) && 'yes' === $this->settings['custom_product_page_widget_enabled'] ) {
+			$hook_name = $this->settings['custom_product_page_placement_hook'];
+			$priority  = absint( $this->settings['custom_product_page_placement_priority'] );
+			add_action( $hook_name, array( $this, 'add_iframe' ), $priority );
 		}
 	}
 
@@ -150,7 +158,7 @@ class Klarna_OnSite_Messaging_Product_Page {
 			?>
 			<klarna-placement 
 				class="klarna-onsite-messaging-product" 
-				<?php echo ( ! empty( $this->theme ) ) ? esc_html( "data-theme=$this->theme" ) : ''; ?> 
+			<?php echo ( ! empty( $this->theme ) ) ? esc_html( "data-theme=$this->theme" ) : ''; ?> 
 				data-id="<?php echo esc_html( $this->placement_id ); ?>"
 				data-total_amount="<?php echo esc_html( $price ); ?>"
 				></klarna-placement>

@@ -177,6 +177,26 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 			),
 		);
 
+		$settings['custom_product_page_widget_enabled'] = array(
+			'title'   => __( 'Enable custom placement hook', 'klarna-onsite-messaging-for-woocommerce' ),
+			'type'    => 'checkbox',
+			'default' => 'no',
+		);
+
+		$settings['custom_product_page_placement_hook'] = array(
+			'title'    => __( 'Custom placement hook', 'klarna-onsite-messaging-for-woocommerce' ),
+			'desc_tip' => __( 'Enter a custom hook where you want the OSM widget to be placed.', 'klarna-onsite-messaging-for-woocommerce' ),
+			'type'     => 'text',
+			'default'  => 'woocommerce_single_product_summary',
+		);
+
+		$settings['custom_product_page_placement_priority'] = array(
+			'title'    => __( 'Custom placement hook priority', 'klarna-onsite-messaging-for-woocommerce' ),
+			'desc_tip' => __( 'Enter a priority for the custom hook where you want the OSM widget to be placed.', 'klarna-onsite-messaging-for-woocommerce' ),
+			'type'     => 'number',
+			'default'  => 35,
+		);
+
 		return $settings;
 	}
 
