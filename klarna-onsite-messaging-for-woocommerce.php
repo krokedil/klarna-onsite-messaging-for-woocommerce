@@ -244,12 +244,14 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 			$uci = $settings['onsite_messaging_uci'];
 		}
 
-		if ( in_array( wc_get_base_location()['country'], array( 'US', 'CA' ) ) ) {
-			$region = 'na-library';
-		} elseif ( in_array( wc_get_base_location()['country'], array( 'AU', 'NZ' ) ) ) {
-			$region = 'oc-library';
-		} else {
-			$region = 'eu-library';
+		$region        = 'eu-library';
+		$base_location = wc_get_base_location();
+		if ( is_array( $base_location ) && isset( $base_location['country'] ) ) {
+			if ( in_array( $base_location['country'], array( 'US', 'CA' ) ) ) {
+				$region = 'na-library';
+			} elseif ( in_array( $base_location['country'], array( 'AU', 'NZ' ) ) ) {
+				$region = 'oc-library';
+			}
 		}
 
 		$region = apply_filters( 'kosm_region_library', $region );
@@ -273,13 +275,14 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 
 		if ( isset( $_GET['osmDebug'] ) && '1' === $_GET['osmDebug'] ) {
 			$localize['debug_info'] = array(
-				'product'     => is_product(),
-				'cart'        => is_cart(),
-				'shortcode'   => ( ! empty( $post ) && has_shortcode( $post->post_content, 'onsite_messaging' ) ),
-				'data_client' => ! ( empty( $this->data_client_id ) ),
-				'locale'      => kosm_get_locale_for_currency(),
-				'currency'    => get_woocommerce_currency(),
-				'library'     => ( wp_scripts() )->registered['klarna-onsite-messaging']->src ?? $region,
+				'product'       => is_product(),
+				'cart'          => is_cart(),
+				'shortcode'     => ( ! empty( $post ) && has_shortcode( $post->post_content, 'onsite_messaging' ) ),
+				'data_client'   => ! ( empty( $this->data_client_id ) ),
+				'locale'        => kosm_get_locale_for_currency(),
+				'currency'      => get_woocommerce_currency(),
+				'library'       => ( wp_scripts() )->registered['klarna-onsite-messaging']->src ?? $region,
+				'base_location' => $base_location['country'],
 			);
 		}
 
