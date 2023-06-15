@@ -43,6 +43,8 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	 * Class cunstructor.
 	 */
 	public function __construct() {
+		add_action( 'wc_ajax_kosm_get_cart_total', array( $this, 'get_cart_total' ) );
+
 		add_filter( 'wc_gateway_klarna_payments_settings', array( $this, 'extend_settings' ) );
 		add_filter( 'kco_wc_gateway_settings', array( $this, 'extend_settings' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
@@ -52,6 +54,19 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 		add_action( 'plugins_loaded', array( $this, 'include_files' ) );
 		add_action( 'plugins_loaded', array( $this, 'init' ) );
 		add_action( 'widgets_init', array( $this, 'register_klarna_osm_widget' ) );
+	}
+
+	/**
+	 * Retrieve the cart total amount.
+	 *
+	 * @return void
+	 */
+	public function get_cart_total() {
+		if ( ! isset( WC()->cart ) ) {
+			wp_send_json_error( 'no_cart' );
+		}
+
+		wp_send_json_success( WC()->cart->total );
 	}
 
 	/**
@@ -271,7 +286,10 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 
 		wp_register_script( 'klarna_onsite_messaging', plugins_url( '/assets/js/klarna-onsite-messaging.js', __FILE__ ), array( 'jquery' ), WC_KLARNA_ONSITE_MESSAGING_VERSION );
 
-		$localize = array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) );
+		$localize = array(
+			'ajaxurl'            => admin_url( 'admin-ajax.php' ),
+			'get_cart_total_url' => WC_AJAX::get_endpoint( 'kosm_get_cart_total' ),
+		);
 
 		if ( isset( $_GET['osmDebug'] ) && '1' === $_GET['osmDebug'] ) {
 			$localize['debug_info'] = array(
