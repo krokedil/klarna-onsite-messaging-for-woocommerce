@@ -68,7 +68,7 @@ class Klarna_OnSite_Messaging_Cart_Page {
 	 * @return self
 	 */
 	private function set_data_key() {
-		$this->data_key = $this->settings['placement_data_key_cart'];
+		$this->data_key = $this->settings['placement_data_key_cart'] ?? '';
 		return $this->data_key;
 	}
 

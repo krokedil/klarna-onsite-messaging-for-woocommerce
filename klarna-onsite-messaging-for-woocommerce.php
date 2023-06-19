@@ -5,12 +5,12 @@
  * Description: Provides Klarna On-Site Messaging for WooCommerce
  * Author: krokedil, klarna
  * Author URI: https://krokedil.se/
- * Version: 1.11.0
+ * Version: 1.12.0
  * Text Domain: klarna-onsite-messaging-for-woocommerce
  * Domain Path: /languages
  *
  * WC requires at least: 3.8
- * WC tested up to: 7.4.1
+ * WC tested up to: 7.7.0
  *
  * @package Klarna_OnSite_Messaging
  *
@@ -31,7 +31,7 @@
  */
 
 // Definitions.
-define( 'WC_KLARNA_ONSITE_MESSAGING_VERSION', '1.11.0' );
+define( 'WC_KLARNA_ONSITE_MESSAGING_VERSION', '1.12.0' );
 define( 'WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'WC_KLARNA_ONSITE_MESSAGING_PLUGIN_URL', untrailingslashit( plugin_dir_url( __FILE__ ) ) );
 
@@ -43,6 +43,8 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	 * Class cunstructor.
 	 */
 	public function __construct() {
+		add_action( 'wc_ajax_kosm_get_cart_total', array( $this, 'get_cart_total' ) );
+
 		add_filter( 'wc_gateway_klarna_payments_settings', array( $this, 'extend_settings' ) );
 		add_filter( 'kco_wc_gateway_settings', array( $this, 'extend_settings' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
@@ -55,6 +57,19 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	}
 
 	/**
+	 * Retrieve the cart total amount.
+	 *
+	 * @return void
+	 */
+	public function get_cart_total() {
+		if ( ! isset( WC()->cart ) ) {
+			wp_send_json_error( 'no_cart' );
+		}
+
+		wp_send_json_success( WC()->cart->total );
+	}
+
+	/**
 	 * Init the plugin after plugins_loaded so environment variables are set.
 	 */
 	public function init() {
@@ -63,6 +78,19 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 		}
 
 		$this->set_data_client_id();
+		add_action( 'before_woocommerce_init', array( $this, 'declare_wc_compatibility' ) );
+	}
+
+		/**
+		 * Declare compatibility with WooCommerce features.
+		 *
+		 * @return void
+		 */
+	public function declare_wc_compatibility() {
+		// Declare HPOS compatibility.
+		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+		}
 	}
 
 	/**
@@ -164,6 +192,26 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 			),
 		);
 
+		$settings['custom_product_page_widget_enabled'] = array(
+			'title'   => __( 'Enable custom placement hook', 'klarna-onsite-messaging-for-woocommerce' ),
+			'type'    => 'checkbox',
+			'default' => 'no',
+		);
+
+		$settings['custom_product_page_placement_hook'] = array(
+			'title'    => __( 'Custom placement hook', 'klarna-onsite-messaging-for-woocommerce' ),
+			'desc_tip' => __( 'Enter a custom hook where you want the OSM widget to be placed.', 'klarna-onsite-messaging-for-woocommerce' ),
+			'type'     => 'text',
+			'default'  => 'woocommerce_single_product_summary',
+		);
+
+		$settings['custom_product_page_placement_priority'] = array(
+			'title'    => __( 'Custom placement hook priority', 'klarna-onsite-messaging-for-woocommerce' ),
+			'desc_tip' => __( 'Enter a priority for the custom hook where you want the OSM widget to be placed.', 'klarna-onsite-messaging-for-woocommerce' ),
+			'type'     => 'number',
+			'default'  => 35,
+		);
+
 		return $settings;
 	}
 
@@ -231,12 +279,14 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 			$uci = $settings['onsite_messaging_uci'];
 		}
 
-		if ( in_array( wc_get_base_location()['country'], array( 'US', 'CA' ) ) ) {
-			$region = 'na-library';
-		} elseif ( in_array( wc_get_base_location()['country'], array( 'AU', 'NZ' ) ) ) {
-			$region = 'oc-library';
-		} else {
-			$region = 'eu-library';
+		$region        = 'eu-library';
+		$base_location = wc_get_base_location();
+		if ( is_array( $base_location ) && isset( $base_location['country'] ) ) {
+			if ( in_array( $base_location['country'], array( 'US', 'CA' ) ) ) {
+				$region = 'na-library';
+			} elseif ( in_array( $base_location['country'], array( 'AU', 'NZ' ) ) ) {
+				$region = 'oc-library';
+			}
 		}
 
 		$region = apply_filters( 'kosm_region_library', $region );
@@ -256,17 +306,21 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 
 		wp_register_script( 'klarna_onsite_messaging', plugins_url( '/assets/js/klarna-onsite-messaging.js', __FILE__ ), array( 'jquery' ), WC_KLARNA_ONSITE_MESSAGING_VERSION );
 
-		$localize = array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) );
+		$localize = array(
+			'ajaxurl'            => admin_url( 'admin-ajax.php' ),
+			'get_cart_total_url' => WC_AJAX::get_endpoint( 'kosm_get_cart_total' ),
+		);
 
 		if ( isset( $_GET['osmDebug'] ) && '1' === $_GET['osmDebug'] ) {
 			$localize['debug_info'] = array(
-				'product'     => is_product(),
-				'cart'        => is_cart(),
-				'shortcode'   => ( ! empty( $post ) && has_shortcode( $post->post_content, 'onsite_messaging' ) ),
-				'data_client' => ! ( empty( $this->data_client_id ) ),
-				'locale'      => kosm_get_locale_for_currency(),
-				'currency'    => get_woocommerce_currency(),
-				'library'     => ( wp_scripts() )->registered['klarna-onsite-messaging']->src ?? $region,
+				'product'       => is_product(),
+				'cart'          => is_cart(),
+				'shortcode'     => ( ! empty( $post ) && has_shortcode( $post->post_content, 'onsite_messaging' ) ),
+				'data_client'   => ! ( empty( $this->data_client_id ) ),
+				'locale'        => kosm_get_locale_for_currency(),
+				'currency'      => get_woocommerce_currency(),
+				'library'       => ( wp_scripts() )->registered['klarna-onsite-messaging']->src ?? $region,
+				'base_location' => $base_location['country'],
 			);
 		}
 

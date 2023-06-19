@@ -1,8 +1,7 @@
 jQuery( function($) {
 	var klarna_onsite_messaging = {
 		update_iframe: function() {
-			window.kudt = window.kudt || [];
-			window.kudt.push({eventName: 'refresh-placements'});
+			window.Klarna.OnsiteMessaging.refresh()
 			$('klarna-placement').show();
 		},
 
@@ -14,9 +13,14 @@ jQuery( function($) {
 			return true;
 		},
 
-		update_total_cart: function() {
-			let price = Math.round($("#kosm_cart_total").val() * 100);
-			klarna_onsite_messaging.update_total_price(price)
+		update_total_cart: function (price) {
+			if (!price) {
+				price = Math.round($("#kosm_cart_total").val());
+			}
+
+			if (!isNaN(price)) {
+				klarna_onsite_messaging.update_total_price(price * 100)
+			}
 		},
 
 		update_total_variation: function( variation ) {
@@ -99,11 +103,24 @@ jQuery( function($) {
 				}
 
 				klarna_onsite_messaging.debug_info();
+				klarna_onsite_messaging.update_iframe();
 			});
 			
 			$(document.body).on("updated_cart_totals", function () {
-				klarna_onsite_messaging.update_total_cart();
+				$.ajax({
+					url: klarna_onsite_messaging_params.get_cart_total_url,
+					type: 'GET',
+					dataType: 'json',
+					success: function (response) {
+						console.log('success', response)
+						klarna_onsite_messaging.update_total_cart(response.data);
+					},
+					error: function (response) {
+						console.log(response);
+					}
+				});
 			});
+
 			$(document).on( 'found_variation', function( e, variation ) {
 				klarna_onsite_messaging.update_total_variation( variation );
 			});

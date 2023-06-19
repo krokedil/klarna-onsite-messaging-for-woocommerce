@@ -1,113 +1,118 @@
 {
-    "1.1.0" : {
-          "description" : "<ul><li>Feature - Added support for new way to integrate On-Site Messaging.</li><li>Tweak - Use constant to enqueue correct script versions.</li><li>Tweak - Added admin notice to inform current users that they need to update the way OSM is integrated.</li></ul>",
-          "requires" : "4.7.0",
-          "tested" : "5.3.0",
-          "upgrade_notice" : "Klarna On-site Messaging has a new way to be implemented on your site. Please visit the settings age after updating the plugin."
-    },
-    "1.2.0" : {
-        "description" : "<ul><li>Feature - Added support for Australia.</li><li>Fix - Changed url to enqueue Klarna JS file for production.</li></ul>",
-        "requires" : "4.7.0",
-        "tested" : "5.3.0"
-   },
-   "1.2.1" : {
-		"description" : "<ul><li>* Fix - Changed locale name for Norwegian.</li></ul>",
-		"requires" : "4.7.0",
-		"tested" : "5.3.0"
+	"1.1.0": {
+		"description": "<ul><li>Feature - Added support for new way to integrate On-Site Messaging.</li><li>Tweak - Use constant to enqueue correct script versions.</li><li>Tweak - Added admin notice to inform current users that they need to update the way OSM is integrated.</li></ul>",
+		"requires": "4.7.0",
+		"tested": "5.3.0",
+		"upgrade_notice": "Klarna On-site Messaging has a new way to be implemented on your site. Please visit the settings age after updating the plugin."
 	},
-	"1.2.2" : {
-		"description" : "<ul><li>* Fix - Updated JavaScript library URL to not include the plugin version number.</li><li>Fix - Updated the US library endpoint to NA.</li></ul>",
-		"requires" : "4.7.0",
-		"tested" : "5.4.1"
-    },
-    "1.3.0" : {
-        "description" : "<ul><li>Feature - Added [onsite_messaging] shortcode to be able to display OSM placements on other places than plugin default.</li><li>Tweak - Removed inline javascript.</li><li>Tweak - Coding standards fix.</li><li>Fix - Error notice fix.</li></ul>",
-		"requires" : "4.7.0",
-		"tested" : "5.4.2"
-    },
-    "1.3.1" : {
-        "description" : "<ul><li>Fix - Small JS fix that could cause issues with single product page display and variable products.</li></ul>",
-		"requires" : "4.7.0",
-		"tested" : "5.4.2"
+	"1.2.0": {
+		"description": "<ul><li>Feature - Added support for Australia.</li><li>Fix - Changed url to enqueue Klarna JS file for production.</li></ul>",
+		"requires": "4.7.0",
+		"tested": "5.3.0"
 	},
-	"1.4.0" : {
-        "description" : "<ul><li>Feature - Added a widget to add Klarna on-site messaging to a widget field.</li><li>Enhancement - Added support for changing the total value data tag on a page with multiple placements.</li></ul>",
-		"requires" : "4.7.0",
-		"tested" : "5.5.1"
+	"1.2.1": {
+		"description": "<ul><li>* Fix - Changed locale name for Norwegian.</li></ul>",
+		"requires": "4.7.0",
+		"tested": "5.3.0"
 	},
-	"1.4.1" : {
-        "description" : "<ul><li>Enhancement - Added support for multicurrency plugins.</li><li>Fix - Removed JavaScript defaulted version number. This caused an issue when loading the JavaScript from Klarna when they made an updated their system.</li></ul>",
-		"requires" : "4.7.0",
-		"tested" : "5.5.1"
+	"1.2.2": {
+		"description": "<ul><li>* Fix - Updated JavaScript library URL to not include the plugin version number.</li><li>Fix - Updated the US library endpoint to NA.</li></ul>",
+		"requires": "4.7.0",
+		"tested": "5.4.1"
 	},
-	"1.4.2" : {
-        "description" : "<ul><li>Fix - Fixed Norwegian, Finish and Dutch locales.</li></ul>",
-		"requires" : "4.7.0",
-		"tested" : "5.5.1"
+	"1.3.0": {
+		"description": "<ul><li>Feature - Added [onsite_messaging] shortcode to be able to display OSM placements on other places than plugin default.</li><li>Tweak - Removed inline javascript.</li><li>Tweak - Coding standards fix.</li><li>Fix - Error notice fix.</li></ul>",
+		"requires": "4.7.0",
+		"tested": "5.4.2"
 	},
-	"1.4.3" : {
-        "description" : "<ul><li>Tweak - Remove code that overwrote Klarnas cookie.</li></ul>",
-		"requires" : "4.7.0",
-		"tested" : "5.5.1"
-    },
-	"1.4.4" : {
-		"description" : "<ul><li>Enhancement - Add support for France, Canada and New Zealand.</li></ul>",
-		"requires" : "4.7.0",
-		"tested" : "5.5.1"
+	"1.3.1": {
+		"description": "<ul><li>Fix - Small JS fix that could cause issues with single product page display and variable products.</li></ul>",
+		"requires": "4.7.0",
+		"tested": "5.4.2"
 	},
-	"1.5.0" : {
-		"description" : "<ul><li>Feature - Added support to automatically populate the data-purchase-amount when using a shortcode on a product or cart page as long as no purchase amount has been specified.</li><li>Fix - We now update the placement purchase amount properly when updating the cart on the cart page.</li><li>Fix - Fixed an issue of not including taxes in the variable product price.</li><li>Fix - Fixed a error caused by the global post variable not being present on a page.</li></ul>",
-		"requires" : "4.7.0",
-		"tested" : "5.7.0"
+	"1.4.0": {
+		"description": "<ul><li>Feature - Added a widget to add Klarna on-site messaging to a widget field.</li><li>Enhancement - Added support for changing the total value data tag on a page with multiple placements.</li></ul>",
+		"requires": "4.7.0",
+		"tested": "5.5.1"
 	},
-	"1.5.1" : {
-		"description" : "<ul><li>Enhancement - Add support to handle product bundles with pricing set to keep the price of the bundled products.</li><li>Fix - Add a check to make sure we only run calculations on numeric values. WooCommerce could sometimes return prices as empty strings, which has now been considered and solved</li></ul>",
-		"requires" : "4.7.0",
-		"tested" : "5.7.2"
+	"1.4.1": {
+		"description": "<ul><li>Enhancement - Added support for multicurrency plugins.</li><li>Fix - Removed JavaScript defaulted version number. This caused an issue when loading the JavaScript from Klarna when they made an updated their system.</li></ul>",
+		"requires": "4.7.0",
+		"tested": "5.5.1"
 	},
-	"1.6.1" : {
-		"description" : "<ul><li>Fix - Fixed an issue with defaulting the locale for the Placement to en-US. Now the placement wont show if the locale is not set.</li></ul>",
-		"requires" : "4.7.0",
-		"tested" : "5.7.2"
+	"1.4.2": {
+		"description": "<ul><li>Fix - Fixed Norwegian, Finish and Dutch locales.</li></ul>",
+		"requires": "4.7.0",
+		"tested": "5.5.1"
 	},
-	"1.6.2" : {
-		"description" : "<ul><li>Fix - We now enqueue the scripts directly in the shortcode, this solves an issue where the needed scripts did not get loaded when using the shortcode in the footer or header using widget areas with Gutenberg Blocks.</li></ul>",
-		"requires" : "4.7.0",
-		"tested" : "5.9.1"
+	"1.4.3": {
+		"description": "<ul><li>Tweak - Remove code that overwrote Klarnas cookie.</li></ul>",
+		"requires": "4.7.0",
+		"tested": "5.5.1"
 	},
-	"1.6.3" : {
-		"description" : "<ul><li>Fix - Fixed the locale for Polish to be passed correctly.</li><li>Fix - Fixed an issue caused by the customer object in WooCommerce missing.</li></ul>",
-		"requires" : "4.7.0",
-		"tested" : "5.9.3"
+	"1.4.4": {
+		"description": "<ul><li>Enhancement - Add support for France, Canada and New Zealand.</li></ul>",
+		"requires": "4.7.0",
+		"tested": "5.5.1"
+	},
+	"1.5.0": {
+		"description": "<ul><li>Feature - Added support to automatically populate the data-purchase-amount when using a shortcode on a product or cart page as long as no purchase amount has been specified.</li><li>Fix - We now update the placement purchase amount properly when updating the cart on the cart page.</li><li>Fix - Fixed an issue of not including taxes in the variable product price.</li><li>Fix - Fixed a error caused by the global post variable not being present on a page.</li></ul>",
+		"requires": "4.7.0",
+		"tested": "5.7.0"
+	},
+	"1.5.1": {
+		"description": "<ul><li>Enhancement - Add support to handle product bundles with pricing set to keep the price of the bundled products.</li><li>Fix - Add a check to make sure we only run calculations on numeric values. WooCommerce could sometimes return prices as empty strings, which has now been considered and solved</li></ul>",
+		"requires": "4.7.0",
+		"tested": "5.7.2"
+	},
+	"1.6.1": {
+		"description": "<ul><li>Fix - Fixed an issue with defaulting the locale for the Placement to en-US. Now the placement wont show if the locale is not set.</li></ul>",
+		"requires": "4.7.0",
+		"tested": "5.7.2"
+	},
+	"1.6.2": {
+		"description": "<ul><li>Fix - We now enqueue the scripts directly in the shortcode, this solves an issue where the needed scripts did not get loaded when using the shortcode in the footer or header using widget areas with Gutenberg Blocks.</li></ul>",
+		"requires": "4.7.0",
+		"tested": "5.9.1"
+	},
+	"1.6.3": {
+		"description": "<ul><li>Fix - Fixed the locale for Polish to be passed correctly.</li><li>Fix - Fixed an issue caused by the customer object in WooCommerce missing.</li></ul>",
+		"requires": "4.7.0",
+		"tested": "5.9.3"
 	},
 	"1.7.0": {
 		"description": "<ul><li>Feature - Added filter 'kosm_data_client_id' for filtering data client ID.</li><li>Enhancement - Fixed an issue where the placement would not appear on the page when added through the Elementor Builder's widget.</li><li>Fix - Fixed critical error happening when the widget or shortcode is used in the header.</li></ul>",
-		"requires" : "4.7.0",
+		"requires": "4.7.0",
 		"tested": "6.0"
 	},
 	"1.7.1": {
 		"description": "<ul><li>Fix - Update kernl.</li></ul>",
-		"requires" : "4.7.0",
+		"requires": "4.7.0",
 		"tested": "6.0"
 	},
 	"1.8.0": {
 		"description": "<ul><li>Feature - Added support for the third-party plugin 'WooCommerce Measurement Price Calculator'.</li><li>Enhancement - You can now use the 'kosm_region_library' filter to force a specific regional library. See [documentation](https://docs.krokedil.com/klarna-for-woocommerce/additional-klarna-plugins/klarna-on-site-messaging/#customize-region-dependent-js-libraries).</li><li>Tweak - The osmDebug option will now also tell which library is being used. Used for debugging purposes.</li></ul>",
-		"requires" : "4.7.0",
+		"requires": "4.7.0",
 		"tested": "6.0"
 	},
 	"1.9.0": {
 		"description": "<ul><li>Feature - Added support for Greece.</li></ul>",
-		"requires" : "4.7.0",
+		"requires": "4.7.0",
 		"tested": "6.0.4"
 	},
 	"1.10.0": {
 		"description": "<ul><li>Feature - Added support for Flycart's Discount Rules.</li><li>Tweak - Removed redundant enqueue.</li></ul>",
-		"requires" : "4.7.0",
+		"requires": "4.7.0",
 		"tested": "6.1.1"
 	},
 	"1.11.0": {
 		"description": "<ul><li>Feature - Added support for Romanian.</li><li>Tweak - Added a check for if WooCommerce is enabled before initializing the plugin.</li></ul>",
-		"requires" : "4.7.0",
+		"requires": "4.7.0",
 		"tested": "6.1.1"
+	},
+	"1.12.0": {
+		"description": "<ul><li>Feature - The plugin now supports WooCommerce's \"High-Performance Order Storage\" (\"HPOS\") feature.</li><li>Feature - You can now specify the placement location using action hooks and priorities through the plugin settings.</li><li>Fix - Resolved an issue causing an undefined index notice.</li><li>Fix - The placement will now remain visible even when a non-valid price is entered.</li><li>Fix - Fixed an issue where the placement was not appearing on certain variable products until a variant was selected.</li><li>Fix - Addressed a deprecation warning.</li></ul>",
+		"requires": "4.7.0",
+		"tested": "6.2.1"
 	}
 }

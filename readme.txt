@@ -2,10 +2,10 @@
 Contributors: krokedil
 Tags: woocommerce, klarna, ecommerce, e-commerce, on-site messaging
 Requires at least: 4.7
-Tested up to: 6.1.1
+Tested up to: 6.2.1
 Requires PHP: 7.0
 WC requires at least: 4.0.0
-WC tested up to: 7.4.1
+WC tested up to: 7.7.0
 Stable tag: trunk
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -28,6 +28,14 @@ For help setting up and configuring On-Site Messaging for WooCommerce please ref
 	
 
 == Changelog ==
+= 2023.06.19    - version 1.12.0 =
+* Feature       - The plugin is now compatible with WooCommerce's "High-Performance Order Storage" ("HPOS") feature.
+* Feature       - You can now specify the placement location using action hooks and priorities through the plugin settings.
+* Fix           - Resolved an issue causing an undefined index notice.
+* Fix           - The placement will now remain visible even when a non-valid price is entered.
+* Fix           - Fixed an issue where the placement was not appearing on certain variable products until a variant was selected.
+* Fix           - Addressed a deprecation warning.
+
 = 2023.03.23    - version 1.11.0 =
 * Feature       - Added support for Romanian.
 * Tweak         - Added a check for if WooCommerce is enabled before initializing the plugin.
