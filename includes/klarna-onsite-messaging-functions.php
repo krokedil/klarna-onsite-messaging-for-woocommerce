@@ -196,7 +196,7 @@ function kosm_get_locale_for_currency() {
 		default:
 			$locale = false;
 	}
-	return $locale;
+	return apply_filters( 'kosm_locale', $locale );
 }
 
 /**
