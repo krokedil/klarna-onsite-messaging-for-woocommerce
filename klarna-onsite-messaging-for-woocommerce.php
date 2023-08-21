@@ -267,13 +267,17 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	 *
 	 * @return void
 	 */
-
 	public function enqueue_scripts() {
 		if ( ! class_exists( 'WooCommerce' ) ) {
 			return;
 		}
 		$settings = self::get_settings();
-		$uci      = '';
+		if ( empty( $settings ) ) {
+			// If there are no settings, KP and KCO are most likely disabled.
+			return;
+		}
+
+		$uci = '';
 
 		if ( isset( $settings['onsite_messaging_uci'] ) ) {
 			$uci = $settings['onsite_messaging_uci'];
