@@ -123,7 +123,13 @@ class Klarna_OnSite_Messaging_Product_Page {
 	 * @return void
 	 */
 	public function add_iframe() {
-		global $product;
+		$product = kosm_get_global_product();
+
+		// If the product is an empty value, just return early.
+		if ( empty( $product ) ) {
+			return;
+		}
+
 		if ( $product->is_type( 'variable' ) ) {
 			$price = $product->get_variation_price( 'min' );
 		} elseif ( $product->is_type( 'bundle' ) ) {
@@ -156,9 +162,7 @@ class Klarna_OnSite_Messaging_Product_Page {
 			kosm_klarna_placement( $args );
 		} else {
 			?>
-			<klarna-placement 
-				class="klarna-onsite-messaging-product" 
-			<?php echo ( ! empty( $this->theme ) ) ? esc_html( "data-theme=$this->theme" ) : ''; ?> 
+																																	<klarna-placement class="klarna-onsite-messaging-product" <?php echo ( ! empty( $this->theme ) ) ? esc_html( "data-theme=$this->theme" ) : ''; ?>
 				data-id="<?php echo esc_html( $this->placement_id ); ?>"
 				data-total_amount="<?php echo esc_html( $price ); ?>"
 				></klarna-placement>

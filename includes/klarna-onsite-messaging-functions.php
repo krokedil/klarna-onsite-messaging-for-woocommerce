@@ -302,10 +302,7 @@ function kosm_klarna_placement( $args ) {
 		return;
 	}
 
-	global $product;
-	if ( ! is_object( $product ) ) {
-		$product = wc_get_product( get_the_ID() );
-	}
+	$product = kosm_get_global_product();
 
 	if ( ! empty( $product ) && empty( $purchase_amount ) ) {
 		if ( $product->is_type( 'variable' ) ) {
@@ -328,4 +325,25 @@ function kosm_klarna_placement( $args ) {
 		<?php echo ( ! empty( $purchase_amount ) ) ? esc_html( "data-purchase-amount=$purchase_amount" ) : ''; ?>
 	></klarna-placement>
 	<?php
+}
+
+/**
+ * Get the product from the global product variable set by WooCommerce.
+ *
+ * @return WC_Product|bool|object|null
+ */
+function kosm_get_global_product() {
+	global $product;
+
+	// If the product is not an object, then it might be a id. So try to get the product from the value.
+	if ( ! is_object( $product ) ) {
+		$product = wc_get_product( $product );
+	}
+
+	// If the product is an empty value, just return early.
+	if ( empty( $product ) ) {
+		null;
+	}
+
+	return $product;
 }
