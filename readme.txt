@@ -28,6 +28,13 @@ For help setting up and configuring On-Site Messaging for WooCommerce please ref
 	
 
 == Changelog ==
+= 2023.08.23    - version 1.13.0 =
+* Feature       - Added the 'kosm_locale' filter, allowing you to set the locale, irrespective of the currency.
+* Fix           - Fixed a fatal error due to missing client ID.
+* Fix           - Fixed a fatal error that happened when a global product variable was passed as a string or integer.
+* Fix           - Fixed an undefined index warning that happened when both Klarna Payments and Klarna Checkout were not active.
+* Fix           - Fixed an issue where the placement would sometimes not appear until a product variant is selected. 
+
 = 2023.06.19    - version 1.12.0 =
 * Feature       - The plugin is now compatible with WooCommerce's "High-Performance Order Storage" ("HPOS") feature.
 * Feature       - You can now specify the placement location using action hooks and priorities through the plugin settings.
