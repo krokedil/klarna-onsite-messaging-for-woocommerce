@@ -1,7 +1,9 @@
 jQuery( function($) {
 	var klarna_onsite_messaging = {
-		update_iframe: function() {
-			window.Klarna.OnsiteMessaging.refresh()
+		update_iframe: function () {
+			if (window.Klarna) {
+				window.Klarna.OnsiteMessaging.refresh()
+			}
 			$('klarna-placement').show();
 		},
 

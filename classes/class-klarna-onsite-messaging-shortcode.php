@@ -55,7 +55,13 @@ class Klarna_OnSite_Messaging_Shortcode {
 		$price = '';
 		wp_enqueue_script( 'klarna-onsite-messaging' );
 		if ( is_product() ) {
-			global $product;
+			$product = kosm_get_global_product();
+
+			// If we did not get a product, just return the attributes.
+			if ( empty( $product ) ) {
+				return $atts;
+			}
+
 			if ( $product->is_type( 'variable' ) ) {
 				$price = $product->get_variation_price( 'min', true );
 			} elseif ( $product->is_type( 'bundle' ) ) {

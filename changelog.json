@@ -114,5 +114,10 @@
 		"description": "<ul><li>Feature - The plugin now supports WooCommerce's \"High-Performance Order Storage\" (\"HPOS\") feature.</li><li>Feature - You can now specify the placement location using action hooks and priorities through the plugin settings.</li><li>Fix - Resolved an issue causing an undefined index notice.</li><li>Fix - The placement will now remain visible even when a non-valid price is entered.</li><li>Fix - Fixed an issue where the placement was not appearing on certain variable products until a variant was selected.</li><li>Fix - Addressed a deprecation warning.</li></ul>",
 		"requires": "4.7.0",
 		"tested": "6.2.1"
-	}
+	},
+    "1.13.0": {
+        "description": "<ul><li>Feature - Added the 'kosm_locale' filter, allowing you to set the locale, irrespective of the currency.</li><li>Fix - Fixed a fatal error due to missing client ID.</li><li>Fix - Fixed a fatal error that happened when a global product variable was passed as a string or integer.</li><li>Fix - Fixed an undefined index warning that happened when both Klarna Payments and Klarna Checkout were not active.</li><li>Fix - Fixed an issue where the placement would sometimes not appear until a product variant is selected.</li></ul>",
+        "requires": "4.7.0",
+        "tested": "6.3.0"
+    }
 }
