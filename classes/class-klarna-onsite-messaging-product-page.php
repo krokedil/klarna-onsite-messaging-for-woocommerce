@@ -146,7 +146,7 @@ class Klarna_OnSite_Messaging_Product_Page {
 		}
 
 		// Force a numeric value.
-		$price  = intval( number_format( $price * 100, 0, '', '' ) );
+		$price  = intval( number_format( apply_filters( 'kosm_product_price', $price ) * 100, 0, '', '' ) );
 		$locale = kosm_get_locale_for_currency();
 
 		if ( empty( $locale ) ) {
@@ -162,11 +162,12 @@ class Klarna_OnSite_Messaging_Product_Page {
 			kosm_klarna_placement( $args );
 		} else {
 			?>
-																																	<klarna-placement class="klarna-onsite-messaging-product" <?php echo ( ! empty( $this->theme ) ) ? esc_html( "data-theme=$this->theme" ) : ''; ?>
+		<klarna-placement class="klarna-onsite-messaging-product" <?php echo ( ! empty( $this->theme ) ) ? esc_html( "data-theme=$this->theme" ) : ''; ?>
 				data-id="<?php echo esc_html( $this->placement_id ); ?>"
 				data-total_amount="<?php echo esc_html( $price ); ?>"
 				></klarna-placement>
 			<?php
 		}
 	}
-} new Klarna_OnSite_Messaging_Product_Page();
+}
+new Klarna_OnSite_Messaging_Product_Page();
