@@ -10,7 +10,7 @@
  * Domain Path: /languages
  *
  * WC requires at least: 3.8
- * WC tested up to: 8.2.2
+ * WC tested up to: 8.6.1
  *
  * @package Klarna_OnSite_Messaging
  *
@@ -382,5 +382,4 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	public function register_klarna_osm_widget() {
 		register_widget( 'Klarna_OnSite_Messaging_Widget' );
 	}
-
 } new Klarna_OnSite_Messaging_For_WooCommerce();
