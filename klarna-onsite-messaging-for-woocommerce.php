@@ -54,6 +54,8 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 		add_action( 'plugins_loaded', array( $this, 'include_files' ) );
 		add_action( 'plugins_loaded', array( $this, 'init' ) );
 		add_action( 'widgets_init', array( $this, 'register_klarna_osm_widget' ) );
+
+		add_action( 'admin_notices', array( $this, 'kosm_installed_admin_notice' ) );
 	}
 
 	/**
@@ -81,11 +83,30 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 		add_action( 'before_woocommerce_init', array( $this, 'declare_wc_compatibility' ) );
 	}
 
-		/**
-		 * Declare compatibility with WooCommerce features.
-		 *
-		 * @return void
-		 */
+	/**
+	 * Check if the Klarna On-Site Messaging plugin is active, and notify the admin about the new changes.
+	 *
+	 * @return void
+	 */
+	public function kosm_installed_admin_notice() {
+		$link         = 'https://docs.krokedil.com/klarna-checkout-for-woocommerce/get-started/klarna-on-site-messaging/';
+		$allowed_html = array( 'a' => array( 'href' => true ) );
+
+		$plugin = 'klarna-onsite-messaging-for-woocommerce/klarna-onsite-messaging-for-woocommerce.php';
+		if ( is_plugin_active( $plugin ) ) {
+			// translators: %s: link to the guide.
+			$message = sprintf( __( 'The On-Site Messaging plugin will be retired by the end of 2024. To continue using its features, please follow the steps outlined in this guide: <a href="%1$s">%2$s</a>', 'klarna-onsite-messaging-for-woocommerce' ), $link, $link );
+
+			printf( '<div class="notice notice-error"><p>%s</p></div>', wp_kses( $message, $allowed_html ) );
+
+		}
+	}
+
+	/**
+	 * Declare compatibility with WooCommerce features.
+	 *
+	 * @return void
+	 */
 	public function declare_wc_compatibility() {
 		// Declare HPOS compatibility.
 		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
