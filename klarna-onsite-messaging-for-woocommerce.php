@@ -40,7 +40,14 @@ define( 'WC_KLARNA_ONSITE_MESSAGING_PLUGIN_URL', untrailingslashit( plugin_dir_u
  */
 class Klarna_OnSite_Messaging_For_WooCommerce {
 	/**
-	 * Class cunstructor.
+	 * The data client ID.
+	 *
+	 * @var string
+	 */
+	private $data_client_id;
+
+	/**
+	 * Class constructor.
 	 */
 	public function __construct() {
 		add_action( 'wc_ajax_kosm_get_cart_total', array( $this, 'get_cart_total' ) );
@@ -92,7 +99,7 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 		$link         = 'https://docs.krokedil.com/klarna-checkout-for-woocommerce/get-started/klarna-on-site-messaging/';
 		$allowed_html = array( 'a' => array( 'href' => true ) );
 
-		$plugin = 'klarna-onsite-messaging-for-woocommerce/klarna-onsite-messaging-for-woocommerce.php';
+		$plugin = plugin_basename( __FILE__ );
 		if ( is_plugin_active( $plugin ) ) {
 			// translators: %s: link to the guide.
 			$message = sprintf( __( 'The On-Site Messaging plugin will be retired by the end of 2024. To continue using its features, please follow the steps outlined in this guide: <a href="%1$s">%2$s</a>', 'klarna-onsite-messaging-for-woocommerce' ), $link, $link );
@@ -270,17 +277,14 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	}
 
 	/**
-	 * Sets the placement id
+	 * Sets the data client ID.
 	 *
-	 * @return self
+	 * @return void
 	 */
 	private function set_data_client_id() {
 		$settings             = self::get_settings();
-		$this->data_client_id = '';
-		if ( isset( $settings['data_client_id'] ) ) {
-			$this->data_client_id = apply_filters( 'kosm_data_client_id', $settings['data_client_id'] );
-		}
-		return $this->data_client_id;
+		$client_id            = isset( $settings['data_client_id'] ) ? $settings['data_client_id'] : '';
+		$this->data_client_id = apply_filters( 'kosm_data_client_id', $client_id );
 	}
 
 	/**
