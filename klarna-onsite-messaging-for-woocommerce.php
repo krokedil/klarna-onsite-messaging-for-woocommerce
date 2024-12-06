@@ -99,7 +99,7 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 		$link         = 'https://docs.krokedil.com/klarna-checkout-for-woocommerce/get-started/klarna-on-site-messaging/';
 		$allowed_html = array( 'a' => array( 'href' => true ) );
 
-		$plugin = 'klarna-onsite-messaging-for-woocommerce/klarna-onsite-messaging-for-woocommerce.php';
+		$plugin = plugin_basename( __FILE__ );
 		if ( is_plugin_active( $plugin ) ) {
 			// translators: %s: link to the guide.
 			$message = sprintf( __( 'The On-Site Messaging plugin will be retired by the end of 2024. To continue using its features, please follow the steps outlined in this guide: <a href="%1$s">%2$s</a>', 'klarna-onsite-messaging-for-woocommerce' ), $link, $link );
