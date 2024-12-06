@@ -40,7 +40,14 @@ define( 'WC_KLARNA_ONSITE_MESSAGING_PLUGIN_URL', untrailingslashit( plugin_dir_u
  */
 class Klarna_OnSite_Messaging_For_WooCommerce {
 	/**
-	 * Class cunstructor.
+	 * The data client ID.
+	 *
+	 * @var string
+	 */
+	private $data_client_id;
+
+	/**
+	 * Class constructor.
 	 */
 	public function __construct() {
 		add_action( 'wc_ajax_kosm_get_cart_total', array( $this, 'get_cart_total' ) );
@@ -270,17 +277,14 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	}
 
 	/**
-	 * Sets the placement id
+	 * Sets the data client ID.
 	 *
-	 * @return self
+	 * @return void
 	 */
 	private function set_data_client_id() {
 		$settings             = self::get_settings();
-		$this->data_client_id = '';
-		if ( isset( $settings['data_client_id'] ) ) {
-			$this->data_client_id = apply_filters( 'kosm_data_client_id', $settings['data_client_id'] );
-		}
-		return $this->data_client_id;
+		$client_id            = isset( $settings['data_client_id'] ) ? $settings['data_client_id'] : '';
+		$this->data_client_id = apply_filters( 'kosm_data_client_id', $client_id );
 	}
 
 	/**
