@@ -28,6 +28,12 @@ For help setting up and configuring On-Site Messaging for WooCommerce please ref
 	
 
 == Changelog ==
+= 2024.12.09    - version 1.13.1 =
+* Feature       - Added deprecation notice on the admin pages.
+* Fix           - Resolved fatal error on plugin activation.
+* Fix           - Resolved PHP 8.2 Creation of dynamic property deprecation warning.
+* Tweak         - Now retrieves plugin name from plugin_basename.
+
 = 2023.08.23    - version 1.13.0 =
 * Feature       - Added the 'kosm_locale' filter, allowing you to set the locale, irrespective of the currency.
 * Fix           - Fixed a fatal error due to missing client ID.

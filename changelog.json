@@ -119,5 +119,10 @@
         "description": "<ul><li>Feature - Added the 'kosm_locale' filter, allowing you to set the locale, irrespective of the currency.</li><li>Fix - Fixed a fatal error due to missing client ID.</li><li>Fix - Fixed a fatal error that happened when a global product variable was passed as a string or integer.</li><li>Fix - Fixed an undefined index warning that happened when both Klarna Payments and Klarna Checkout were not active.</li><li>Fix - Fixed an issue where the placement would sometimes not appear until a product variant is selected.</li></ul>",
         "requires": "4.7.0",
         "tested": "6.3.0"
-    }
+    },
+	"1.13.1": {
+		"description": "<ul><li>Feature - Added deprecation notice on the admin pages.</li><li>Fix - Resolved fatal error on plugin activation.</li><li>Fix - Resolved PHP 8.2 Creation of dynamic property deprecation warning.</li><li>Tweak - Now retrieves plugin name from plugin_basename.</li></ul>",
+		"requires": "4.7.0",
+		"tested": "6.3.0"
+	}
 }
