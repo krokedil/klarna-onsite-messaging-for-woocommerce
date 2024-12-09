@@ -5,16 +5,16 @@
  * Description: Provides Klarna On-Site Messaging for WooCommerce
  * Author: krokedil, klarna
  * Author URI: https://krokedil.se/
- * Version: 1.13.0
+ * Version: 1.13.1
  * Text Domain: klarna-onsite-messaging-for-woocommerce
  * Domain Path: /languages
  *
  * WC requires at least: 3.8
- * WC tested up to: 8.0.1
+ * WC tested up to: 9.4.3
  *
  * @package Klarna_OnSite_Messaging
  *
- * Copyright (c) 2017-2023 Krokedil
+ * Copyright (c) 2017-2024 Krokedil
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@
  */
 
 // Definitions.
-define( 'WC_KLARNA_ONSITE_MESSAGING_VERSION', '1.13.0' );
+define( 'WC_KLARNA_ONSITE_MESSAGING_VERSION', '1.13.1' );
 define( 'WC_KLARNA_ONSITE_MESSAGING_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'WC_KLARNA_ONSITE_MESSAGING_PLUGIN_URL', untrailingslashit( plugin_dir_url( __FILE__ ) ) );
 
@@ -40,7 +40,14 @@ define( 'WC_KLARNA_ONSITE_MESSAGING_PLUGIN_URL', untrailingslashit( plugin_dir_u
  */
 class Klarna_OnSite_Messaging_For_WooCommerce {
 	/**
-	 * Class cunstructor.
+	 * The data client ID.
+	 *
+	 * @var string
+	 */
+	private $data_client_id;
+
+	/**
+	 * Class constructor.
 	 */
 	public function __construct() {
 		add_action( 'wc_ajax_kosm_get_cart_total', array( $this, 'get_cart_total' ) );
@@ -52,8 +59,10 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 
 		add_action( 'plugins_loaded', array( $this, 'check_version' ) );
 		add_action( 'plugins_loaded', array( $this, 'include_files' ) );
-		add_action( 'plugins_loaded', array( $this, 'init' ) );
+		add_action( 'plugins_loaded', array( $this, 'init' ), 11 );
 		add_action( 'widgets_init', array( $this, 'register_klarna_osm_widget' ) );
+
+		add_action( 'admin_notices', array( $this, 'kosm_installed_admin_notice' ) );
 	}
 
 	/**
@@ -81,11 +90,30 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 		add_action( 'before_woocommerce_init', array( $this, 'declare_wc_compatibility' ) );
 	}
 
-		/**
-		 * Declare compatibility with WooCommerce features.
-		 *
-		 * @return void
-		 */
+	/**
+	 * Check if the Klarna On-Site Messaging plugin is active, and notify the admin about the new changes.
+	 *
+	 * @return void
+	 */
+	public function kosm_installed_admin_notice() {
+		$link         = 'https://docs.krokedil.com/klarna-checkout-for-woocommerce/get-started/klarna-on-site-messaging/';
+		$allowed_html = array( 'a' => array( 'href' => true ) );
+
+		$plugin = plugin_basename( __FILE__ );
+		if ( is_plugin_active( $plugin ) ) {
+			// translators: %s: link to the guide.
+			$message = sprintf( __( 'The On-Site Messaging plugin will be retired by the end of 2024. To continue using its features, please follow the steps outlined in this guide: <a href="%1$s">%2$s</a>', 'klarna-onsite-messaging-for-woocommerce' ), $link, $link );
+
+			printf( '<div class="notice notice-error"><p>%s</p></div>', wp_kses( $message, $allowed_html ) );
+
+		}
+	}
+
+	/**
+	 * Declare compatibility with WooCommerce features.
+	 *
+	 * @return void
+	 */
 	public function declare_wc_compatibility() {
 		// Declare HPOS compatibility.
 		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
@@ -249,17 +277,14 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	}
 
 	/**
-	 * Sets the placement id
+	 * Sets the data client ID.
 	 *
-	 * @return self
+	 * @return void
 	 */
 	private function set_data_client_id() {
 		$settings             = self::get_settings();
-		$this->data_client_id = '';
-		if ( isset( $settings['data_client_id'] ) ) {
-			$this->data_client_id = apply_filters( 'kosm_data_client_id', $settings['data_client_id'] );
-		}
-		return $this->data_client_id;
+		$client_id            = isset( $settings['data_client_id'] ) ? $settings['data_client_id'] : '';
+		$this->data_client_id = apply_filters( 'kosm_data_client_id', $client_id );
 	}
 
 	/**
@@ -382,5 +407,4 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 	public function register_klarna_osm_widget() {
 		register_widget( 'Klarna_OnSite_Messaging_Widget' );
 	}
-
 } new Klarna_OnSite_Messaging_For_WooCommerce();
