@@ -121,8 +121,8 @@
         "tested": "6.3.0"
     },
 	"1.13.1": {
-		"description": "<ul><li>Feature - Added deprecation notice on the admin pages.</li><li>Fix - Resolved fatal error on plugin activation.</li><li>Fix - Resolved PHP 8.2 Creation of dynamic property deprecation warning.</li><li>Tweak - Now retrieves plugin name from plugin_basename.</li></ul>",
+		"description": "<ul><li>Feature - Added deprecation notice on the admin pages.</li><li>Fix - Resolved fatal error on plugin activation.</li><li>Fix - Resolved PHP 8.2 Creation of dynamic property deprecation warning.</li></ul>",
 		"requires": "4.7.0",
-		"tested": "6.3.0"
+		"tested": "6.7.1"
 	}
 }

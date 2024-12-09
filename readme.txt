@@ -2,10 +2,10 @@
 Contributors: krokedil
 Tags: woocommerce, klarna, ecommerce, e-commerce, on-site messaging
 Requires at least: 4.7
-Tested up to: 6.6
+Tested up to: 6.7.1
 Requires PHP: 7.0
 WC requires at least: 4.0.0
-WC tested up to: 9.0.2
+WC tested up to: 9.4.3
 Stable tag: trunk
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -32,7 +32,6 @@ For help setting up and configuring On-Site Messaging for WooCommerce please ref
 * Feature       - Added deprecation notice on the admin pages.
 * Fix           - Resolved fatal error on plugin activation.
 * Fix           - Resolved PHP 8.2 Creation of dynamic property deprecation warning.
-* Tweak         - Now retrieves plugin name from plugin_basename.
 
 = 2023.08.23    - version 1.13.0 =
 * Feature       - Added the 'kosm_locale' filter, allowing you to set the locale, irrespective of the currency.
