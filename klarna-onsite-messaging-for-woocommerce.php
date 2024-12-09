@@ -59,7 +59,7 @@ class Klarna_OnSite_Messaging_For_WooCommerce {
 
 		add_action( 'plugins_loaded', array( $this, 'check_version' ) );
 		add_action( 'plugins_loaded', array( $this, 'include_files' ) );
-		add_action( 'plugins_loaded', array( $this, 'init' ) );
+		add_action( 'plugins_loaded', array( $this, 'init' ), 11 );
 		add_action( 'widgets_init', array( $this, 'register_klarna_osm_widget' ) );
 
 		add_action( 'admin_notices', array( $this, 'kosm_installed_admin_notice' ) );
